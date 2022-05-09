@@ -1,8 +1,8 @@
 module	square_object	(	
 					input		logic	clk,
 					input		logic	resetN,
-					input 	logic signed	[10:0] pixelX,// current VGA pixel 
-					input 	logic signed	[10:0] pixelY,
+					input 	logic signed	[10:0] PixelX,// current VGA pixel 
+					input 	logic signed	[10:0] PixelY,
 					input 	logic signed	[10:0] topLeftX, //position on the screen 
 					input 	logic	signed [10:0] topLeftY,   // can be negative , if the object is partliy outside 
 					
@@ -25,8 +25,8 @@ logic insideBracket ;
 // Calculate object right  & bottom  boundaries
 assign rightX	= (topLeftX + OBJECT_WIDTH_X);
 assign bottomY	= (topLeftY + OBJECT_HEIGHT_Y);
-assign	insideBracket  = 	 ( (pixelX  >= topLeftX) &&  (pixelX < rightX) // math is made with SIGNED variables  
-						   && (pixelY  >= topLeftY) &&  (pixelY < bottomY) )  ; // as the top left position can be negative
+assign	insideBracket  = 	 ( (PixelX  >= topLeftX) &&  (PixelX < rightX) // math is made with SIGNED variables  
+						   && (PixelY  >= topLeftY) &&  (PixelY < bottomY) )  ; // as the top left position can be negative
 		
 
 
@@ -49,8 +49,8 @@ begin
 		begin 
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			drawingRequest <= 1'b1 ;
-			offsetX	<= (pixelX - topLeftX); //calculate relative offsets from top left corner allways a positive number 
-			offsetY	<= (pixelY - topLeftY);
+			offsetX	<= (PixelX - topLeftX); //calculate relative offsets from top left corner allways a positive number 
+			offsetY	<= (PixelY - topLeftY);
 		end 
 		
 

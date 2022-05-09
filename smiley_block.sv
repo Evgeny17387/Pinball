@@ -1,14 +1,14 @@
 module smiley_block(
 	input		logic							clk,
 	input		logic							resetN,
-	input 	logic signed	[10:0] 	pixelX,
-	input 	logic signed	[10:0] 	pixelY,
+	input 	logic signed	[10:0] 	PixelX,
+	input 	logic signed	[10:0] 	PixelY,
 	input 	logic 						startOfFrame,
 	input		logic							Y_direction,
 	input		logic							toggleX,
 	input 	logic							collision,
-	output	logic				[7:0]		RGBout,
-	output	logic							smileyDrawingRequest
+	output	logic				[7:0]		RGB_smiley,
+	output	logic							draw_smiley
 );
 
 logic smileyRecDR;
@@ -39,8 +39,8 @@ square_object square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
+	.PixelX(PixelX),
+	.PixelY(PixelY),
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY),
 // output
@@ -57,9 +57,9 @@ smileyBitMap smileyBitMap_inst(
 	.offsetY(smileyOffsetY),
 	.InsideRectangle(smileyRecDR),
 // output
-	.RGBout(RGBout),
+	.RGB_smiley(RGB_smiley),
 	.HitEdgeCode(HitEdgeCode),
-	.drawingRequest(smileyDrawingRequest)
+	.draw_smiley(draw_smiley)
 );
 
 endmodule

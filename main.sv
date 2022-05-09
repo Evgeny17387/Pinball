@@ -11,12 +11,12 @@ logic				reset;
 logic	[10:0]	PixelX;
 logic	[10:0]	PixelY;
 
-logic	[7:0]		backGroundRGB;
-logic	[7:0]		smileyRGB;
+logic	[7:0]		RGB_backGround;
+logic	[7:0]		RGB_smiley;
 logic	[7:0]		RGB;
 
-logic				boardersDrawReq;
-logic 			smileyDrawingRequest;
+logic				draw_boarders;
+logic 			draw_smiley;
 
 logic 			startOfFrame;
 logic 			Y_direction;
@@ -32,37 +32,37 @@ back_ground_draw back_ground_draw_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.PixelX(PixelX),
+	.PixelY(PixelY),
 // output
-	.BG_RGB(backGroundRGB),
-	.boardersDrawReq(boardersDrawReq)
+	.RGB_backGround(RGB_backGround),
+	.draw_boarders(draw_boarders)
 );
 
 smiley_block smiley_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.PixelX(PixelX),
+	.PixelY(PixelY),
 	.startOfFrame(startOfFrame),
 	.Y_direction(Y_direction),
 	.toggleX(toggleX),
 	.collision(collision),
 // output
-	.RGBout(smileyRGB),
-	.smileyDrawingRequest(smileyDrawingRequest)
+	.RGB_smiley(RGB_smiley),
+	.draw_smiley(draw_smiley)
 );
 
 objects_mux objects_mux_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.smileyDrawingRequest(smileyDrawingRequest),
-	.smileyRGB(smileyRGB),
-	.backGroundRGB(backGroundRGB),
+	.draw_smiley(draw_smiley),
+	.RGB_smiley(RGB_smiley),
+	.RGB_backGround(RGB_backGround),
 // output
-	.RGBOut(RGB)
+	.RGB(RGB)
 );
 
 clock_divider_0002 clock_divider_inst(
@@ -87,8 +87,8 @@ game_controller game_controller_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.drawing_request_Ball(smileyDrawingRequest),
-	.drawing_request_1(boardersDrawReq),
+	.draw_smiley(draw_smiley),
+	.draw_boarders(draw_boarders),
 // output
 	.collision(collision)
 );

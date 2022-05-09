@@ -1,11 +1,11 @@
 module game_controller(
 	input	logic	clk,
 	input	logic	resetN,
-	input	logic	drawing_request_Ball,
-	input	logic	drawing_request_1,
+	input	logic	draw_smiley,
+	input	logic	draw_boarders,
 	output logic collision
 );
 
-assign collision = (drawing_request_Ball && drawing_request_1);
+assign collision = (draw_smiley && draw_boarders);
 
 endmodule

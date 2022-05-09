@@ -1,23 +1,23 @@
 module objects_mux(
 	input		logic	clk,
 	input		logic	resetN,
-	input		logic	smileyDrawingRequest,
-	input		logic	[7:0] smileyRGB,
-	input		logic	[7:0] backGroundRGB,
-	output	logic	[7:0] RGBOut
+	input		logic	draw_smiley,
+	input		logic	[7:0] RGB_smiley,
+	input		logic	[7:0] RGB_backGround,
+	output	logic	[7:0] RGB
 );
 
 always_ff@(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
-		RGBOut <= 8'b0;
+		RGB <= 8'b0;
 	end
 	else begin
-		if (smileyDrawingRequest == 1'b1)
-			RGBOut <= smileyRGB;
+		if (draw_smiley == 1'b1)
+			RGB <= RGB_smiley;
 		else 
-			RGBOut <= backGroundRGB;
+			RGB <= RGB_backGround;
 		end
 	end
 
