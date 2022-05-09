@@ -15,6 +15,7 @@ logic	[7:0]		backGroundRGB;
 logic	[7:0]		smileyRGB;
 logic	[7:0]		RGB;
 
+logic				boardersDrawReq;
 logic 			smileyDrawingRequest;
 
 logic 			startOfFrame;
@@ -24,9 +25,8 @@ logic				collision;
 
 assign reset = !resetN;
 
-assign Y_direction 	= 0;
-assign toggleX 		= 0;
-assign collision 		= 0;
+assign Y_direction	= KEY[1];
+assign toggleX 		= KEY[2];
 
 back_ground_draw back_ground_draw_inst(
 // input
@@ -35,7 +35,8 @@ back_ground_draw back_ground_draw_inst(
 	.pixelX(PixelX),
 	.pixelY(PixelY),
 // output
-	.BG_RGB(backGroundRGB)
+	.BG_RGB(backGroundRGB),
+	.boardersDrawReq(boardersDrawReq)
 );
 
 smiley_block smiley_block_inst(
@@ -80,6 +81,16 @@ VGA_Controller VGA_Controller_inst(
 	.PixelY(PixelY),
 	.oVGA(OVGA),
 	.startOfFrame(startOfFrame)
+);
+
+game_controller game_controller_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.drawing_request_Ball(smileyDrawingRequest),
+	.drawing_request_1(boardersDrawReq),
+// output
+	.collision(collision)
 );
 
 endmodule
