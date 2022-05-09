@@ -11,7 +11,7 @@ module smiley_block(
 	output	logic							draw_smiley
 );
 
-logic draw_smiley_inner;
+logic smileyRecDR;
 
 logic [10:0] smileyOffsetX;
 logic [10:0] smileyOffsetY;
@@ -46,7 +46,7 @@ square_object square_object_inst(
 // output
 	.offsetX(smileyOffsetX),
 	.offsetY(smileyOffsetY),
-	.draw(draw_smiley_inner)
+	.drawingRequest(smileyRecDR)
 );
 
 smiley_bitmap smiley_bitmap_inst(
@@ -55,7 +55,7 @@ smiley_bitmap smiley_bitmap_inst(
 	.resetN(resetN),
 	.offsetX(smileyOffsetX),
 	.offsetY(smileyOffsetY),
-	.InsideRectangle(draw_smiley_inner),
+	.InsideRectangle(smileyRecDR),
 // output
 	.RGB_smiley(RGB_smiley),
 	.HitEdgeCode(HitEdgeCode),
