@@ -1,4 +1,4 @@
-module back_ground_draw(
+module background(
 	input		logic				clk,
 	input		logic				resetN,
 	input		logic	[10:0]	PixelX,

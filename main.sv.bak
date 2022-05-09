@@ -28,7 +28,7 @@ assign reset = !resetN;
 assign Y_direction	= KEY[1];
 assign toggleX 		= KEY[2];
 
-background background_inst(
+back_ground_draw back_ground_draw_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
@@ -65,7 +65,7 @@ objects_mux objects_mux_inst(
 	.RGB(RGB)
 );
 
-clock_divider clock_divider_inst(
+clock_divider_0002 clock_divider_inst(
 	.refclk(CLOCK_50),
 	.rst(reset),
 	.outclk_0(clk),

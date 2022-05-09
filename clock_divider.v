@@ -1,16 +1,8 @@
 `timescale 1ns/10ps
-module  clock_divider_0002(
-
-	// interface 'refclk'
+module  clock_divider(
 	input wire refclk,
-
-	// interface 'reset'
 	input wire rst,
-
-	// interface 'outclk0'
 	output wire outclk_0,
-
-	// interface 'locked'
 	output wire locked
 );
 
@@ -83,5 +75,6 @@ module  clock_divider_0002(
 		.fbclk	(1'b0),
 		.refclk	(refclk)
 	);
+
 endmodule
 

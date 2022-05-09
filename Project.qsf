@@ -214,14 +214,14 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oVGA[26]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oVGA[27]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oVGA[28]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to resetN
+set_global_assignment -name SYSTEMVERILOG_FILE background.sv
+set_global_assignment -name VERILOG_FILE clock_divider.v
 set_global_assignment -name SYSTEMVERILOG_FILE smiley_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE objects_mux.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE square_object.sv
-set_global_assignment -name SYSTEMVERILOG_FILE back_ground_draw.sv
-set_global_assignment -name VERILOG_FILE clock_divider_0002.v
 set_global_assignment -name TCL_SCRIPT_FILE pin.tcl
 set_global_assignment -name SYSTEMVERILOG_FILE VGA_Controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE main.sv
