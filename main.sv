@@ -25,8 +25,8 @@ logic				collision;
 
 assign reset = !resetN;
 
-assign Y_direction	= KEY[1];
-assign toggleX 		= KEY[2];
+assign Y_direction	= !KEY[1];
+assign toggleX 		= !KEY[2];
 
 background background_inst(
 // input
