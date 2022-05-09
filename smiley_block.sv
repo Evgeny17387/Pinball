@@ -7,7 +7,8 @@ module smiley_block(
 	input		logic							Y_direction,
 	input		logic							toggleX,
 	input 	logic							collision,
-	output	logic				[7:0]		RGBout
+	output	logic				[7:0]		RGBout,
+	output	logic							smileyDrawingRequest
 );
 
 logic smileyRecDR;
@@ -57,7 +58,8 @@ smileyBitMap smileyBitMap_inst(
 	.InsideRectangle(smileyRecDR),
 // output
 	.RGBout(RGBout),
-	.HitEdgeCode(HitEdgeCode)
+	.HitEdgeCode(HitEdgeCode),
+	.drawingRequest(smileyDrawingRequest)
 );
 
 endmodule
