@@ -21,7 +21,7 @@ logic signed [10:0] topLeftY;
 
 logic	[3:0] HitEdgeCode;
 
-smileyface_moveCollision smileyface_moveCollision_inst(
+smiley_controller smiley_controller_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
@@ -49,7 +49,7 @@ square_object square_object_inst(
 	.drawingRequest(smileyRecDR)
 );
 
-smileyBitMap smileyBitMap_inst(
+smiley_bitmap smiley_bitmap_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

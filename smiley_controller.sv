@@ -1,14 +1,5 @@
-// (c) Technion IIT, Department of Electrical Engineering 2021 
-//-- Alex Grinshpun Apr 2017
-//-- Dudy Nov 13 2017
-// SystemVerilog version Alex Grinshpun May 2018
-// coding convention dudy December 2018
-// updaed Eyal Lev Feb 2021
-
-
-module	smileyface_moveCollision	(	
- 
-					input	logic	clk,
+module smiley_controller(
+ 					input	logic	clk,
 					input	logic	resetN,
 					input	logic	startOfFrame,  // short pulse every start of frame 30Hz 
 					input	logic	Y_direction,  //change the direction in Y to up  
