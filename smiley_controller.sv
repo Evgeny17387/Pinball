@@ -12,7 +12,7 @@ module smiley_controller(
 
 parameter 	int INITIAL_X 					= 280;
 parameter 	int INITIAL_Y 					= 185;
-parameter 	int INITIAL_X_SPEED 			= 40;
+parameter 	int INITIAL_X_SPEED 			= 0;
 parameter 	int INITIAL_Y_SPEED 			= 20;
 parameter 	int MAX_Y_SPEED 				= 230;
 const 		int Y_ACCEL 					= -1;
@@ -36,10 +36,10 @@ begin
 
 	else begin
 
-		if (collision && (HitEdgeCode [2] == 1) && (Yspeed < 0))
+		if (collision && (HitEdgeCode[2] == 1) && (Yspeed < 0))
 			Yspeed <= -Yspeed;
 
-		if (collision && (HitEdgeCode [0] == 1) && (Yspeed > 0))
+		if (collision && (HitEdgeCode[0] == 1) && (Yspeed > 0))
 			Yspeed <= -Yspeed;
 
 		if (startOfFrame == 1'b1) begin
@@ -47,7 +47,7 @@ begin
 			topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
 
 			if (Yspeed < MAX_Y_SPEED)
-				Yspeed <= Yspeed - Y_ACCEL;
+				Yspeed <= Yspeed + Y_ACCEL;
 
 			if (Y_direction && (Yspeed > 0))
 				Yspeed <= -Yspeed;
