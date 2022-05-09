@@ -1,13 +1,13 @@
 module smiley_bitmap(	
-	input		logic				clk,
-	input		logic				resetN,
-	input 	logic	[10:0] 	offsetX,
-	input 	logic	[10:0] 	offsetY,
-	input		logic				InsideRectangle,
-	output	logic				draw_smiley,
-	output	logic	[7:0] 	RGB_smiley,
-	output	logic	[3:0] 	HitEdgeCode
-);
+input		logic				clk,
+input		logic				resetN,
+input 	logic	[10:0] 	offsetX,
+input 	logic	[10:0] 	offsetY,
+input		logic				InsideRectangle,
+output	logic				draw_smiley,
+output	logic	[7:0] 	RGB_smiley,
+output	logic	[3:0] 	HitEdgeCode
+ ) ;
 
 localparam  int OBJECT_NUMBER_OF_Y_BITS = 5;
 localparam  int OBJECT_NUMBER_OF_X_BITS = 6;
@@ -64,26 +64,22 @@ logic [0:3] [0:3] [3:0] hit_colors = {
 
 always_ff@(posedge clk or negedge resetN)
 begin
-
-	if (!resetN) begin
-		RGB_smiley <= 8'h00;
+	if(!resetN) begin
+		RGB_smiley <=	8'h00;
 		HitEdgeCode <= 4'h0;
 	end
-
 	else begin
-
 		RGB_smiley <= TRANSPARENT_ENCODING;
 		HitEdgeCode <= 4'h0;
 
 		if (InsideRectangle == 1'b1) begin
 			HitEdgeCode <= hit_colors[offsetY >> OBJECT_HEIGHT_Y_DIVIDER][offsetX >> OBJECT_WIDTH_X_DIVIDER];
 			RGB_smiley <= object_colors[OBJECT_HEIGHT_Y - offsetY][offsetX];
-
 		end
 	end
 
 end
 
-assign draw_smiley = (RGB_smiley != TRANSPARENT_ENCODING) ? 1'b1 : 1'b0;
+assign draw_smiley = (RGB_smiley != TRANSPARENT_ENCODING ) ? 1'b1 : 1'b0;
 
 endmodule
