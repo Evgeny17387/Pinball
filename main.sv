@@ -2,7 +2,11 @@ module main(
 	output	logic [28:0] 	OVGA,
 	input		logic				resetN,
 	input		logic				CLOCK_50,
-	input		logic	[3:1]		KEY
+	input		logic	[3:1]		KEY,
+	input 	logic 			PS2_CLK,
+	input 	logic 			PS2_DAT,
+	output	logic	[6:0]		HEX0,
+	output	logic	[6:0]		HEX1
 );
 
 logic				clk;
@@ -22,6 +26,10 @@ logic 			startOfFrame;
 logic 			Y_direction;
 logic				toggleX;
 logic				collision;
+
+logic				make;
+logic				breakk;
+logic	[8:0]		key_code;
 
 assign reset = !resetN;
 
@@ -83,6 +91,7 @@ VGA_Controller VGA_Controller_inst(
 	.startOfFrame(startOfFrame)
 );
 
+// ToDo: should it be CLK_50 ?
 game_controller game_controller_inst(
 // input
 	.clk(clk),
@@ -91,6 +100,32 @@ game_controller game_controller_inst(
 	.draw_boarders(draw_boarders),
 // output
 	.collision(collision)
+);
+
+keyboard keyboard_inst(
+// input
+	.clk(CLOCK_50),
+	.resetN(resetN),
+	.in(PS2_CLK),
+	.kbd_dat(PS2_DAT),
+// output
+	.make(make),
+	.breakk(breakk),
+	.key_code(key_code)
+);
+
+hex_ss hexSS_inst_1(
+// input
+	.i_dig(key_code[3:0]),
+// output
+	.o_seg(HEX0)
+);
+
+hex_ss hexSS_inst_2(
+// input
+	.i_dig(key_code[7:4]),
+// output
+	.o_seg(HEX1)
 );
 
 endmodule
