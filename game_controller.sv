@@ -3,9 +3,12 @@ module game_controller(
 	input	logic	resetN,
 	input	logic	draw_smiley,
 	input	logic	draw_boarders,
-	output logic collision
+	input	logic	draw_flipper,
+	output logic collisionSmileyBorders,
+	output logic collisionSmileyFlipper
 );
 
-assign collision = (draw_smiley && draw_boarders);
+assign collisionSmileyBorders = (draw_smiley && draw_boarders);
+assign collisionSmileyFlipper = (draw_smiley && draw_flipper);
 
 endmodule

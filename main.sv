@@ -25,7 +25,9 @@ logic 			draw_smiley;
 logic 			draw_flipper;
 
 logic 			startOfFrame;
-logic				collision;
+
+logic				collisionSmileyBorders;
+logic				collisionSmileyFlipper;
 
 logic				make;
 logic				breakk;
@@ -57,7 +59,8 @@ smiley_block smiley_block_inst(
 	.PixelX(PixelX),
 	.PixelY(PixelY),
 	.startOfFrame(startOfFrame),
-	.collision(collision),
+	.collisionSmileyBorders(collisionSmileyBorders),
+	.collisionSmileyFlipper(collisionSmileyFlipper),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -114,8 +117,10 @@ game_controller game_controller_inst(
 	.resetN(resetN),
 	.draw_smiley(draw_smiley),
 	.draw_boarders(draw_boarders),
+	.draw_flipper(draw_flipper),
 // output
-	.collision(collision)
+	.collisionSmileyBorders(collisionSmileyBorders),
+	.collisionSmileyFlipper(collisionSmileyFlipper)
 );
 
 keyboard keyboard_inst(

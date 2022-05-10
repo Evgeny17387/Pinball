@@ -2,7 +2,8 @@ module smiley_controller(
 	input		logic							clk,
 	input		logic							resetN,
 	input		logic							startOfFrame,
-	input 	logic 						collision,
+	input 	logic 						collisionSmileyBorders,
+	input 	logic							collisionSmileyFlipper,
 	input		logic				[3:0] 	HitEdgeCode,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
@@ -35,7 +36,7 @@ begin
 
 	else begin
 
-		if (collision && (HitEdgeCode[2] == 1) && (Yspeed < 0)) begin
+		if ((collisionSmileyFlipper || (collisionSmileyBorders && (HitEdgeCode[2] == 1))) && (Yspeed < 0)) begin
 			if (Yspeed < -Y_VELOCITY_LOSS) begin
 				Yspeed <= -Yspeed - Y_VELOCITY_LOSS;
 			end
@@ -44,7 +45,7 @@ begin
 			end
 		end
 
-		if (collision && (HitEdgeCode[0] == 1) && (Yspeed > 0))
+		if (collisionSmileyBorders && (HitEdgeCode[0] == 1) && (Yspeed > 0))
 			Yspeed <= -Yspeed;
 
 		if (startOfFrame == 1'b1) begin
@@ -70,10 +71,10 @@ begin
 
 	else begin
 
-		if (collision && (HitEdgeCode [3] == 1) && (Xspeed < 0))
+		if (collisionSmileyBorders && (HitEdgeCode [3] == 1) && (Xspeed < 0))
 			Xspeed <= -Xspeed;
 
-		if (collision && (HitEdgeCode [1] == 1) && (Xspeed > 0))
+		if (collisionSmileyBorders && (HitEdgeCode [1] == 1) && (Xspeed > 0))
 			Xspeed <= -Xspeed;
 
 		if (startOfFrame == 1'b1)

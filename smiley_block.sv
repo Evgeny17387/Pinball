@@ -4,7 +4,8 @@ module smiley_block(
 	input 	logic signed	[10:0] 	PixelX,
 	input 	logic signed	[10:0] 	PixelY,
 	input 	logic 						startOfFrame,
-	input 	logic							collision,
+	input 	logic							collisionSmileyBorders,
+	input 	logic							collisionSmileyFlipper,
 	output	logic				[7:0]		RGB_smiley,
 	output	logic							draw_smiley
 );
@@ -24,7 +25,8 @@ smiley_controller smiley_controller_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.startOfFrame(startOfFrame),
-	.collision(collision),
+	.collisionSmileyBorders(collisionSmileyBorders),
+	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.HitEdgeCode(HitEdgeCode),
 // output
 	.topLeftX(topLeftX),
