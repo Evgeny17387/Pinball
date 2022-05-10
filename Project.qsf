@@ -214,6 +214,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oVGA[26]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oVGA[27]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oVGA[28]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to resetN
+set_global_assignment -name SYSTEMVERILOG_FILE key_decoder.sv
 set_global_assignment -name SYSTEMVERILOG_FILE hex_ss.sv
 set_global_assignment -name SYSTEMVERILOG_FILE keyboard.sv
 set_global_assignment -name SYSTEMVERILOG_FILE lpf.sv
