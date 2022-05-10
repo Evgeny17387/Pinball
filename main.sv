@@ -18,10 +18,12 @@ logic	[10:0]	PixelY;
 
 logic	[7:0]		RGB_backGround;
 logic	[7:0]		RGB_smiley;
+logic	[7:0]		RGB_flipper;
 logic	[7:0]		RGB;
 
 logic				draw_boarders;
 logic 			draw_smiley;
+logic 			draw_flipper;
 
 logic 			startOfFrame;
 logic 			Y_direction;
@@ -67,12 +69,27 @@ smiley_block smiley_block_inst(
 	.draw_smiley(draw_smiley)
 );
 
+flipper_block flipper_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.PixelX(PixelX),
+	.PixelY(PixelY),
+	.startOfFrame(startOfFrame),
+	.keyIsPressed(keyIsPressed),
+// output
+	.RGB_flipper(RGB_flipper),
+	.draw_flipper(draw_flipper)
+);
+
 objects_mux objects_mux_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.draw_smiley(draw_smiley),
 	.RGB_smiley(RGB_smiley),
+	.draw_flipper(draw_flipper),
+	.RGB_flipper(RGB_flipper),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
@@ -96,7 +113,6 @@ VGA_Controller VGA_Controller_inst(
 	.startOfFrame(startOfFrame)
 );
 
-// ToDo: should it be CLK_50 ?
 game_controller game_controller_inst(
 // input
 	.clk(clk),
@@ -143,6 +159,5 @@ key_decoder key_decoder_inst(
 // output
 	.keyIsPressed(keyIsPressed)
 );
-
 
 endmodule
