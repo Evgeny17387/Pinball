@@ -41,6 +41,8 @@ assign reset = !resetN;
 assign Y_direction	= !KEY[1];
 assign toggleX 		= !KEY[2];
 
+assign LEDR[0] = keyIsPressed;
+
 background background_inst(
 // input
 	.clk(clk),
@@ -109,7 +111,7 @@ game_controller game_controller_inst(
 
 keyboard keyboard_inst(
 // input
-	.clk(CLOCK_50),
+	.clk(clk),
 	.resetN(resetN),
 	.in(PS2_CLK),
 	.kbd_dat(PS2_DAT),
@@ -134,7 +136,7 @@ hex_ss hexSS_inst_2(
 );
 
 key_decoder key_decoder_inst(
-	.clk(CLOCK_50),
+	.clk(clk),
 	.resetN(resetN),
 	.key_code(key_code),
 	.make(make),
@@ -144,41 +146,5 @@ key_decoder key_decoder_inst(
 	.keyIsPressed(keyIsPressed)
 );
 
-always_ff @(posedge clk or negedge resetN)
-begin: fsm_sync_proc
-
-	if (resetN == 1'b0) begin
-		LEDR[0] <= 1'b0;
-		LEDR[1] <= 1'b0;
-//		LEDR[2] <= 1'b0;
-	end
-
-	else begin
-
-		if (keyLatch == 1'b1) begin
-			LEDR[0] <= 1'b1;
-		end
-		else begin
-			LEDR[0] <= 1'b0;
-		end
-
-//		if (keyRisingEdgePulse == 1'b1) begin
-//			LEDR[1] <= 1'b1;
-//		end
-//		else begin
-//			LEDR[1] <= 1'b0;
-//		end
-
-		if (keyIsPressed == 1'b1) begin
-			LEDR[1] <= 1'b1;
-		end
-		else begin
-			LEDR[1] <= 1'b0;
-		end
-
-
-	end
-
-end
 
 endmodule
