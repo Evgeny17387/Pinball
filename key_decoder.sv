@@ -1,4 +1,6 @@
-module key_decoder(
+module key_decoder
+#(parameter KEY_VALUE = 9'h070)
+(
 	input	 logic      clk,
 	input	 logic      resetN,
 	input  logic[8:0]	key_code,
@@ -8,8 +10,6 @@ module key_decoder(
 	output logic  		keyRisingEdgePulse,
 	output logic  		keyIsPressed
 );
-
-parameter KEY_VALUE = 9'h070;
 
 logic keyIsPressed_d;
 

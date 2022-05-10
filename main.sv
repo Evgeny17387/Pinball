@@ -2,7 +2,6 @@ module main(
 	output	logic [28:0] 	OVGA,
 	input		logic				resetN,
 	input		logic				CLOCK_50,
-	input		logic	[3:1]		KEY,
 	input 	logic 			PS2_CLK,
 	input 	logic 			PS2_DAT,
 	output	logic	[6:0]		HEX0,
@@ -26,22 +25,19 @@ logic 			draw_smiley;
 logic 			draw_flipper;
 
 logic 			startOfFrame;
-logic 			Y_direction;
-logic				toggleX;
 logic				collision;
 
 logic				make;
 logic				breakk;
 logic	[8:0]		key_code;
 
-logic  			keyIsPressed;
+logic  			key4IsPressed;
+logic  			key6IsPressed;
 
 assign reset = !resetN;
 
-assign Y_direction	= !KEY[1];
-assign toggleX 		= !KEY[2];
-
-assign LEDR[0] = keyIsPressed;
+assign LEDR[0] = key6IsPressed;
+assign LEDR[1] = key4IsPressed;
 
 background background_inst(
 // input
@@ -61,8 +57,6 @@ smiley_block smiley_block_inst(
 	.PixelX(PixelX),
 	.PixelY(PixelY),
 	.startOfFrame(startOfFrame),
-	.Y_direction(Y_direction),
-	.toggleX(toggleX),
 	.collision(collision),
 // output
 	.RGB_smiley(RGB_smiley),
@@ -76,7 +70,8 @@ flipper_block flipper_block_inst(
 	.PixelX(PixelX),
 	.PixelY(PixelY),
 	.startOfFrame(startOfFrame),
-	.keyIsPressed(keyIsPressed),
+	.key4IsPressed(key4IsPressed),
+	.key6IsPressed(key6IsPressed),
 // output
 	.RGB_flipper(RGB_flipper),
 	.draw_flipper(draw_flipper)
@@ -149,7 +144,7 @@ hex_ss hexSS_inst_2(
 	.o_seg(HEX1)
 );
 
-key_decoder key_decoder_inst(
+key_decoder #(.KEY_VALUE(9'h06B)) key_decoder_4_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
@@ -157,7 +152,18 @@ key_decoder key_decoder_inst(
 	.make(make),
 	.breakk(breakk),
 // output
-	.keyIsPressed(keyIsPressed)
+	.keyIsPressed(key4IsPressed)
+);
+
+key_decoder #(.KEY_VALUE(9'h074)) key_decoder_6_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.key_code(key_code),
+	.make(make),
+	.breakk(breakk),
+// output
+	.keyIsPressed(key6IsPressed)
 );
 
 endmodule

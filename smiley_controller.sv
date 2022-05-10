@@ -2,8 +2,6 @@ module smiley_controller(
 	input		logic							clk,
 	input		logic							resetN,
 	input		logic							startOfFrame,
-	input		logic							Y_direction,
-	input		logic							toggleX,
 	input 	logic 						collision,
 	input		logic				[3:0] 	HitEdgeCode,
 	output	logic signed 	[10:0]	topLeftX,
@@ -56,9 +54,6 @@ begin
 			if (Yspeed < MAX_Y_SPEED)
 				Yspeed <= Yspeed + Y_ACCEL;
 
-			if (Y_direction && (Yspeed > 0))
-				Yspeed <= -Yspeed;
-
 		end
 
 	end
@@ -74,9 +69,6 @@ begin
 	end
 
 	else begin
-
-		if (toggleX)
-			Xspeed <= -Xspeed;
 
 		if (collision && (HitEdgeCode [3] == 1) && (Xspeed < 0))
 			Xspeed <= -Xspeed;
