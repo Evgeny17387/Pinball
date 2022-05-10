@@ -32,8 +32,6 @@ logic				make;
 logic				breakk;
 logic	[8:0]		key_code;
 
-logic				keyLatch;
-logic  			keyRisingEdgePulse;
 logic  			keyIsPressed;
 
 assign reset = !resetN;
@@ -136,13 +134,13 @@ hex_ss hexSS_inst_2(
 );
 
 key_decoder key_decoder_inst(
+// input
 	.clk(clk),
 	.resetN(resetN),
 	.key_code(key_code),
 	.make(make),
 	.breakk(breakk),
-	.keyLatch(keyLatch),
-	.keyRisingEdgePulse(keyRisingEdgePulse),
+// output
 	.keyIsPressed(keyIsPressed)
 );
 

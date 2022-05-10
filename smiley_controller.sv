@@ -21,6 +21,7 @@ const 		int x_FRAME_SIZE				= 639 * FIXED_POINT_MULTIPLIER;
 const 		int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;
 const 		int bracketOffset 			= 30;
 const 		int OBJECT_WIDTH_X 			= 64;
+const 		int Y_VELOCITY_LOSS 			= 10;
 				int Xspeed;
 				int topLeftX_FixedPoint;
 				int Yspeed;
@@ -36,8 +37,14 @@ begin
 
 	else begin
 
-		if (collision && (HitEdgeCode[2] == 1) && (Yspeed < 0))
-			Yspeed <= -Yspeed;
+		if (collision && (HitEdgeCode[2] == 1) && (Yspeed < 0)) begin
+			if (Yspeed < -Y_VELOCITY_LOSS) begin
+				Yspeed <= -Yspeed - Y_VELOCITY_LOSS;
+			end
+			else begin
+				Yspeed <= 0;
+			end
+		end
 
 		if (collision && (HitEdgeCode[0] == 1) && (Yspeed > 0))
 			Yspeed <= -Yspeed;
