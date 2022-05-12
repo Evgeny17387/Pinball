@@ -5,6 +5,7 @@ module game_controller(
 	input	logic	draw_boarders,
 	input	logic	draw_bottom_boarder,
 	input	logic	draw_flipper,
+	input	logic	key5IsPressed,
 	output 	logic 	collisionSmileyBorders,
 	output 	logic	collisionSmileyFlipper,
 	output 	logic	pause
@@ -18,13 +19,18 @@ begin
 
 	if (!resetN) begin
 
-		pause = 0;
+		pause = 1;
 
 	end 
 
 	else begin
-	
-		if (draw_smiley && draw_bottom_boarder) begin
+
+		if (key5IsPressed) begin
+		
+			pause <= 0;
+		
+		end
+		else if (draw_smiley && draw_bottom_boarder) begin
 
 			pause <= 1;
 

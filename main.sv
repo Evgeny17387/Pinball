@@ -126,6 +126,7 @@ game_controller game_controller_inst(
 	.draw_boarders(draw_boarders),
 	.draw_bottom_boarder(draw_bottom_boarder),
 	.draw_flipper(draw_flipper),
+	.key5IsPressed(key5IsPressed),
 // output
 	.collisionSmileyBorders(collisionSmileyBorders),
 	.collisionSmileyFlipper(collisionSmileyFlipper),

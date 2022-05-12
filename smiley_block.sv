@@ -12,15 +12,15 @@ module smiley_block(
 	output	logic					draw_smiley
 );
 
-logic draw_smiley_inner;
+logic 					draw_smiley_inner;
 
-logic [10:0] smileyOffsetX;
-logic [10:0] smileyOffsetY;
+logic 			[10:0] 	smileyOffsetX;
+logic 			[10:0] 	smileyOffsetY;
 
-logic signed [10:0] topLeftX;
-logic signed [10:0] topLeftY;
+logic signed 	[10:0] 	topLeftX;
+logic signed 	[10:0] 	topLeftY;
 
-logic	[3:0] HitEdgeCode;
+logic			[3:0] 	HitEdgeCode;
 
 smiley_controller smiley_controller_inst(
 // input

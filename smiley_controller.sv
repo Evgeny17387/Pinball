@@ -45,13 +45,17 @@ begin
 	end 
 
 	else begin
-	
-		if (key5IsPressed) begin
 
-			start <= 1;
-		
+		if (!pause) begin
+
+			if (!start) begin
+
+				start <= 1;
+
+			end
+
 		end
-
+	
 	end
 
 end
@@ -68,10 +72,10 @@ begin
 	
 		if (!pause) begin
 
-			if (!start && key5IsPressed) begin
+			if (!start) begin
 
 				Yspeed <= INITIAL_Y_SPEED;
-			
+
 			end
 			else if (start) begin
 
@@ -113,7 +117,7 @@ begin
 
 		if (!pause) begin
 
-			if (!start && key5IsPressed) begin
+			if (!start) begin
 
 				Xspeed <= 0;
 			
