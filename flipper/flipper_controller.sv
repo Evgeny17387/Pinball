@@ -5,6 +5,7 @@ module flipper_controller(
 	input	logic					key4IsPressed,
 	input	logic					key6IsPressed,
 	input	logic					pause,
+	input	logic					reset_level,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY,
 	output	logic			[31:0]	speedX
@@ -27,13 +28,23 @@ always_ff@(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
+
 		topLeftX_FixedPoint <= INITIAL_X * FIXED_POINT_MULTIPLIER;
 		topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
+		speedX <= 0;
+
 	end
 
 	else begin
 
-		if (!pause) begin
+		if (reset_level) begin
+
+			topLeftX_FixedPoint <= INITIAL_X * FIXED_POINT_MULTIPLIER;
+			topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
+			speedX <= 0;
+
+		end
+		else if (!pause) begin
 
 			if (startOfFrame == 1'b1) begin
 

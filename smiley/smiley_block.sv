@@ -11,6 +11,7 @@ module smiley_block(
 	input	logic					key5IsPressed,
 	input	logic					pause,
 	input	logic			[31:0]	flipperSpeedX,
+	input	logic					reset_level,
 	output	logic			[7:0]	RGB_smiley,
 	output	logic					draw_smiley
 );
@@ -35,6 +36,7 @@ smiley_controller smiley_controller_inst(
 	.key5IsPressed(key5IsPressed),
 	.pause(pause),
 	.flipperSpeedX(flipperSpeedX),
+	.reset_level(reset_level),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY)

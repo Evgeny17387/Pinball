@@ -36,6 +36,7 @@ logic			collisionSmileyBorderRight;
 logic			collisionSmileyFlipper;
 
 logic			pause;
+logic			reset_level;
 
 logic			make;
 logic			breakk;
@@ -80,6 +81,7 @@ smiley_block smiley_block_inst(
 	.key5IsPressed(key5IsPressed),
 	.pause(pause),
 	.flipperSpeedX(flipperSpeedX),
+	.reset_level(reset_level),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -95,6 +97,7 @@ flipper_block flipper_block_inst(
 	.key4IsPressed(key4IsPressed),
 	.key6IsPressed(key6IsPressed),
 	.pause(pause),
+	.reset_level(reset_level),
 // output
 	.RGB_flipper(RGB_flipper),
 	.draw_flipper(draw_flipper),
@@ -148,7 +151,8 @@ game_controller game_controller_inst(
 	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
 	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
-	.pause(pause)
+	.pause(pause),
+	.reset_level(reset_level)
 );
 
 hex_ss hexSS_inst_1(
