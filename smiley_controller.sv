@@ -14,14 +14,14 @@ parameter 	int INITIAL_X 					= 280;
 parameter 	int INITIAL_Y 					= 185;
 
 parameter 	int INITIAL_X_SPEED 			= 0;
-parameter 	int INITIAL_Y_SPEED 			= 20;
+parameter 	int INITIAL_Y_SPEED 			= 100;
 
 const 		int Y_GRAVITY 					= 0;
-const 		int Y_EXTRA 					= 10;
+const 		int Y_EXTRA 					= 0;
 
 parameter 	int MAX_Y_SPEED 				= 230;
 
-const 		int FIXED_POINT_MULTIPLIER	= 64;
+const 		int FIXED_POINT_MULTIPLIER		= 64;
 
 const 		int x_FRAME_SIZE				= 639 * FIXED_POINT_MULTIPLIER;
 const 		int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;

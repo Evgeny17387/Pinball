@@ -1,13 +1,13 @@
 module flipper_block(
-	input		logic							clk,
-	input		logic							resetN,
+	input	logic					clk,
+	input	logic					resetN,
 	input 	logic signed	[10:0] 	PixelX,
 	input 	logic signed	[10:0] 	PixelY,
-	input 	logic 						startOfFrame,
-	input		logic							key4IsPressed,
-	input		logic							key6IsPressed,
-	output	logic				[7:0]		RGB_flipper,
-	output	logic							draw_flipper
+	input 	logic 					startOfFrame,
+	input	logic					key4IsPressed,
+	input	logic					key6IsPressed,
+	output	logic			[7:0]	RGB_flipper,
+	output	logic					draw_flipper
 );
 
 logic signed [10:0] topLeftX;

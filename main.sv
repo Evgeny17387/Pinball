@@ -1,12 +1,12 @@
 module main(
-	output	logic [28:0] 	OVGA,
-	input		logic				resetN,
-	input		logic				CLOCK_50,
+	output	logic	[28:0] 	OVGA,
+	input	logic			resetN,
+	input	logic			CLOCK_50,
 	input 	logic 			PS2_CLK,
 	input 	logic 			PS2_DAT,
-	output	logic	[6:0]		HEX0,
-	output	logic	[6:0]		HEX1,
-	output	logic	[1:0]		LEDR
+	output	logic	[6:0]	HEX0,
+	output	logic	[6:0]	HEX1,
+	output	logic	[1:0]	LEDR
 );
 
 logic				clk;
@@ -15,23 +15,23 @@ logic				reset;
 logic	[10:0]	PixelX;
 logic	[10:0]	PixelY;
 
-logic	[7:0]		RGB_backGround;
-logic	[7:0]		RGB_smiley;
-logic	[7:0]		RGB_flipper;
-logic	[7:0]		RGB;
+logic	[7:0]	RGB_backGround;
+logic	[7:0]	RGB_smiley;
+logic	[7:0]	RGB_flipper;
+logic	[7:0]	RGB;
 
-logic				draw_boarders;
+logic			draw_boarders;
 logic 			draw_smiley;
 logic 			draw_flipper;
 
 logic 			startOfFrame;
 
-logic				collisionSmileyBorders;
-logic				collisionSmileyFlipper;
+logic			collisionSmileyBorders;
+logic			collisionSmileyFlipper;
 
-logic				make;
-logic				breakk;
-logic	[8:0]		key_code;
+logic			make;
+logic			breakk;
+logic	[8:0]	key_code;
 
 logic 			key4IsPressed;
 logic 			key5IsPressed;
@@ -125,18 +125,6 @@ game_controller game_controller_inst(
 	.collisionSmileyFlipper(collisionSmileyFlipper)
 );
 
-keyboard keyboard_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.in(PS2_CLK),
-	.kbd_dat(PS2_DAT),
-// output
-	.make(make),
-	.breakk(breakk),
-	.key_code(key_code)
-);
-
 hex_ss hexSS_inst_1(
 // input
 	.i_dig(key_code[3:0]),
@@ -151,37 +139,16 @@ hex_ss hexSS_inst_2(
 	.o_seg(HEX1)
 );
 
-key_decoder #(.KEY_VALUE(9'h06B)) key_decoder_4_inst(
+keyboard_block keyboard_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.key_code(key_code),
-	.make(make),
-	.breakk(breakk),
+	.in(PS2_CLK),
+	.kbd_dat(PS2_DAT),
 // output
-	.keyIsPressed(key4IsPressed)
-);
-
-key_decoder #(.KEY_VALUE(9'h074)) key_decoder_6_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.key_code(key_code),
-	.make(make),
-	.breakk(breakk),
-// output
-	.keyIsPressed(key6IsPressed)
-);
-
-key_decoder #(.KEY_VALUE(9'h073)) key_decoder_5_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.key_code(key_code),
-	.make(make),
-	.breakk(breakk),
-// output
-	.keyIsPressed(key5IsPressed)
+	.key4IsPressed(key4IsPressed),
+	.key5IsPressed(key5IsPressed),
+	.key6IsPressed(key6IsPressed),
 );
 
 endmodule

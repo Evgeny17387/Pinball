@@ -1,9 +1,9 @@
 module flipper_controller(
-	input		logic							clk,
-	input		logic							resetN,
-	input		logic							startOfFrame,
-	input		logic							key4IsPressed,
-	input		logic							key6IsPressed,
+	input	logic					clk,
+	input	logic					resetN,
+	input	logic					startOfFrame,
+	input	logic					key4IsPressed,
+	input	logic					key6IsPressed,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -13,13 +13,13 @@ const int FIXED_POINT_MULTIPLIER	= 64;
 const int x_FRAME_SIZE				= 639 * FIXED_POINT_MULTIPLIER;
 const int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;
 
-const	int INITIAL_X 					= 280;
-const	int INITIAL_Y 					= 400;
+const int INITIAL_X 				= 280;
+const int INITIAL_Y 				= 400;
 
-const	int Xspeed 						= 250;
+const int Xspeed 					= 250;
 
-		int topLeftX_FixedPoint;
-		int topLeftY_FixedPoint;
+int topLeftX_FixedPoint;
+int topLeftY_FixedPoint;
 
 always_ff@(posedge clk or negedge resetN)
 begin
