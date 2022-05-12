@@ -2,11 +2,13 @@ module smiley_controller(
 	input	logic					clk,
 	input	logic					resetN,
 	input	logic					startOfFrame,
-	input 	logic					collisionSmileyBorders,
+	input 	logic 					collisionSmileyBorderTop,
+	input 	logic 					collisionSmileyBorderLeft,
+	input 	logic 					collisionSmileyBorderRight,
 	input 	logic					collisionSmileyFlipper,
-	input	logic			[3:0] 	HitEdgeCode,
 	input	logic					key5IsPressed,
 	input	logic					pause,
+	input	logic			[31:0]	flipperSpeedX,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -17,10 +19,7 @@ parameter 	int INITIAL_Y 					= 185;
 parameter 	int INITIAL_X_SPEED 			= 0;
 parameter 	int INITIAL_Y_SPEED 			= 100;
 
-const 		int Y_GRAVITY 					= 0;
-const 		int Y_EXTRA 					= 0;
-
-parameter 	int MAX_Y_SPEED 				= 230;
+const 		int Y_GRAVITY 					= 2;
 
 const 		int FIXED_POINT_MULTIPLIER		= 64;
 
@@ -78,22 +77,17 @@ begin
 
 			end
 			else if (start) begin
-
-				if ((collisionSmileyBorders && (HitEdgeCode[2] == 1)) && (Yspeed < 0))
+			
+				if (collisionSmileyBorderTop && (Yspeed < 0))
 					Yspeed <= -Yspeed;
-
-				if ((collisionSmileyBorders && (HitEdgeCode[0] == 1)) && (Yspeed > 0))
+				else if (collisionSmileyFlipper && (Yspeed > 0))
 					Yspeed <= -Yspeed;
-
-				if (collisionSmileyFlipper && (Yspeed > 0))
-					Yspeed <= -Yspeed - Y_EXTRA;
 
 				if (startOfFrame) begin
 
 					topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
 
-					if (Yspeed < MAX_Y_SPEED)
-						Yspeed <= Yspeed + Y_GRAVITY;
+					Yspeed <= Yspeed + Y_GRAVITY;
 
 				end
 			
@@ -120,15 +114,16 @@ begin
 			if (!start) begin
 
 				Xspeed <= 0;
-			
+
 			end
 			else if (start) begin
 
-				if (collisionSmileyBorders && (HitEdgeCode [3] == 1) && (Xspeed < 0))
+				if (collisionSmileyBorderLeft && (Xspeed < 0))
 					Xspeed <= -Xspeed;
-
-				if (collisionSmileyBorders && (HitEdgeCode [1] == 1) && (Xspeed > 0))
+				else if (collisionSmileyBorderRight && (Xspeed > 0))
 					Xspeed <= -Xspeed;
+				else if (collisionSmileyFlipper && (Yspeed > 0))
+					Xspeed <= Xspeed + flipperSpeedX;
 
 				if (startOfFrame == 1'b1)
 					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;

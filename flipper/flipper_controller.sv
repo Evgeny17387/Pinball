@@ -6,7 +6,8 @@ module flipper_controller(
 	input	logic					key6IsPressed,
 	input	logic					pause,
 	output	logic signed 	[10:0]	topLeftX,
-	output	logic signed	[10:0]	topLeftY
+	output	logic signed	[10:0]	topLeftY,
+	output	logic			[31:0]	speedX
 );
 
 const int FIXED_POINT_MULTIPLIER	= 64;
@@ -35,11 +36,17 @@ begin
 		if (!pause) begin
 
 			if (startOfFrame == 1'b1) begin
+
 				if (key6IsPressed) begin
 					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+					speedX <= Xspeed;
 				end
-				if (key4IsPressed) begin
+				else if (key4IsPressed) begin
 					topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
+					speedX <= -Xspeed;
+				end
+				else begin
+					speedX <= 0;
 				end
 
 			end

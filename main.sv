@@ -20,15 +20,21 @@ logic	[7:0]	RGB_smiley;
 logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGB;
 
-logic			draw_boarders;
+logic			draw_top_boarder;
 logic			draw_bottom_boarder;
+logic			draw_left_boarder;
+logic			draw_right_boarder;
 logic 			draw_smiley;
 logic 			draw_flipper;
 
 logic 			startOfFrame;
 
-logic			collisionSmileyBorders;
+logic			collisionSmileyBorderTop;
+logic			collisionSmileyBorderLeft;
+logic			collisionSmileyBorderRight;
+
 logic			collisionSmileyFlipper;
+
 logic			pause;
 
 logic			make;
@@ -38,6 +44,8 @@ logic	[8:0]	key_code;
 logic 			key4IsPressed;
 logic 			key5IsPressed;
 logic  			key6IsPressed;
+
+wire	[31:0]	flipperSpeedX;
 
 assign reset = !resetN;
 
@@ -52,8 +60,10 @@ background background_inst(
 	.PixelY(PixelY),
 // output
 	.RGB_backGround(RGB_backGround),
-	.draw_boarders(draw_boarders),
-	.draw_bottom_boarder(draw_bottom_boarder)
+	.draw_top_boarder(draw_top_boarder),
+	.draw_bottom_boarder(draw_bottom_boarder),
+	.draw_left_boarder(draw_left_boarder),
+	.draw_right_boarder(draw_right_boarder)
 );
 
 smiley_block smiley_block_inst(
@@ -63,10 +73,13 @@ smiley_block smiley_block_inst(
 	.PixelX(PixelX),
 	.PixelY(PixelY),
 	.startOfFrame(startOfFrame),
-	.collisionSmileyBorders(collisionSmileyBorders),
+	.collisionSmileyBorderTop(collisionSmileyBorderTop),
+	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
+	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.key5IsPressed(key5IsPressed),
 	.pause(pause),
+	.flipperSpeedX(flipperSpeedX),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -84,7 +97,8 @@ flipper_block flipper_block_inst(
 	.pause(pause),
 // output
 	.RGB_flipper(RGB_flipper),
-	.draw_flipper(draw_flipper)
+	.draw_flipper(draw_flipper),
+	.speedX(flipperSpeedX)
 );
 
 objects_mux objects_mux_inst(
@@ -123,12 +137,16 @@ game_controller game_controller_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.draw_smiley(draw_smiley),
-	.draw_boarders(draw_boarders),
+	.draw_top_boarder(draw_top_boarder),
 	.draw_bottom_boarder(draw_bottom_boarder),
+	.draw_left_boarder(draw_left_boarder),
+	.draw_right_boarder(draw_right_boarder),
 	.draw_flipper(draw_flipper),
 	.key5IsPressed(key5IsPressed),
 // output
-	.collisionSmileyBorders(collisionSmileyBorders),
+	.collisionSmileyBorderTop(collisionSmileyBorderTop),
+	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
+	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.pause(pause)
 );

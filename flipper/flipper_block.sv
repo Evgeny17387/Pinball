@@ -8,7 +8,8 @@ module flipper_block(
 	input	logic					key6IsPressed,
 	input	logic					pause,
 	output	logic			[7:0]	RGB_flipper,
-	output	logic					draw_flipper
+	output	logic					draw_flipper,
+	output	logic			[31:0]	speedX
 );
 
 logic signed [10:0] topLeftX;
@@ -24,7 +25,8 @@ flipper_controller flipper_controller_inst(
 	.pause(pause),
 // output
 	.topLeftX(topLeftX),
-	.topLeftY(topLeftY)
+	.topLeftY(topLeftY),
+	.speedX(speedX)
 );
 
 flipper_object flipper_object_inst(

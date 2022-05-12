@@ -4,8 +4,10 @@ module background(
 	input	logic	[10:0]	PixelX,
 	input	logic	[10:0]	PixelY,
 	output	logic	[7:0]	RGB_backGround,
-	output	logic			draw_boarders,
-	output	logic			draw_bottom_boarder
+	output	logic			draw_top_boarder,
+	output	logic			draw_bottom_boarder,
+	output	logic			draw_left_boarder,
+	output	logic			draw_right_boarder
 );
 
 const int xFrameSize = 635;
@@ -28,8 +30,11 @@ begin
 		redBits <= DARK_COLOR;
 		greenBits <= DARK_COLOR;
 		blueBits <= DARK_COLOR;
-		draw_boarders <= 1'b0;
+
+		draw_top_boarder <= 1'b0;
 		draw_bottom_boarder <= 1'b0;
+		draw_left_boarder <= 1'b0;
+		draw_right_boarder <= 1'b0;
 
 	end 
 	else begin
@@ -37,23 +42,39 @@ begin
 		greenBits <= 3'b110;
 		redBits <= 3'b010;
 		blueBits <= LIGHT_COLOR;
-		draw_boarders <= 1'b0;
+
+		draw_top_boarder <= 1'b0;
 		draw_bottom_boarder <= 1'b0;
+		draw_left_boarder <= 1'b0;
+		draw_right_boarder <= 1'b0;
 
-		if ((PixelX == bracketOffset) || (PixelY == bracketOffset) || (PixelX == (xFrameSize - bracketOffset)))
-		begin
+		if (PixelY == bracketOffset) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
-			draw_boarders <= 1'b1;
+
+			draw_top_boarder <= 1'b1;
 		end
-
-		if (PixelY == (yFrameSize - bracketOffset))
-		begin
+		else if (PixelY == (yFrameSize - bracketOffset)) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
+
 			draw_bottom_boarder <= 1'b1;
+		end
+		else if (PixelX == bracketOffset) begin
+			redBits <= DARK_COLOR;
+			greenBits <= DARK_COLOR;
+			blueBits <= DARK_COLOR;
+
+			draw_left_boarder <= 1'b1;
+		end
+		else if (PixelX == (xFrameSize - bracketOffset)) begin
+			redBits <= DARK_COLOR;
+			greenBits <= DARK_COLOR;
+			blueBits <= DARK_COLOR;
+
+			draw_right_boarder <= 1'b1;
 		end
 
 	end
