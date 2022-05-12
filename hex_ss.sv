@@ -1,5 +1,5 @@
 module hex_ss(
-	input		logic [3:0] i_dig,
+	input	logic [3:0] i_dig,
 	output	logic [6:0] o_seg
 );
 
