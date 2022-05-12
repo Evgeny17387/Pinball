@@ -1,13 +1,14 @@
 module smiley_block(
-	input		logic							clk,
-	input		logic							resetN,
+	input	logic					clk,
+	input	logic					resetN,
 	input 	logic signed	[10:0] 	PixelX,
 	input 	logic signed	[10:0] 	PixelY,
-	input 	logic 						startOfFrame,
-	input 	logic							collisionSmileyBorders,
-	input 	logic							collisionSmileyFlipper,
-	output	logic				[7:0]		RGB_smiley,
-	output	logic							draw_smiley
+	input 	logic 					startOfFrame,
+	input 	logic					collisionSmileyBorders,
+	input 	logic					collisionSmileyFlipper,
+	input	logic					key5IsPressed,
+	output	logic			[7:0]	RGB_smiley,
+	output	logic					draw_smiley
 );
 
 logic draw_smiley_inner;
@@ -28,6 +29,7 @@ smiley_controller smiley_controller_inst(
 	.collisionSmileyBorders(collisionSmileyBorders),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.HitEdgeCode(HitEdgeCode),
+	.key5IsPressed(key5IsPressed),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY)

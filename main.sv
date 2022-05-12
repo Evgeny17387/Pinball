@@ -33,7 +33,8 @@ logic				make;
 logic				breakk;
 logic	[8:0]		key_code;
 
-logic  			key4IsPressed;
+logic 			key4IsPressed;
+logic 			key5IsPressed;
 logic  			key6IsPressed;
 
 assign reset = !resetN;
@@ -44,7 +45,7 @@ assign LEDR[1] = key4IsPressed;
 background background_inst(
 // input
 	.clk(clk),
-	.resetN(resetN),
+	.resetN(resetN),//
 	.PixelX(PixelX),
 	.PixelY(PixelY),
 // output
@@ -61,6 +62,7 @@ smiley_block smiley_block_inst(
 	.startOfFrame(startOfFrame),
 	.collisionSmileyBorders(collisionSmileyBorders),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
+	.key5IsPressed(key5IsPressed),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -169,6 +171,17 @@ key_decoder #(.KEY_VALUE(9'h074)) key_decoder_6_inst(
 	.breakk(breakk),
 // output
 	.keyIsPressed(key6IsPressed)
+);
+
+key_decoder #(.KEY_VALUE(9'h073)) key_decoder_5_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.key_code(key_code),
+	.make(make),
+	.breakk(breakk),
+// output
+	.keyIsPressed(key5IsPressed)
 );
 
 endmodule

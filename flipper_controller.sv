@@ -14,7 +14,7 @@ const int x_FRAME_SIZE				= 639 * FIXED_POINT_MULTIPLIER;
 const int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;
 
 const	int INITIAL_X 					= 280;
-const	int INITIAL_Y 					= 50;
+const	int INITIAL_Y 					= 400;
 
 const	int Xspeed 						= 250;
 
@@ -33,10 +33,10 @@ begin
 
 		if (startOfFrame == 1'b1) begin
 			if (key6IsPressed) begin
-				topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
+				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
 			end
 			if (key4IsPressed) begin
-				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+				topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
 			end
 		end
 	end
