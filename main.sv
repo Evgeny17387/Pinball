@@ -154,6 +154,7 @@ keyboard_block keyboard_block_inst(
 	.in(PS2_CLK),
 	.kbd_dat(PS2_DAT),
 // output
+	.key_code(key_code),
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
 	.key6IsPressed(key6IsPressed)

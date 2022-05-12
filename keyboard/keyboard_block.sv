@@ -1,16 +1,16 @@
 module keyboard_block(
-	input 	logic clk,
-	input 	logic resetN,
-	input 	logic in,
-	input 	logic kbd_dat,
-	output 	logic key4IsPressed,
-	output 	logic key5IsPressed,
-	output 	logic key6IsPressed
+	input 	logic 		clk,
+	input 	logic 		resetN,
+	input 	logic 		in,
+	input 	logic 		kbd_dat,
+	output 	logic 		key4IsPressed,
+	output 	logic 		key5IsPressed,
+	output 	logic 		key6IsPressed,
+	output	logic [8:0]	key_code
 );
 
 logic 		make;
 logic 		breakk;
-logic [8:0]	key_code;
 
 keyboard keyboard_inst(
 // input
