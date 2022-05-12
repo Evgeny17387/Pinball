@@ -4,6 +4,7 @@ module flipper_controller(
 	input	logic					startOfFrame,
 	input	logic					key4IsPressed,
 	input	logic					key6IsPressed,
+	input	logic					pause,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -31,14 +32,20 @@ begin
 
 	else begin
 
-		if (startOfFrame == 1'b1) begin
-			if (key6IsPressed) begin
-				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+		if (!pause) begin
+
+			if (startOfFrame == 1'b1) begin
+				if (key6IsPressed) begin
+					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+				end
+				if (key4IsPressed) begin
+					topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
+				end
+
 			end
-			if (key4IsPressed) begin
-				topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
-			end
+
 		end
+
 	end
 
 end

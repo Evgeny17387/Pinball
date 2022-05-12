@@ -7,6 +7,7 @@ module smiley_block(
 	input 	logic					collisionSmileyBorders,
 	input 	logic					collisionSmileyFlipper,
 	input	logic					key5IsPressed,
+	input	logic					pause,
 	output	logic			[7:0]	RGB_smiley,
 	output	logic					draw_smiley
 );
@@ -30,6 +31,7 @@ smiley_controller smiley_controller_inst(
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.HitEdgeCode(HitEdgeCode),
 	.key5IsPressed(key5IsPressed),
+	.pause(pause),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY)

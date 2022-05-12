@@ -9,8 +9,8 @@ module main(
 	output	logic	[1:0]	LEDR
 );
 
-logic				clk;
-logic				reset;
+logic			clk;
+logic			reset;
 
 logic	[10:0]	PixelX;
 logic	[10:0]	PixelY;
@@ -21,6 +21,7 @@ logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGB;
 
 logic			draw_boarders;
+logic			draw_bottom_boarder;
 logic 			draw_smiley;
 logic 			draw_flipper;
 
@@ -28,6 +29,7 @@ logic 			startOfFrame;
 
 logic			collisionSmileyBorders;
 logic			collisionSmileyFlipper;
+logic			pause;
 
 logic			make;
 logic			breakk;
@@ -50,7 +52,8 @@ background background_inst(
 	.PixelY(PixelY),
 // output
 	.RGB_backGround(RGB_backGround),
-	.draw_boarders(draw_boarders)
+	.draw_boarders(draw_boarders),
+	.draw_bottom_boarder(draw_bottom_boarder)
 );
 
 smiley_block smiley_block_inst(
@@ -63,6 +66,7 @@ smiley_block smiley_block_inst(
 	.collisionSmileyBorders(collisionSmileyBorders),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.key5IsPressed(key5IsPressed),
+	.pause(pause),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -77,6 +81,7 @@ flipper_block flipper_block_inst(
 	.startOfFrame(startOfFrame),
 	.key4IsPressed(key4IsPressed),
 	.key6IsPressed(key6IsPressed),
+	.pause(pause),
 // output
 	.RGB_flipper(RGB_flipper),
 	.draw_flipper(draw_flipper)
@@ -98,7 +103,7 @@ objects_mux objects_mux_inst(
 clock_divider clock_divider_inst(
 	.refclk(CLOCK_50),
 	.rst(reset),
-	.outclk_0(clk),
+	.outclk_0(clk)
 );
 
 VGA_Controller VGA_Controller_inst(
@@ -119,10 +124,12 @@ game_controller game_controller_inst(
 	.resetN(resetN),
 	.draw_smiley(draw_smiley),
 	.draw_boarders(draw_boarders),
+	.draw_bottom_boarder(draw_bottom_boarder),
 	.draw_flipper(draw_flipper),
 // output
 	.collisionSmileyBorders(collisionSmileyBorders),
-	.collisionSmileyFlipper(collisionSmileyFlipper)
+	.collisionSmileyFlipper(collisionSmileyFlipper),
+	.pause(pause)
 );
 
 hex_ss hexSS_inst_1(
@@ -148,7 +155,7 @@ keyboard_block keyboard_block_inst(
 // output
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
-	.key6IsPressed(key6IsPressed),
+	.key6IsPressed(key6IsPressed)
 );
 
 endmodule

@@ -28,6 +28,8 @@ begin
 		redBits <= DARK_COLOR;
 		greenBits <= DARK_COLOR;
 		blueBits <= DARK_COLOR;
+		draw_boarders <= 1'b0;
+		draw_bottom_boarder <= 1'b0;
 
 	end 
 	else begin

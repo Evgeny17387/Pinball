@@ -6,6 +6,7 @@ module smiley_controller(
 	input 	logic					collisionSmileyFlipper,
 	input	logic			[3:0] 	HitEdgeCode,
 	input	logic					key5IsPressed,
+	input	logic					pause,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -65,31 +66,35 @@ begin
 
 	else begin
 	
-		if (!start && key5IsPressed) begin
+		if (!pause) begin
 
-			Yspeed <= INITIAL_Y_SPEED;
-		
-		end
-		else if (start) begin
+			if (!start && key5IsPressed) begin
 
-			if ((collisionSmileyBorders && (HitEdgeCode[2] == 1)) && (Yspeed < 0))
-				Yspeed <= -Yspeed;
-
-			if ((collisionSmileyBorders && (HitEdgeCode[0] == 1)) && (Yspeed > 0))
-				Yspeed <= -Yspeed;
-
-			if (collisionSmileyFlipper && (Yspeed > 0))
-				Yspeed <= -Yspeed - Y_EXTRA;
-
-			if (startOfFrame) begin
-
-				topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
-
-				if (Yspeed < MAX_Y_SPEED)
-					Yspeed <= Yspeed + Y_GRAVITY;
-
+				Yspeed <= INITIAL_Y_SPEED;
+			
 			end
-		
+			else if (start) begin
+
+				if ((collisionSmileyBorders && (HitEdgeCode[2] == 1)) && (Yspeed < 0))
+					Yspeed <= -Yspeed;
+
+				if ((collisionSmileyBorders && (HitEdgeCode[0] == 1)) && (Yspeed > 0))
+					Yspeed <= -Yspeed;
+
+				if (collisionSmileyFlipper && (Yspeed > 0))
+					Yspeed <= -Yspeed - Y_EXTRA;
+
+				if (startOfFrame) begin
+
+					topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
+
+					if (Yspeed < MAX_Y_SPEED)
+						Yspeed <= Yspeed + Y_GRAVITY;
+
+				end
+			
+			end
+
 		end
 
 	end
@@ -106,21 +111,25 @@ begin
 
 	else begin
 
-		if (!start && key5IsPressed) begin
+		if (!pause) begin
 
-			Xspeed <= 0;
-		
-		end
-		else if (start) begin
+			if (!start && key5IsPressed) begin
 
-			if (collisionSmileyBorders && (HitEdgeCode [3] == 1) && (Xspeed < 0))
-				Xspeed <= -Xspeed;
+				Xspeed <= 0;
+			
+			end
+			else if (start) begin
 
-			if (collisionSmileyBorders && (HitEdgeCode [1] == 1) && (Xspeed > 0))
-				Xspeed <= -Xspeed;
+				if (collisionSmileyBorders && (HitEdgeCode [3] == 1) && (Xspeed < 0))
+					Xspeed <= -Xspeed;
 
-			if (startOfFrame == 1'b1)
-				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+				if (collisionSmileyBorders && (HitEdgeCode [1] == 1) && (Xspeed > 0))
+					Xspeed <= -Xspeed;
+
+				if (startOfFrame == 1'b1)
+					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+
+			end
 
 		end
 
