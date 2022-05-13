@@ -1,12 +1,14 @@
 module objects_mux(
-	input		logic	clk,
-	input		logic	resetN,
-	input		logic	draw_smiley,
-	input		logic	[7:0] RGB_smiley,
-	input		logic	draw_flipper,
-	input		logic	[7:0] RGB_flipper,
-	input		logic	[7:0] RGB_backGround,
-	output	logic	[7:0] RGB
+	input	logic		clk,
+	input	logic		resetN,
+	input	logic		draw_smiley,
+	input	logic [7:0]	RGB_smiley,
+	input	logic		draw_flipper,
+	input	logic [7:0] RGB_flipper,
+	input	logic		drawObstacle,
+	input	logic [7:0]	RGBObstacle,
+	input	logic [7:0] RGB_backGround,
+	output	logic [7:0] RGB
 );
 
 always_ff@(posedge clk or negedge resetN)
@@ -22,7 +24,9 @@ begin
 		else if (draw_flipper == 1'b1) begin
 			RGB <= RGB_flipper;
 		end
-		// ToDo: what in case we have a collision between smiley and flipper ?
+		else if (drawObstacle == 1'b1) begin
+			RGB <= RGBObstacle;
+		end
 		else begin
 			RGB <= RGB_backGround;
 		end

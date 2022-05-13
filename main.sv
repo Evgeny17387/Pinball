@@ -18,6 +18,7 @@ logic	[10:0]	PixelY;
 logic	[7:0]	RGB_backGround;
 logic	[7:0]	RGB_smiley;
 logic	[7:0]	RGB_flipper;
+logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -26,6 +27,7 @@ logic			draw_left_boarder;
 logic			draw_right_boarder;
 logic 			draw_smiley;
 logic 			draw_flipper;
+logic 			drawObstacle;
 
 logic 			startOfFrame;
 
@@ -110,6 +112,17 @@ flipper_block flipper_block_inst(
 	.speedX(flipperSpeedX)
 );
 
+Obstacle Obstacle_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
+// output
+	.drawObstacle(drawObstacle),
+	.RGBObstacle(RGBObstacle)
+);
+
 objects_mux objects_mux_inst(
 // input
 	.clk(clk),
@@ -118,6 +131,8 @@ objects_mux objects_mux_inst(
 	.RGB_smiley(RGB_smiley),
 	.draw_flipper(draw_flipper),
 	.RGB_flipper(RGB_flipper),
+	.drawObstacle(drawObstacle),
+	.RGBObstacle(RGBObstacle),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
