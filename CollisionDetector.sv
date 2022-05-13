@@ -36,11 +36,12 @@ begin
 			collisionFlipperBorderLeft <= 0;
 			collisionFlipperBorderRight <= 0;
 		end
-		else if (draw_flipper && draw_left_boarder)
-			collisionFlipperBorderLeft <= 1;
-		else if (draw_flipper && draw_right_boarder)
-			collisionFlipperBorderRight <= 1;
-
+		else begin
+			if (draw_flipper && draw_left_boarder)
+				collisionFlipperBorderLeft <= 1;
+			if (draw_flipper && draw_right_boarder)
+				collisionFlipperBorderRight <= 1;
+		end
 	end
 
 end
