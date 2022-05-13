@@ -17,7 +17,6 @@ module smiley_controller(
 parameter 	int INITIAL_X 					= 280;
 parameter 	int INITIAL_Y 					= 185;
 
-parameter 	int INITIAL_X_SPEED 			= 0;
 parameter 	int INITIAL_Y_SPEED 			= 100;
 
 const 		int Y_GRAVITY 					= 1;
@@ -38,7 +37,7 @@ begin
 
 	if (!resetN) begin
 
-		Yspeed <= 0;
+		Yspeed <= INITIAL_Y_SPEED;
 		topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
 
 	end 
@@ -46,7 +45,7 @@ begin
 
 		if (reset_level) begin
 
-			Yspeed <= 0;
+			Yspeed <= INITIAL_Y_SPEED;
 			topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
 
 		end

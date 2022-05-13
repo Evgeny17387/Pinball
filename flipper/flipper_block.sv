@@ -8,6 +8,8 @@ module flipper_block(
 	input	logic					key6IsPressed,
 	input	logic					pause,
 	input	logic					reset_level,
+	input 	logic 					collisionFlipperBorderLeft,
+	input 	logic 					collisionFlipperBorderRight,
 	output	logic			[7:0]	RGB_flipper,
 	output	logic					draw_flipper,
 	output	logic			[31:0]	speedX
@@ -25,6 +27,8 @@ flipper_controller flipper_controller_inst(
 	.key6IsPressed(key6IsPressed),
 	.pause(pause),
 	.reset_level(reset_level),
+	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
+	.collisionFlipperBorderRight(collisionFlipperBorderRight),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY),

@@ -30,10 +30,14 @@ logic 			draw_flipper;
 logic 			startOfFrame;
 
 logic			collisionSmileyBorderTop;
+logic			collisionSmileyBorderBottom;
 logic			collisionSmileyBorderLeft;
 logic			collisionSmileyBorderRight;
 
 logic			collisionSmileyFlipper;
+
+logic 			collisionFlipperBorderLeft;
+logic 			collisionFlipperBorderRight;
 
 logic			pause;
 logic			reset_level;
@@ -98,6 +102,8 @@ flipper_block flipper_block_inst(
 	.key6IsPressed(key6IsPressed),
 	.pause(pause),
 	.reset_level(reset_level),
+	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
+	.collisionFlipperBorderRight(collisionFlipperBorderRight),
 // output
 	.RGB_flipper(RGB_flipper),
 	.draw_flipper(draw_flipper),
@@ -139,20 +145,32 @@ game_controller game_controller_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
+	.key5IsPressed(key5IsPressed),
+	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
+// output
+	.pause(pause),
+	.reset_level(reset_level)
+);
+
+CollisionDetector CollisionDetector_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
 	.draw_smiley(draw_smiley),
 	.draw_top_boarder(draw_top_boarder),
 	.draw_bottom_boarder(draw_bottom_boarder),
 	.draw_left_boarder(draw_left_boarder),
 	.draw_right_boarder(draw_right_boarder),
 	.draw_flipper(draw_flipper),
-	.key5IsPressed(key5IsPressed),
+	.startOfFrame(startOfFrame),
 // output
 	.collisionSmileyBorderTop(collisionSmileyBorderTop),
+	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
 	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
 	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
-	.pause(pause),
-	.reset_level(reset_level)
+	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
+	.collisionFlipperBorderRight(collisionFlipperBorderRight)
 );
 
 hex_ss hexSS_inst_1(

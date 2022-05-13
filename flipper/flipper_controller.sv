@@ -6,6 +6,8 @@ module flipper_controller(
 	input	logic					key6IsPressed,
 	input	logic					pause,
 	input	logic					reset_level,
+	input 	logic 					collisionFlipperBorderLeft,
+	input 	logic 					collisionFlipperBorderRight,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY,
 	output	logic			[31:0]	speedX
@@ -19,7 +21,8 @@ const int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;
 const int INITIAL_X 				= 280;
 const int INITIAL_Y 				= 400;
 
-const int Xspeed 					= 250;
+const int Xspeed 					= 500;
+const int XspeedCollisionAdd		= 100;
 
 int topLeftX_FixedPoint;
 int topLeftY_FixedPoint;
@@ -48,13 +51,13 @@ begin
 
 			if (startOfFrame == 1'b1) begin
 
-				if (key6IsPressed) begin
+				if (key6IsPressed && !collisionFlipperBorderRight) begin
 					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
-					speedX <= Xspeed;
+					speedX <= XspeedCollisionAdd;
 				end
-				else if (key4IsPressed) begin
+				else if (key4IsPressed && !collisionFlipperBorderLeft) begin
 					topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
-					speedX <= -Xspeed;
+					speedX <= -XspeedCollisionAdd;
 				end
 				else begin
 					speedX <= 0;
