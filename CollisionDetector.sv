@@ -7,6 +7,7 @@ module CollisionDetector(
 	input	logic draw_left_boarder,
 	input	logic draw_right_boarder,
 	input	logic draw_flipper,
+	input	logic drawObstacle,
 	input 	logic startOfFrame,
 	output 	logic collisionSmileyBorderTop,
 	output	logic collisionSmileyBorderBottom,
@@ -14,7 +15,8 @@ module CollisionDetector(
 	output 	logic collisionSmileyBorderRight,
 	output 	logic collisionSmileyFlipper,
 	output 	logic collisionFlipperBorderLeft,
-	output 	logic collisionFlipperBorderRight
+	output 	logic collisionFlipperBorderRight,
+	output	logic collisionSmileyObstacle
 );
 
 assign collisionSmileyBorderTop 	= (draw_smiley && draw_top_boarder);
@@ -23,6 +25,8 @@ assign collisionSmileyBorderLeft 	= (draw_smiley && draw_left_boarder);
 assign collisionSmileyBorderRight 	= (draw_smiley && draw_right_boarder);
 
 assign collisionSmileyFlipper 		= (draw_smiley && draw_flipper);
+
+assign collisionSmileyObstacle		= (draw_smiley && drawObstacle);
 
 always_ff @(posedge clk or negedge resetN)
 begin

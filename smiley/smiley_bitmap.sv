@@ -5,7 +5,8 @@ module smiley_bitmap(
 	input 	logic	[10:0] 	offsetY,
 	input	logic			InsideRectangle,
 	output	logic			draw_smiley,
-	output	logic	[7:0] 	RGB_smiley
+	output	logic	[7:0] 	RGB_smiley,
+	output 	logic	[3:0]	hitEdgeCode
 );
 
 localparam  int OBJECT_NUMBER_OF_Y_BITS = 5;
@@ -54,21 +55,36 @@ localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;
 // {8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF, 8'hFF }
 // };
 
+// {Left, Top, Right, Bottom}
+// Left 	- 3
+// Top 		- 2
+// Right 	- 1
+// Bottom 	- 0
+logic [0:3] [0:3] [3:0] hit_colors = 
+{
+	16'hC446,
+	16'h8C62,
+	16'h8932,
+	16'h9113
+};
+
 always_ff@(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
 		RGB_smiley <= 8'h00;
+		hitEdgeCode <= 4'h0;
 	end
 
 	else begin
 
 		RGB_smiley <= TRANSPARENT_ENCODING;
+		hitEdgeCode <= 4'h0;
 
 		if (InsideRectangle == 1'b1) begin
 			// RGB_smiley <= object_colors[OBJECT_HEIGHT_Y - offsetY][offsetX];
 			RGB_smiley <= 8'h55;
-
+			hitEdgeCode <= hit_colors[offsetY >> OBJECT_HEIGHT_Y_DIVIDER][offsetX >> OBJECT_WIDTH_X_DIVIDER];
 		end
 	end
 

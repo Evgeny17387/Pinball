@@ -41,6 +41,8 @@ logic			collisionSmileyFlipper;
 logic 			collisionFlipperBorderLeft;
 logic 			collisionFlipperBorderRight;
 
+logic 			collisionSmileyObstacle;
+
 logic			pause;
 logic			reset_level;
 
@@ -88,6 +90,7 @@ smiley_block smiley_block_inst(
 	.pause(pause),
 	.flipperSpeedX(flipperSpeedX),
 	.reset_level(reset_level),
+	.collisionSmileyObstacle(collisionSmileyObstacle),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -177,6 +180,7 @@ CollisionDetector CollisionDetector_inst(
 	.draw_left_boarder(draw_left_boarder),
 	.draw_right_boarder(draw_right_boarder),
 	.draw_flipper(draw_flipper),
+	.drawObstacle(drawObstacle),
 	.startOfFrame(startOfFrame),
 // output
 	.collisionSmileyBorderTop(collisionSmileyBorderTop),
@@ -185,7 +189,8 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
-	.collisionFlipperBorderRight(collisionFlipperBorderRight)
+	.collisionFlipperBorderRight(collisionFlipperBorderRight),
+	.collisionSmileyObstacle(collisionSmileyObstacle)
 );
 
 hex_ss hexSS_inst_1(

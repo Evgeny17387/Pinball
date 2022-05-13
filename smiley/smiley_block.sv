@@ -12,6 +12,7 @@ module smiley_block(
 	input	logic					pause,
 	input	logic			[31:0]	flipperSpeedX,
 	input	logic					reset_level,
+	input	logic 					collisionSmileyObstacle,
 	output	logic			[7:0]	RGB_smiley,
 	output	logic					draw_smiley
 );
@@ -23,6 +24,8 @@ logic 			[10:0] 	smileyOffsetY;
 
 logic signed 	[10:0] 	topLeftX;
 logic signed 	[10:0] 	topLeftY;
+
+logic			[3:0]	hitEdgeCode;
 
 smiley_controller smiley_controller_inst(
 // input
@@ -37,6 +40,8 @@ smiley_controller smiley_controller_inst(
 	.pause(pause),
 	.flipperSpeedX(flipperSpeedX),
 	.reset_level(reset_level),
+	.hitEdgeCode(hitEdgeCode),
+	.collisionSmileyObstacle(collisionSmileyObstacle),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY)
@@ -65,7 +70,8 @@ smiley_bitmap smiley_bitmap_inst(
 	.InsideRectangle(draw_smiley_inner),
 // output
 	.RGB_smiley(RGB_smiley),
-	.draw_smiley(draw_smiley)
+	.draw_smiley(draw_smiley),
+	.hitEdgeCode(hitEdgeCode)
 );
 
 endmodule
