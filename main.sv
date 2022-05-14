@@ -6,6 +6,7 @@ module main(
 	input 	logic 			PS2_DAT,
 	output	logic	[6:0]	HEX0,
 	output	logic	[6:0]	HEX1,
+	output	logic	[6:0]	HEX2,
 	output	logic	[1:0]	LEDR
 );
 
@@ -55,6 +56,8 @@ logic 			key5IsPressed;
 logic  			key6IsPressed;
 
 wire	[31:0]	flipperSpeedX;
+
+logic	[3:0] 	score;
 
 assign reset = !resetN;
 
@@ -165,9 +168,11 @@ game_controller game_controller_inst(
 	.resetN(resetN),
 	.key5IsPressed(key5IsPressed),
 	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
+	.collisionSmileyObstacle(collisionSmileyObstacle),
 // output
 	.pause(pause),
-	.reset_level(reset_level)
+	.reset_level(reset_level),
+	.score(score)
 );
 
 CollisionDetector CollisionDetector_inst(
@@ -205,6 +210,13 @@ hex_ss hexSS_inst_2(
 	.i_dig(key_code[7:4]),
 // output
 	.o_seg(HEX1)
+);
+
+hex_ss hexSS_inst_3(
+// input
+	.i_dig(score[3:0]),
+// output
+	.o_seg(HEX2)
 );
 
 keyboard_block keyboard_block_inst(

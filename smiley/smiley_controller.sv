@@ -21,7 +21,7 @@ parameter 	int INITIAL_Y 					= 185;
 
 parameter 	int INITIAL_Y_SPEED 			= 100;
 
-const 		int Y_GRAVITY 					= 1;
+const 		int Y_GRAVITY 					= 0;
 
 const 		int FIXED_POINT_MULTIPLIER		= 64;
 

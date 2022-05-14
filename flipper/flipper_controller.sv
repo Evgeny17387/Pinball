@@ -15,9 +15,6 @@ module flipper_controller(
 
 const int FIXED_POINT_MULTIPLIER	= 64;
 
-const int x_FRAME_SIZE				= 639 * FIXED_POINT_MULTIPLIER;
-const int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;
-
 const int INITIAL_X 				= 280;
 const int INITIAL_Y 				= 400;
 
