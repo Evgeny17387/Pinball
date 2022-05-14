@@ -1,8 +1,8 @@
 module smiley_block(
 	input	logic					clk,
 	input	logic					resetN,
-	input 	logic signed	[10:0] 	PixelX,
-	input 	logic signed	[10:0] 	PixelY,
+	input 	logic signed	[10:0] 	pixelX,
+	input 	logic signed	[10:0] 	pixelY,
 	input 	logic 					startOfFrame,
 	input 	logic 					collisionSmileyBorderTop,
 	input 	logic 					collisionSmileyBorderLeft,
@@ -49,12 +49,13 @@ smiley_controller smiley_controller_inst(
 	.collisionSmileyObstacleReal(collisionSmileyObstacleReal)
 );
 
+// ToDo: make sure width\height of the object and bitmap are equal
 square_object square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.PixelX(PixelX),
-	.PixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY),
 // output

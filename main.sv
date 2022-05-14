@@ -20,6 +20,7 @@ logic	[7:0]	RGB_backGround;
 logic	[7:0]	RGB_smiley;
 logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
+logic	[7:0]	RGBScore;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -29,6 +30,7 @@ logic			draw_right_boarder;
 logic 			draw_smiley;
 logic 			draw_flipper;
 logic 			drawObstacle;
+logic 			drawScore;
 
 logic 			startOfFrame;
 
@@ -83,8 +85,8 @@ smiley_block smiley_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.PixelX(PixelX),
-	.PixelY(PixelY),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
 	.startOfFrame(startOfFrame),
 	.collisionSmileyBorderTop(collisionSmileyBorderTop),
 	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
@@ -141,6 +143,8 @@ objects_mux objects_mux_inst(
 	.RGB_flipper(RGB_flipper),
 	.drawObstacle(drawObstacle),
 	.RGBObstacle(RGBObstacle),
+	.drawScore(drawScore),
+	.RGBScore(RGBScore),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
@@ -233,6 +237,18 @@ keyboard_block keyboard_block_inst(
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
 	.key6IsPressed(key6IsPressed)
+);
+
+score_block score_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.score(score),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
+// output
+	.drawScore(drawScore),
+	.RGBScore(RGBScore)
 );
 
 endmodule

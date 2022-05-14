@@ -1,20 +1,20 @@
-module square_object(
-	input		logic	clk,
-	input		logic	resetN,
-	input 	logic signed	[10:0] 	PixelX,
-	input 	logic signed	[10:0] 	PixelY,
+module square_object
+#(parameter OBJECT_WIDTH_X = 60, OBJECT_HEIGHT_Y = 32)
+(
+	input	logic					clk,
+	input	logic					resetN,
+	input 	logic signed	[10:0] 	pixelX,
+	input 	logic signed	[10:0] 	pixelY,
 	input 	logic signed	[10:0] 	topLeftX,
-	input 	logic	signed 	[10:0] 	topLeftY,
-	output 	logic				[10:0] 	offsetX,
-	output 	logic				[10:0]  	offsetY,
-	output	logic							draw,
-	output	logic				[7:0]		RGB
+	input 	logic signed 	[10:0] 	topLeftY,
+	output 	logic			[10:0] 	offsetX,
+	output 	logic			[10:0]  offsetY,
+	output	logic					draw,
+	output	logic			[7:0]	RGB
 );
 
-parameter  int 			OBJECT_WIDTH_X 		= 60;
-parameter  int 			OBJECT_HEIGHT_Y 		= 32;
 parameter  logic [7:0] 	OBJECT_COLOR 			= 8'h5b;
-localparam logic [7:0] 	TRANSPARENT_ENCODING = 8'hFF;
+localparam logic [7:0] 	TRANSPARENT_ENCODING 	= 8'hFF;
 
 int rightX;
 int bottomY;
@@ -24,7 +24,7 @@ logic insideBracket;
 assign rightX 	= topLeftX + OBJECT_WIDTH_X;
 assign bottomY	= topLeftY + OBJECT_HEIGHT_Y;
 
-assign insideBracket	= ((PixelX >= topLeftX) && (PixelX < rightX) && (PixelY >= topLeftY) && (PixelY < bottomY));
+assign insideBracket = ((pixelX >= topLeftX) && (pixelX < rightX) && (pixelY >= topLeftY) && (pixelY < bottomY));
 
 always_ff@(posedge clk or negedge resetN)
 begin
@@ -44,8 +44,8 @@ begin
 		if (insideBracket) begin
 			RGB <= OBJECT_COLOR;
 			draw <= 1'b1;
-			offsetX <= PixelX - topLeftX;
-			offsetY <= PixelY - topLeftY;
+			offsetX <= pixelX - topLeftX;
+			offsetY <= pixelY - topLeftY;
 		end 
 
 	end
