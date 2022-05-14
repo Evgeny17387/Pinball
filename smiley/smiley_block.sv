@@ -14,7 +14,8 @@ module smiley_block(
 	input	logic					reset_level,
 	input	logic 					collisionSmileyObstacle,
 	output	logic			[7:0]	RGB_smiley,
-	output	logic					draw_smiley
+	output	logic					draw_smiley,
+	output	logic					collisionSmileyObstacleReal
 );
 
 logic 					draw_smiley_inner;
@@ -44,7 +45,8 @@ smiley_controller smiley_controller_inst(
 	.collisionSmileyObstacle(collisionSmileyObstacle),
 // output
 	.topLeftX(topLeftX),
-	.topLeftY(topLeftY)
+	.topLeftY(topLeftY),
+	.collisionSmileyObstacleReal(collisionSmileyObstacleReal)
 );
 
 square_object square_object_inst(
