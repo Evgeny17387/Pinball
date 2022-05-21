@@ -7,6 +7,7 @@ module main(
 	output	logic	[6:0]	HEX0,
 	output	logic	[6:0]	HEX1,
 	output	logic	[6:0]	HEX2,
+	output	logic	[6:0]	HEX3,
 	output	logic	[1:0]	LEDR
 );
 
@@ -21,6 +22,7 @@ logic	[7:0]	RGB_smiley;
 logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBScore;
+logic	[7:0]	RGBLevel;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -31,6 +33,7 @@ logic 			draw_smiley;
 logic 			draw_flipper;
 logic 			drawObstacle;
 logic 			drawScore;
+logic 			drawLevel;
 
 logic 			startOfFrame;
 
@@ -61,6 +64,8 @@ logic  			key6IsPressed;
 wire	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	score;
+
+logic	[3:0] 	level;
 
 assign reset = !resetN;
 
@@ -145,6 +150,8 @@ objects_mux objects_mux_inst(
 	.RGBObstacle(RGBObstacle),
 	.drawScore(drawScore),
 	.RGBScore(RGBScore),
+	.drawLevel(drawLevel),
+	.RGBLevel(RGBLevel),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
@@ -179,7 +186,8 @@ game_controller game_controller_inst(
 // output
 	.pause(pause),
 	.reset_level(reset_level),
-	.score(score)
+	.score(score),
+	.level(level)
 );
 
 CollisionDetector CollisionDetector_inst(
@@ -226,6 +234,13 @@ hex_ss hexSS_inst_3(
 	.o_seg(HEX2)
 );
 
+hex_ss hexSS_inst_4(
+// input
+	.i_dig(level[3:0]),
+// output
+	.o_seg(HEX3)
+);
+
 keyboard_block keyboard_block_inst(
 // input
 	.clk(clk),
@@ -249,6 +264,18 @@ score_block score_block_inst(
 // output
 	.drawScore(drawScore),
 	.RGBScore(RGBScore)
+);
+
+level_block level_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.level(level),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
+// output
+	.drawLevel(drawLevel),
+	.RGBLevel(RGBLevel)
 );
 
 endmodule

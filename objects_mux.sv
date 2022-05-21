@@ -9,6 +9,8 @@ module objects_mux(
 	input	logic [7:0]	RGBObstacle,
 	input	logic		drawScore,
 	input	logic [7:0]	RGBScore,
+	input	logic		drawLevel,
+	input	logic [7:0]	RGBLevel,
 	input	logic [7:0] RGB_backGround,
 	output	logic [7:0] RGB
 );
@@ -28,6 +30,9 @@ begin
 		end
 		else if (drawScore == 1'b1) begin
 			RGB <= RGBScore;
+		end
+		else if (drawLevel == 1'b1) begin
+			RGB <= RGBLevel;
 		end
 		else if (drawObstacle == 1'b1) begin
 			RGB <= RGBObstacle;

@@ -7,7 +7,8 @@ module game_controller(
 	input	logic			collisionSmileyObstacleReal,
 	output 	logic 			pause,
 	output 	logic 			reset_level,
-	output 	logic [3:0] 	score
+	output 	logic [3:0] 	score,
+	output 	logic [3:0] 	level
 );
 
 enum logic [2:0] {state_1, state_2} state_present, state_next;
@@ -19,6 +20,7 @@ begin
 
 		state_present <= state_1;
 		score <= 0;
+		level <= 0;
 
 	end
 	else begin
@@ -26,7 +28,12 @@ begin
 		state_present <= state_next;
 
 		if (collisionSmileyObstacleReal)
-			score <= score + 1;
+			if (score == 4'h1) begin
+				score <= 0;
+				level <= level + 1;
+			end
+			else
+				score <= score + 1;
 
 		if (collisionSmileyBorderBottom)
 			score <= 0;
