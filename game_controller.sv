@@ -13,30 +13,29 @@ module game_controller(
 
 enum logic [2:0] {state_1, state_2} state_present, state_next;
 
+logic [3:0] score_current, score_next;
+logic [3:0] level_current, level_next;
+
+assign score = score_current;
+assign level = level_current;
+
 always_ff @(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
 
 		state_present <= state_1;
-		score <= 0;
-		level <= 0;
+
+		score_current <= 0;
+		level_current <= 0;
 
 	end
 	else begin
 
 		state_present <= state_next;
 
-		if (collisionSmileyObstacleReal)
-			if (score == 4'h1) begin
-				score <= 0;
-				level <= level + 1;
-			end
-			else
-				score <= score + 1;
-
-		if (collisionSmileyBorderBottom)
-			score <= 0;
+		score_current <= score_next;
+		level_current <= level_next;
 
 	end
 
@@ -46,14 +45,26 @@ always_comb
 begin
 
 	state_next = state_present;
+
+	score_next = score_current;
+	level_next = level_current;
+
 	pause = 1;
+
 	reset_level = 0;
 
 	case (state_present)
 
 		state_1: begin
-			if (key5IsPressed)
+
+			score_next = 0;
+
+			reset_level = 1;
+
+			if (key5IsPressed) begin
 				state_next = state_2;
+			end
+
 		end
 
 		state_2: begin
@@ -61,8 +72,16 @@ begin
 			pause = 0;
 
 			if (collisionSmileyBorderBottom) begin
-				reset_level = 1;
 				state_next = state_1;
+			end
+			else if (collisionSmileyObstacleReal) begin
+				if (score == 4'h1) begin
+					state_next = state_1;
+					level_next = level_current + 1;
+				end
+				else begin
+					score_next = score_current + 1;
+				end
 			end
 
 		end
