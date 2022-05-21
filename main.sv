@@ -23,6 +23,7 @@ logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBScore;
 logic	[7:0]	RGBLevel;
+logic	[7:0]	RGBStatusLevel;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -34,6 +35,7 @@ logic 			draw_flipper;
 logic 			drawObstacle;
 logic 			drawScore;
 logic 			drawLevel;
+logic 			drawStatusLevel;
 
 logic 			startOfFrame;
 
@@ -152,6 +154,8 @@ objects_mux objects_mux_inst(
 	.RGBScore(RGBScore),
 	.drawLevel(drawLevel),
 	.RGBLevel(RGBLevel),
+	.drawStatusLevel(drawStatusLevel),
+	.RGBStatusLevel(RGBStatusLevel),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
@@ -278,4 +282,15 @@ level_block level_block_inst(
 	.RGBLevel(RGBLevel)
 );
 
+status_level_block status_level_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
+	.reset_level(reset_level),
+// output
+	.drawStatusLevel(drawStatusLevel),
+	.RGBStatusLevel(RGBStatusLevel)
+);
 endmodule
