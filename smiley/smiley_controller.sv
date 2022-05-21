@@ -1,5 +1,4 @@
-import defines::INITIAL_X;
-import defines::INITIAL_Y;
+import defines::INITIAL_X, defines::INITIAL_Y;
 
 module smiley_controller(
 	input	logic					clk,

@@ -1,3 +1,5 @@
+import defines::SCORE_TOP_LEFT_X, defines::SCORE_TOP_LEFT_Y;
+
 module score_block(
 	input 	logic 			clk,
 	input 	logic 			resetN,
@@ -13,17 +15,14 @@ logic [10:0] offsetY;
 
 logic insideRectangle;
 
-localparam logic signed [10:0] topLeftX = 50;
-localparam logic signed [10:0] topLeftY = 50;
-
 square_object #(.OBJECT_WIDTH_X(16), .OBJECT_HEIGHT_Y(32)) square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.topLeftX(topLeftX),
-	.topLeftY(topLeftY),
+	.topLeftX(SCORE_TOP_LEFT_X),
+	.topLeftY(SCORE_TOP_LEFT_Y),
 // output
 	.offsetX(offsetX),
 	.offsetY(offsetY),
