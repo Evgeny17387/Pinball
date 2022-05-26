@@ -13,3 +13,10 @@ package defines;
     parameter logic signed [10:0] LEVEL_STATUS_TOP_LEFT_Y = 50;
 
 endpackage
+
+package defines_ball;
+
+    parameter int WIDTH = 32;
+    parameter int HEIGHT = 32;
+
+endpackage

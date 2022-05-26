@@ -1,3 +1,5 @@
+import defines_ball::WIDTH, defines_ball::HEIGHT;
+
 module smiley_block(
 	input	logic					clk,
 	input	logic					resetN,
@@ -13,6 +15,7 @@ module smiley_block(
 	input	logic			[31:0]	flipperSpeedX,
 	input	logic					reset_level,
 	input	logic 					collisionSmileyObstacle,
+	input	logic 			[3:0]	level,
 	output	logic			[7:0]	RGB_smiley,
 	output	logic					draw_smiley,
 	output	logic					collisionSmileyObstacleReal
@@ -43,6 +46,7 @@ smiley_controller smiley_controller_inst(
 	.reset_level(reset_level),
 	.hitEdgeCode(hitEdgeCode),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
+	.level(level),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY),
@@ -50,7 +54,7 @@ smiley_controller smiley_controller_inst(
 );
 
 // ToDo: make sure width\height of the object and bitmap are equal
-square_object square_object_inst(
+square_object #(.OBJECT_WIDTH_X(defines_ball::WIDTH), .OBJECT_HEIGHT_Y(defines_ball::HEIGHT)) square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

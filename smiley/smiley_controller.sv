@@ -14,6 +14,7 @@ module smiley_controller(
 	input	logic					reset_level,
 	input	logic 					collisionSmileyObstacle,
 	input 	logic			[3:0]	hitEdgeCode,
+	input	logic 			[3:0]	level,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY,
 	output	logic					collisionSmileyObstacleReal
@@ -90,7 +91,7 @@ begin
 	else begin
 
 		if (reset_level) begin
-			Yspeed <= INITIAL_Y_SPEED;
+			Yspeed <= INITIAL_Y_SPEED * (level + 1);
 			topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
 			isCollisionXHappened <= 0;
 			collisionYSmileyObstacleReal <= 0;

@@ -63,7 +63,7 @@ logic 			key4IsPressed;
 logic 			key5IsPressed;
 logic  			key6IsPressed;
 
-wire	[31:0]	flipperSpeedX;
+logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	score;
 
@@ -104,6 +104,7 @@ smiley_block smiley_block_inst(
 	.flipperSpeedX(flipperSpeedX),
 	.reset_level(reset_level),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
+	.level(level),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley),
