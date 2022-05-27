@@ -54,7 +54,7 @@ smiley_controller smiley_controller_inst(
 );
 
 // ToDo: make sure width\height of the object and bitmap are equal
-square_object #(.OBJECT_WIDTH_X(defines_ball::WIDTH), .OBJECT_HEIGHT_Y(defines_ball::HEIGHT)) square_object_inst(
+square_object #(.OBJECT_WIDTH(defines_ball::WIDTH), .OBJECT_HEIGHT(defines_ball::HEIGHT)) square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

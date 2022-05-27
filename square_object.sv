@@ -1,5 +1,5 @@
 module square_object
-#(parameter OBJECT_WIDTH_X = 60, OBJECT_HEIGHT_Y = 32)
+#(parameter OBJECT_WIDTH = 32, OBJECT_HEIGHT = 32)
 (
 	input	logic					clk,
 	input	logic					resetN,
@@ -21,8 +21,8 @@ int bottomY;
 
 logic insideBracket;
 
-assign rightX 	= topLeftX + OBJECT_WIDTH_X;
-assign bottomY	= topLeftY + OBJECT_HEIGHT_Y;
+assign rightX 	= topLeftX + OBJECT_WIDTH;
+assign bottomY	= topLeftY + OBJECT_HEIGHT;
 
 assign insideBracket = ((pixelX >= topLeftX) && (pixelX < rightX) && (pixelY >= topLeftY) && (pixelY < bottomY));
 

@@ -15,7 +15,7 @@ logic [10:0] offsetY;
 
 logic insideRectangle;
 
-square_object #(.OBJECT_WIDTH_X(16), .OBJECT_HEIGHT_Y(32)) square_object_inst(
+square_object #(.OBJECT_WIDTH(16), .OBJECT_HEIGHT(32)) square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

@@ -11,6 +11,7 @@ output	logic	[7:0]	RGBNumber
 
 parameter logic [7:0] digit_color = 8'hAA;
 
+`ifdef PICTURES
 bit [0:15] [0:31] [0:15] number_bitmap = {
 // 0
 {16'b	0000001111100000,
@@ -541,6 +542,7 @@ bit [0:15] [0:31] [0:15] number_bitmap = {
 16'b	1111000000000000,
 16'b	1111000000000000}
 };
+`endif
 
 always_ff@(posedge clk or negedge resetN)
 begin
@@ -555,7 +557,13 @@ begin
 		drawNumber <= 1'b0;
 
 		if (insideRectangle == 1'b1)
+
+`ifdef PICTURES
 			drawNumber <= (number_bitmap[number][offsetY][offsetX]);
+`else
+			drawNumber <= 1'b1;
+`endif
+
 	end
 
 end

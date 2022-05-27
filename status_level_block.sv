@@ -12,7 +12,7 @@ module status_level_block(
 
 assign RGBStatusLevel = reset_level ? 8'b00000011 : 8'b00011100;
 
-square_object #(.OBJECT_WIDTH_X(15), .OBJECT_HEIGHT_Y(15)) square_object_inst(
+square_object #(.OBJECT_WIDTH(15), .OBJECT_HEIGHT(15)) square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

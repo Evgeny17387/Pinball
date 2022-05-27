@@ -1,3 +1,5 @@
+import defines::bracketOffset_h, defines::bracketOffset_top, defines::bracketOffset_bottom;
+
 module background(
 	input	logic			clk,
 	input	logic			resetN,
@@ -12,8 +14,6 @@ module background(
 
 const int xFrameSize = 635;
 const int yFrameSize = 475;
-
-const int bracketOffset = 30;
 
 logic [2:0] redBits;
 logic [2:0] greenBits;
@@ -48,28 +48,28 @@ begin
 		draw_left_boarder <= 1'b0;
 		draw_right_boarder <= 1'b0;
 
-		if (PixelY == bracketOffset) begin
+		if (PixelY == bracketOffset_top) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
 
 			draw_top_boarder <= 1'b1;
 		end
-		else if (PixelY == (yFrameSize - bracketOffset)) begin
+		else if (PixelY == (yFrameSize - bracketOffset_bottom)) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
 
 			draw_bottom_boarder <= 1'b1;
 		end
-		else if (PixelX == bracketOffset) begin
+		else if (PixelX == bracketOffset_h) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
 
 			draw_left_boarder <= 1'b1;
 		end
-		else if (PixelX == (xFrameSize - bracketOffset)) begin
+		else if (PixelX == (xFrameSize - bracketOffset_h)) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
