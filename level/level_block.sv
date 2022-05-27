@@ -1,8 +1,8 @@
-import defines::LEVEL_NUMBER_TOP_LEFT_X, defines::LEVEL_NUMBER_TOP_LEFT_Y;
-import defines::LEVEL_NUMBER_WIDTH, defines::LEVEL_NUMBER_HEIGHT;
-
 import defines::LEVEL_LABEL_TOP_LEFT_X, defines::LEVEL_LABEL_TOP_LEFT_Y;
 import defines::LEVEL_LABEL_WIDTH, defines::LEVEL_LABEL_HEIGHT;
+
+import defines::LEVEL_NUMBER_TOP_LEFT_X, defines::LEVEL_NUMBER_TOP_LEFT_Y;
+import defines::NUMBER_WIDTH, defines::NUMBER_HEIGHT;
 
 module level_block(
 	input 	logic 			clk,
@@ -60,7 +60,7 @@ logic 			insideRectangleNumber;
 logic			drawNumber;
 logic [28:0]	RGBNumber;
 
-square_object #(.OBJECT_WIDTH(LEVEL_NUMBER_WIDTH), .OBJECT_HEIGHT(LEVEL_NUMBER_HEIGHT)) square_object_number_inst(
+square_object #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT)) square_object_number_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

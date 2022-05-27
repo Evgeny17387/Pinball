@@ -1,4 +1,5 @@
 import defines::SCORE_TOP_LEFT_X, defines::SCORE_TOP_LEFT_Y;
+import defines::NUMBER_WIDTH, defines::NUMBER_HEIGHT;
 
 module score_block(
 	input 	logic 			clk,
@@ -15,7 +16,7 @@ logic [10:0] offsetY;
 
 logic insideRectangle;
 
-square_object #(.OBJECT_WIDTH(16), .OBJECT_HEIGHT(32)) square_object_inst(
+square_object #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT)) square_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
