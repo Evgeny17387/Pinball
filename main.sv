@@ -1,9 +1,9 @@
 module main(
-	output	logic	[28:0] 	OVGA,
 	input	logic			resetN,
 	input	logic			CLOCK_50,
 	input 	logic 			PS2_CLK,
 	input 	logic 			PS2_DAT,
+	output	logic	[28:0] 	OVGA,
 	output	logic	[6:0]	HEX0,
 	output	logic	[6:0]	HEX1,
 	output	logic	[6:0]	HEX2,
@@ -24,6 +24,7 @@ logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBScore;
 logic	[7:0]	RGBLevel;
 logic	[7:0]	RGBStatusLevel;
+logic	[7:0]	RGBIndications;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -36,6 +37,7 @@ logic 			drawObstacle;
 logic 			drawScore;
 logic 			drawLevel;
 logic 			drawStatusLevel;
+logic 			drawIndications;
 
 logic 			startOfFrame;
 
@@ -66,8 +68,8 @@ logic  			key6IsPressed;
 logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	score;
-
 logic	[3:0] 	level;
+logic	[3:0] 	life;
 
 assign reset = !resetN;
 
@@ -157,6 +159,8 @@ objects_mux objects_mux_inst(
 	.RGBLevel(RGBLevel),
 	.drawStatusLevel(drawStatusLevel),
 	.RGBStatusLevel(RGBStatusLevel),
+	.drawIndications(drawIndications),
+	.RGBIndications(RGBIndications),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
@@ -192,7 +196,8 @@ game_controller game_controller_inst(
 	.pause(pause),
 	.reset_level(reset_level),
 	.score(score),
-	.level(level)
+	.level(level),
+	.life(life)
 );
 
 CollisionDetector CollisionDetector_inst(
@@ -294,4 +299,17 @@ status_level_block status_level_block_inst(
 	.drawStatusLevel(drawStatusLevel),
 	.RGBStatusLevel(RGBStatusLevel)
 );
+
+indications_block indications_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
+	.life(life),
+// output
+	.drawIndications(drawIndications),
+	.RGBIndications(RGBIndications)
+);
+
 endmodule

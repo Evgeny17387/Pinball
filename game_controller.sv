@@ -8,16 +8,19 @@ module game_controller(
 	output 	logic 			pause,
 	output 	logic 			reset_level,
 	output 	logic [3:0] 	score,
-	output 	logic [3:0] 	level
+	output 	logic [3:0] 	level,
+	output 	logic [3:0] 	life
 );
 
 enum logic [2:0] {state_1, state_2} state_present, state_next;
 
 logic [3:0] score_current, score_next;
 logic [3:0] level_current, level_next;
+logic [3:0] life_current, life_next;
 
 assign score = score_current;
 assign level = level_current;
+assign life = life_current;
 
 always_ff @(posedge clk or negedge resetN)
 begin
@@ -28,6 +31,7 @@ begin
 
 		score_current <= 0;
 		level_current <= 0;
+		life_current <= 3;
 
 	end
 	else begin
@@ -36,6 +40,7 @@ begin
 
 		score_current <= score_next;
 		level_current <= level_next;
+		life_current <= life_next;
 
 	end
 
@@ -48,6 +53,7 @@ begin
 
 	score_next = score_current;
 	level_next = level_current;
+	life_next = life_current;
 
 	pause = 1;
 
@@ -73,6 +79,7 @@ begin
 
 			if (collisionSmileyBorderBottom) begin
 				state_next = state_1;
+				life_next <= life_current - 1;
 			end
 			else if (collisionSmileyObstacleReal) begin
 				if (score == 4'h1) begin

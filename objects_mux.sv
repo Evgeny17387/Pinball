@@ -13,6 +13,8 @@ module objects_mux(
 	input	logic [7:0]	RGBLevel,
 	input	logic		drawStatusLevel,
 	input	logic [7:0]	RGBStatusLevel,
+	input	logic		drawIndications,
+	input	logic [7:0]	RGBIndications,
 	input	logic [7:0] RGB_backGround,
 	output	logic [7:0] RGB
 );
@@ -20,31 +22,25 @@ module objects_mux(
 always_ff@(posedge clk or negedge resetN)
 begin
 
-	if (!resetN) begin
+	if (!resetN)
 		RGB <= 8'b0;
-	end
 	else begin
-		if (draw_smiley == 1'b1) begin
+		if (draw_smiley == 1'b1)
 			RGB <= RGB_smiley;
-		end
-		else if (draw_flipper == 1'b1) begin
+		else if (draw_flipper == 1'b1)
 			RGB <= RGB_flipper;
-		end
-		else if (drawScore == 1'b1) begin
+		else if (drawScore == 1'b1)
 			RGB <= RGBScore;
-		end
-		else if (drawLevel == 1'b1) begin
+		else if (drawLevel == 1'b1)
 			RGB <= RGBLevel;
-		end
-		else if (drawStatusLevel == 1'b1) begin
+		else if (drawStatusLevel == 1'b1)
 			RGB <= RGBStatusLevel;
-		end
-		else if (drawObstacle == 1'b1) begin
+		else if (drawObstacle == 1'b1)
 			RGB <= RGBObstacle;
-		end
-		else begin
+		else if (drawIndications == 1'b1)
+			RGB <= RGBIndications;
+		else
 			RGB <= RGB_backGround;
-		end
 	end
 
 end

@@ -1,12 +1,12 @@
 module number_bitmap(
-input	logic			clk,
-input	logic			resetN,
-input 	logic	[10:0]	offsetX,
-input 	logic	[10:0] 	offsetY,
-input 	logic	[3:0] 	number,
-input	logic			insideRectangle,
-output	logic			drawNumber,
-output	logic	[7:0]	RGBNumber
+	input	logic			clk,
+	input	logic			resetN,
+	input 	logic	[10:0]	offsetX,
+	input 	logic	[10:0] 	offsetY,
+	input 	logic	[3:0] 	number,
+	input	logic			insideRectangle,
+	output	logic			drawNumber,
+	output	logic	[7:0]	RGBNumber
 );
 
 parameter logic [7:0] digit_color = 8'hAA;

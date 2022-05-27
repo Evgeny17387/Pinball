@@ -1,3 +1,5 @@
+import defines::COLOR_TRANSPARENT, defines::COLOR_DEFAULT;
+
 module square_object
 #(parameter OBJECT_WIDTH = 32, OBJECT_HEIGHT = 32)
 (
@@ -12,9 +14,6 @@ module square_object
 	output	logic					draw,
 	output	logic			[7:0]	RGB
 );
-
-parameter  logic [7:0] 	OBJECT_COLOR 			= 8'h5b;
-localparam logic [7:0] 	TRANSPARENT_ENCODING 	= 8'hFF;
 
 int rightX;
 int bottomY;
@@ -36,13 +35,13 @@ begin
 
 	else begin
 
-		RGB <= TRANSPARENT_ENCODING;
+		RGB <= COLOR_TRANSPARENT;
 		draw <= 1'b0;
 		offsetX <= 0;
 		offsetY <= 0;
 
 		if (insideBracket) begin
-			RGB <= OBJECT_COLOR;
+			RGB <= COLOR_DEFAULT;
 			draw <= 1'b1;
 			offsetX <= pixelX - topLeftX;
 			offsetY <= pixelY - topLeftY;
