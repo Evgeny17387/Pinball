@@ -12,30 +12,37 @@ module word
 	output	logic	[7:0]	RGBWord
 );
 
-`define FIRST_LETTER_TOP_LEFT_X 200
-`define FIRST_LETTER_TOP_LEFT_Y 5
+localparam FIRST_LETTER_TOP_LEFT_X = 200;
+localparam FIRST_LETTER_TOP_LEFT_Y = 5;
+localparam LETTER_SPACE = 50;
+localparam WORD_SIZE  = 2;
 
 logic [0:3] letter;
 
 logic drawLetter;
-logic drawLetter1 [1:0];
+logic drawLetter1 [WORD_SIZE-1:0];
 
 logic [10:0] offsetX;
 logic [10:0] offsetY;
-logic [10:0] offsetX1 [1:0];
-logic [10:0] offsetY1 [1:0];
+logic [10:0] offsetX1 [WORD_SIZE-1:0];
+logic [10:0] offsetY1 [WORD_SIZE-1:0];
 
 assign letter = drawLetter1[0] ? 0 : 1;
 
-assign drawLetter = drawLetter1[0] || drawLetter1[1];
+assign drawLetter = drawLetter1.or();
 
 assign offsetX = drawLetter1[0] ? offsetX1[0] : offsetX1[1];
 assign offsetY = drawLetter1[0] ? offsetY1[0] : offsetY1[1];
 
 genvar i;
 generate
-    for (i = 0; i < 2; i = i + 1) begin : block_squares
-        square #(.OBJECT_WIDTH(LETTER_WIDTH), .OBJECT_HEIGHT(LETTER_HEIGHT), .TOP_LEFT_X(200 + i * 50), .TOP_LEFT_Y(5)) square_inst_0(
+    for (i = 0; i < WORD_SIZE; i = i + 1) begin : block_squares
+        square #(
+                .OBJECT_WIDTH(LETTER_WIDTH),
+                .OBJECT_HEIGHT(LETTER_HEIGHT),
+                .TOP_LEFT_X(FIRST_LETTER_TOP_LEFT_X + i * LETTER_SPACE),
+                .TOP_LEFT_Y(FIRST_LETTER_TOP_LEFT_Y)
+                ) square_inst_0 (
         // input
             .pixelX(pixelX),
             .pixelY(pixelY),
