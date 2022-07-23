@@ -1,8 +1,8 @@
 module flipper_object(
 	input		logic							clk,
 	input		logic							resetN,
-	input 	logic signed	[10:0] 	PixelX,
-	input 	logic signed	[10:0] 	PixelY,
+	input 	logic signed	[10:0] 	pixelX,
+	input 	logic signed	[10:0] 	pixelY,
 	input 	logic signed	[10:0] 	topLeftX,
 	input 	logic	signed 	[10:0] 	topLeftY,
 	output	logic							draw,
@@ -24,7 +24,7 @@ logic insideBracket;
 assign rightX 	= topLeftX + OBJECT_WIDTH_X;
 assign bottomY	= topLeftY + OBJECT_HEIGHT_Y;
 
-assign insideBracket	= ((PixelX >= topLeftX) && (PixelX < rightX) && (PixelY >= topLeftY) && (PixelY < bottomY));
+assign insideBracket	= ((pixelX >= topLeftX) && (pixelX < rightX) && (pixelY >= topLeftY) && (pixelY < bottomY));
 
 always_ff@(posedge clk or negedge resetN)
 begin

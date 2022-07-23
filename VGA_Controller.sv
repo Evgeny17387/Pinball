@@ -2,8 +2,8 @@ module VGA_Controller(
 	input	logic			clk,
 	input	logic			resetN,
 	input	logic	[7:0]	RGBIn,
-	output	logic	[10:0]	PixelX,
-	output	logic	[10:0]	PixelY,
+	output	logic	[10:0]	pixelX,
+	output	logic	[10:0]	pixelY,
 	output	logic			startOfFrame,
 	output 	logic 	[28:0] 	oVGA
 );
@@ -38,8 +38,8 @@ assign	oVGA		=	{{~clk},{~((H_Cont<H_BLANK)||(V_Cont<V_BLANK))},{1'b1},{oVGA_VS},
 //                          8 bits RED color     ,  8 bits Green color         ,    8 bits Blue color
                       {RGBIn[1:0], {6{RGBIn[0]}}},{RGBIn[4:2], {5{RGBIn[2]}}},{RGBIn[7:5], {5{RGBIn[5]}}}};
 
-assign	PixelX	=	(H_Cont>=H_BLANK)	?	H_Cont-H_BLANK	:	11'h0	;
-assign	PixelY	=	(V_Cont>=V_BLANK)	?	V_Cont-V_BLANK	:	11'h0	;
+assign	pixelX	=	(H_Cont>=H_BLANK)	?	H_Cont-H_BLANK	:	11'h0	;
+assign	pixelY	=	(V_Cont>=V_BLANK)	?	V_Cont-V_BLANK	:	11'h0	;
 
 always_ff@(posedge clk or negedge resetN)
 begin

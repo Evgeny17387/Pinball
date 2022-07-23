@@ -3,8 +3,8 @@ import defines::bracketOffset_h, defines::bracketOffset_top, defines::bracketOff
 module background(
 	input	logic			clk,
 	input	logic			resetN,
-	input	logic	[10:0]	PixelX,
-	input	logic	[10:0]	PixelY,
+	input	logic	[10:0]	pixelX,
+	input	logic	[10:0]	pixelY,
 	output	logic	[7:0]	RGB_backGround,
 	output	logic			draw_top_boarder,
 	output	logic			draw_bottom_boarder,
@@ -48,28 +48,28 @@ begin
 		draw_left_boarder <= 1'b0;
 		draw_right_boarder <= 1'b0;
 
-		if (PixelY == bracketOffset_top) begin
+		if (pixelY == bracketOffset_top) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
 
 			draw_top_boarder <= 1'b1;
 		end
-		else if (PixelY == (yFrameSize - bracketOffset_bottom)) begin
+		else if (pixelY == (yFrameSize - bracketOffset_bottom)) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
 
 			draw_bottom_boarder <= 1'b1;
 		end
-		else if (PixelX == bracketOffset_h) begin
+		else if (pixelX == bracketOffset_h) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;
 
 			draw_left_boarder <= 1'b1;
 		end
-		else if (PixelX == (xFrameSize - bracketOffset_h)) begin
+		else if (pixelX == (xFrameSize - bracketOffset_h)) begin
 			redBits <= DARK_COLOR;
 			greenBits <= DARK_COLOR;
 			blueBits <= DARK_COLOR;

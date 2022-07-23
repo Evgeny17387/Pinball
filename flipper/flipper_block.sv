@@ -1,8 +1,8 @@
 module flipper_block(
 	input	logic					clk,
 	input	logic					resetN,
-	input 	logic signed	[10:0] 	PixelX,
-	input 	logic signed	[10:0] 	PixelY,
+	input 	logic signed	[10:0] 	pixelX,
+	input 	logic signed	[10:0] 	pixelY,
 	input 	logic 					startOfFrame,
 	input	logic					key4IsPressed,
 	input	logic					key6IsPressed,
@@ -39,8 +39,8 @@ flipper_object flipper_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.PixelX(PixelX),
-	.PixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY),
 // output

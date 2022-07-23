@@ -14,8 +14,8 @@ module main(
 logic			clk;
 logic			reset;
 
-logic	[10:0]	PixelX;
-logic	[10:0]	PixelY;
+logic	[10:0]	pixelX;
+logic	[10:0]	pixelY;
 
 logic	[7:0]	RGB_backGround;
 logic	[7:0]	RGB_smiley;
@@ -82,8 +82,8 @@ background background_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),//
-	.PixelX(PixelX),
-	.PixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 // output
 	.RGB_backGround(RGB_backGround),
 	.draw_top_boarder(draw_top_boarder),
@@ -96,8 +96,8 @@ smiley_block smiley_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
 	.collisionSmileyBorderTop(collisionSmileyBorderTop),
 	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
@@ -119,8 +119,8 @@ flipper_block flipper_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.PixelX(PixelX),
-	.PixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
 	.key4IsPressed(key4IsPressed),
 	.key6IsPressed(key6IsPressed),
@@ -138,8 +138,8 @@ Obstacle Obstacle_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 // output
 	.drawObstacle(drawObstacle),
 	.RGBObstacle(RGBObstacle)
@@ -182,8 +182,8 @@ VGA_Controller VGA_Controller_inst(
 	.resetN(resetN),
 	.RGBIn(RGB),
 // output
-	.PixelX(PixelX),
-	.PixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.oVGA(OVGA),
 	.startOfFrame(startOfFrame)
 );
@@ -273,8 +273,8 @@ score_block score_block_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.score(score),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 // output
 	.drawScore(drawScore),
 	.RGBScore(RGBScore)
@@ -285,8 +285,8 @@ level_block level_block_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.level(level),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 // output
 	.drawLevel(drawLevel),
 	.RGBLevel(RGBLevel)
@@ -296,8 +296,8 @@ status_level_block status_level_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.reset_level(reset_level),
 // output
 	.drawStatusLevel(drawStatusLevel),
@@ -308,8 +308,8 @@ indications_block indications_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.life(life),
 // output
 	.drawIndications(drawIndications),
@@ -320,8 +320,8 @@ word word_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(PixelX),
-	.pixelY(PixelY),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 // output
 	.drawWord(drawWord),
 	.RGBWord(RGBWord)

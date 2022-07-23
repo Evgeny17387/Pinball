@@ -301,8 +301,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE level/level_label_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE status_level_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE level/level_block.sv
 set_global_assignment -name SOURCE_FILE defines/background.svh
-set_global_assignment -name SYSTEMVERILOG_FILE square_object.sv
-set_global_assignment -name SYSTEMVERILOG_FILE score_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley/smiley_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley/smiley_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley/smiley_bitmap.sv
@@ -315,14 +313,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE keyboard/bitrec.sv
 set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_object.sv
 set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_block.sv
-set_global_assignment -name VERILOG_FILE clock_divider.v
-set_global_assignment -name SYSTEMVERILOG_FILE VGA_Controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE obstacle.sv
-set_global_assignment -name SYSTEMVERILOG_FILE objects_mux.sv
-set_global_assignment -name SYSTEMVERILOG_FILE hex_ss.sv
-set_global_assignment -name SYSTEMVERILOG_FILE game_controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE CollisionDetector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE background.sv
 set_global_assignment -name TCL_SCRIPT_FILE pin.tcl
 set_global_assignment -name SYSTEMVERILOG_FILE main.sv
 set_global_assignment -name SLD_FILE db/stp1_auto_stripped.stp
