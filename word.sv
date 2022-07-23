@@ -18,42 +18,34 @@ module word
 logic [0:3] letter;
 
 logic drawLetter;
-logic drawLetter1;
-logic drawLetter2;
+logic drawLetter1 [1:0];
 
 logic [10:0] offsetX;
 logic [10:0] offsetY;
-logic [10:0] offsetX1;
-logic [10:0] offsetY1;
-logic [10:0] offsetX2;
-logic [10:0] offsetY2;
+logic [10:0] offsetX1 [1:0];
+logic [10:0] offsetY1 [1:0];
 
-assign letter = drawLetter1 ? 0 : 1;
+assign letter = drawLetter1[0] ? 0 : 1;
 
-assign drawLetter = drawLetter1 || drawLetter2;
+assign drawLetter = drawLetter1[0] || drawLetter1[1];
 
-assign offsetX = drawLetter1 ? offsetX1 : offsetX2;
-assign offsetY = drawLetter1 ? offsetY1 : offsetY2;
+assign offsetX = drawLetter1[0] ? offsetX1[0] : offsetX1[1];
+assign offsetY = drawLetter1[0] ? offsetY1[0] : offsetY1[1];
 
-square #(.OBJECT_WIDTH(LETTER_WIDTH), .OBJECT_HEIGHT(LETTER_HEIGHT), .TOP_LEFT_X(200), .TOP_LEFT_Y(5)) square_inst_1(
-// input
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.draw(drawLetter1),
-	.offsetX(offsetX1),
-	.offsetY(offsetY1)
-);
-
-square #(.OBJECT_WIDTH(LETTER_WIDTH), .OBJECT_HEIGHT(LETTER_HEIGHT), .TOP_LEFT_X(200 + 50), .TOP_LEFT_Y(5)) square_inst_2(
-// input
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.draw(drawLetter2),
-	.offsetX(offsetX2),
-	.offsetY(offsetY2)
-);
+genvar i;
+generate
+    for (i = 0; i < 2; i = i + 1) begin : block_squares
+        square #(.OBJECT_WIDTH(LETTER_WIDTH), .OBJECT_HEIGHT(LETTER_HEIGHT), .TOP_LEFT_X(200 + i * 50), .TOP_LEFT_Y(5)) square_inst_0(
+        // input
+            .pixelX(pixelX),
+            .pixelY(pixelY),
+        // output
+            .draw(drawLetter1[i]),
+            .offsetX(offsetX1[i]),
+            .offsetY(offsetY1[i])
+        );
+    end
+endgenerate
 
 letter letter_inst(
 // input
