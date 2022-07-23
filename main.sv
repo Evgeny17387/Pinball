@@ -25,6 +25,7 @@ logic	[7:0]	RGBScore;
 logic	[7:0]	RGBLevel;
 logic	[7:0]	RGBStatusLevel;
 logic	[7:0]	RGBIndications;
+logic	[7:0]	RGBWord;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -38,6 +39,7 @@ logic 			drawScore;
 logic 			drawLevel;
 logic 			drawStatusLevel;
 logic 			drawIndications;
+logic 			drawWord;
 
 logic 			startOfFrame;
 
@@ -161,6 +163,8 @@ objects_mux objects_mux_inst(
 	.RGBStatusLevel(RGBStatusLevel),
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications),
+	.drawWord(drawWord),
+	.RGBWord(RGBWord),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB(RGB)
@@ -310,6 +314,17 @@ indications_block indications_block_inst(
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)
+);
+
+word word_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(PixelX),
+	.pixelY(PixelY),
+// output
+	.drawWord(drawWord),
+	.RGBWord(RGBWord)
 );
 
 endmodule

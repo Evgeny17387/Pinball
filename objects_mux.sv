@@ -15,6 +15,8 @@ module objects_mux(
 	input	logic [7:0]	RGBStatusLevel,
 	input	logic		drawIndications,
 	input	logic [7:0]	RGBIndications,
+	input	logic		drawWord,
+	input	logic [7:0]	RGBWord,
 	input	logic [7:0] RGB_backGround,
 	output	logic [7:0] RGB
 );
@@ -39,6 +41,8 @@ begin
 			RGB <= RGBObstacle;
 		else if (drawIndications == 1'b1)
 			RGB <= RGBIndications;
+		else if (drawWord == 1'b1)
+			RGB <= RGBWord;
 		else
 			RGB <= RGB_backGround;
 	end
