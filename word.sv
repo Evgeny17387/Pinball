@@ -15,10 +15,10 @@ module word
 localparam FIRST_LETTER_TOP_LEFT_X = 200;
 localparam FIRST_LETTER_TOP_LEFT_Y = 5;
 localparam LETTER_SPACE = 50;
-localparam WORD_SIZE  = 2;
-localparam int letters [WORD_SIZE-1:0]  = '{1, 0};
+localparam WORD_SIZE  = 8;
+localparam int letters [WORD_SIZE-1:0]  = '{4, 12, 14, 2, 11, 11, 4, 22};
 
-logic [0:3] letter;
+logic [4:0] letter;
 
 logic drawLetter;
 logic drawSquare [WORD_SIZE-1:0];
