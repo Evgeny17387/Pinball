@@ -16,27 +16,37 @@ localparam FIRST_LETTER_TOP_LEFT_X = 200;
 localparam FIRST_LETTER_TOP_LEFT_Y = 5;
 localparam LETTER_SPACE = 50;
 localparam WORD_SIZE  = 2;
+localparam int letters [WORD_SIZE-1:0]  = '{1, 0};
 
 logic [0:3] letter;
 
 logic drawLetter;
-logic drawLetter1 [WORD_SIZE-1:0];
+logic drawSquare [WORD_SIZE-1:0];
 
-logic [10:0] offsetX;
-logic [10:0] offsetY;
-logic [10:0] offsetX1 [WORD_SIZE-1:0];
-logic [10:0] offsetY1 [WORD_SIZE-1:0];
+logic [10:0] offsetXLetter;
+logic [10:0] offsetYLetter;
+logic [10:0] offsetXSquare [WORD_SIZE-1:0];
+logic [10:0] offsetYSquare [WORD_SIZE-1:0];
 
-assign letter = drawLetter1[0] ? 0 : 1;
+assign drawLetter = drawSquare.or();
 
-assign drawLetter = drawLetter1.or();
+always_comb begin
+    letter = letters[0];
+    offsetXLetter = offsetXSquare[0];
+    offsetYLetter = offsetYSquare[0];
 
-assign offsetX = drawLetter1[0] ? offsetX1[0] : offsetX1[1];
-assign offsetY = drawLetter1[0] ? offsetY1[0] : offsetY1[1];
+    for (int i = 1; i < WORD_SIZE; i = i + 1) begin
+        if (drawSquare[i]) begin
+            letter = letters[i];
+            offsetXLetter = offsetXSquare[i];
+            offsetYLetter = offsetYSquare[i];
+        end
+    end
+end
 
 genvar i;
 generate
-    for (i = 0; i < WORD_SIZE; i = i + 1) begin : block_squares
+    for (i = 0; i < WORD_SIZE; i = i + 1) begin : block_squares_inst
         square #(
                 .OBJECT_WIDTH(LETTER_WIDTH),
                 .OBJECT_HEIGHT(LETTER_HEIGHT),
@@ -47,9 +57,9 @@ generate
             .pixelX(pixelX),
             .pixelY(pixelY),
         // output
-            .draw(drawLetter1[i]),
-            .offsetX(offsetX1[i]),
-            .offsetY(offsetY1[i])
+            .draw(drawSquare[i]),
+            .offsetX(offsetXSquare[i]),
+            .offsetY(offsetYSquare[i])
         );
     end
 endgenerate
@@ -58,8 +68,8 @@ letter letter_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.offsetX(offsetX),
-	.offsetY(offsetY),
+	.offsetX(offsetXLetter),
+	.offsetY(offsetYLetter),
 	.letter(letter),
 	.drawLetter(drawLetter),
 // output
