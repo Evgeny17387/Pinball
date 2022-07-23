@@ -2,18 +2,20 @@ import defines::COLOR_TRANSPARENT, defines::COLOR_DEFAULT;
 import defines::LETTER_HEIGHT, defines::LETTER_WIDTH;
 
 module letter
-#(parameter TOP_LEFT_X = 0, TOP_LEFT_Y = 0)
 (
 	input 	logic 			clk,
 	input 	logic 			resetN,
-	input 	logic	[10:0]	pixelX,
-	input 	logic	[10:0]	pixelY,
+	input 	logic	[10:0]	offsetX,
+	input 	logic	[10:0]	offsetY,
 	input	logic	[3:0] 	letter,
-	output	logic			drawLetter,
+	input 	logic 			drawLetter,
+	output	logic			drawLetterBitMask,
 	output	logic	[7:0]	RGBLetter
 );
 
 `ifdef PICTURES
+// A - 0
+// B - 1
 bit [0:1] [0:LETTER_HEIGHT - 1] [0:LETTER_WIDTH - 1] letter_bitmap = {
 // A - 0
 {
@@ -88,28 +90,24 @@ bit [0:1] [0:LETTER_HEIGHT - 1] [0:LETTER_WIDTH - 1] letter_bitmap = {
 };
 `endif
 
-logic insideLetter;
-
-assign insideLetter = ((pixelX >= TOP_LEFT_X) && (pixelX < TOP_LEFT_X + LETTER_WIDTH) && (pixelY >= TOP_LEFT_Y) && (pixelY < TOP_LEFT_Y + LETTER_HEIGHT));
-
 always_ff@(posedge clk or negedge resetN)
 begin
 
 	if(!resetN) begin
 
-		drawLetter <= 1'b0;
+		drawLetterBitMask <= 1'b0;
 
 	end
 	else begin
 
-		drawLetter <= 1'b0;
+		drawLetterBitMask <= 1'b0;
 
-		if (insideLetter == 1'b1)
+		if (drawLetter == 1'b1)
 
 `ifdef PICTURES
-			drawLetter <= (letter_bitmap[letter][pixelY - TOP_LEFT_Y][pixelX - TOP_LEFT_X]);
+			drawLetterBitMask <= (letter_bitmap[letter][offsetY][offsetX]);
 `else
-			drawLetter <= 1'b1;
+			drawLetterBitMask <= 1'b1;
 `endif
 
 	end

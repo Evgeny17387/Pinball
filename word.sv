@@ -12,38 +12,60 @@ module word
 	output	logic	[7:0]	RGBWord
 );
 
+`define FIRST_LETTER_TOP_LEFT_X 200
+`define FIRST_LETTER_TOP_LEFT_Y 5
+
+logic [0:3] letter;
+
+logic drawLetter;
 logic drawLetter1;
 logic drawLetter2;
 
-assign drawWord = drawLetter1 || drawLetter2;
+logic [10:0] offsetX;
+logic [10:0] offsetY;
+logic [10:0] offsetX1;
+logic [10:0] offsetY1;
+logic [10:0] offsetX2;
+logic [10:0] offsetY2;
 
-logic [7:0] RGBLetter1;
-logic [7:0] RGBLetter2;
+assign letter = drawLetter1 ? 0 : 1;
 
-assign RGBWord = drawLetter1 ? RGBLetter1 : RGBLetter2;
+assign drawLetter = drawLetter1 || drawLetter2;
 
-letter #(.TOP_LEFT_X(200), .TOP_LEFT_Y(5)) letter_inst1(
+assign offsetX = drawLetter1 ? offsetX1 : offsetX2;
+assign offsetY = drawLetter1 ? offsetY1 : offsetY2;
+
+square #(.OBJECT_WIDTH(LETTER_WIDTH), .OBJECT_HEIGHT(LETTER_HEIGHT), .TOP_LEFT_X(200), .TOP_LEFT_Y(5)) square_inst_1(
 // input
-	.clk(clk),
-	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.letter(0),
 // output
-	.drawLetter(drawLetter1),
-	.RGBLetter(RGBLetter1)
+	.draw(drawLetter1),
+	.offsetX(offsetX1),
+	.offsetY(offsetY1)
 );
 
-letter #(.TOP_LEFT_X(250), .TOP_LEFT_Y(5)) letter_inst2(
+square #(.OBJECT_WIDTH(LETTER_WIDTH), .OBJECT_HEIGHT(LETTER_HEIGHT), .TOP_LEFT_X(200 + 50), .TOP_LEFT_Y(5)) square_inst_2(
+// input
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.draw(drawLetter2),
+	.offsetX(offsetX2),
+	.offsetY(offsetY2)
+);
+
+letter letter_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-	.letter(1),
+	.offsetX(offsetX),
+	.offsetY(offsetY),
+	.letter(letter),
+	.drawLetter(drawLetter),
 // output
-	.drawLetter(drawLetter2),
-	.RGBLetter(RGBLetter2)
+	.drawLetterBitMask(drawWord),
+	.RGBLetter(RGBWord)
 );
 
 endmodule 
