@@ -1,7 +1,7 @@
 import defines::COLOR_TRANSPARENT, defines::COLOR_DEFAULT;
 
 module square_object
-#(parameter OBJECT_WIDTH = 32, OBJECT_HEIGHT = 32)
+#(parameter OBJECT_WIDTH = 0, OBJECT_HEIGHT = 0)
 (
 	input	logic					clk,
 	input	logic					resetN,

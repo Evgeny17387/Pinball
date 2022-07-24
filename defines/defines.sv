@@ -25,7 +25,7 @@ endpackage
 
 package defines_ball;
 
-    parameter int           WIDTH                   = 32;
-    parameter int           HEIGHT                  = 32;
+    parameter int           WIDTH                   = 64;
+    parameter int           HEIGHT                  = 64;
 
 endpackage
