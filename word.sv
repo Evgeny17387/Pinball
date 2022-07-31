@@ -12,8 +12,8 @@ module word
 	output	logic	[7:0]	RGBWord
 );
 
-localparam FIRST_LETTER_TOP_LEFT_X = 200;
-localparam FIRST_LETTER_TOP_LEFT_Y = 5;
+localparam FIRST_LETTER_TOP_LEFT_X = 100;
+localparam FIRST_LETTER_TOP_LEFT_Y = 200;
 localparam LETTER_SPACE = 50;
 localparam WORD_SIZE  = 8;
 localparam int letters [WORD_SIZE-1:0]  = '{4, 12, 14, 2, 11, 11, 4, 22};

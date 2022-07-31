@@ -1,5 +1,7 @@
 package defines;
 
+    `include "defines/dimensions.svh"
+
     `include "defines/colors.svh"
 
     `include "defines/background.svh"

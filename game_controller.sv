@@ -9,10 +9,11 @@ module game_controller(
 	output 	logic 			reset_level,
 	output 	logic [3:0] 	score,
 	output 	logic [3:0] 	level,
-	output 	logic [3:0] 	life
+	output 	logic [3:0] 	life,
+	output 	logic 			start
 );
 
-enum logic [2:0] {state_1, state_2} state_present, state_next;
+enum logic [2:0] {state_0, state_1, state_2} state_present, state_next;
 
 logic [3:0] score_current, score_next;
 logic [3:0] level_current, level_next;
@@ -27,7 +28,7 @@ begin
 
 	if (!resetN) begin
 
-		state_present <= state_1;
+		state_present <= state_0;
 
 		score_current <= 0;
 		level_current <= 0;
@@ -59,7 +60,19 @@ begin
 
 	reset_level = 0;
 
+	start = 1;
+
 	case (state_present)
+
+		state_0: begin
+
+			start = 0;
+
+			if (key5IsPressed) begin
+				state_next = state_1;
+			end
+
+		end
 
 		state_1: begin
 

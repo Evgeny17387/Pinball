@@ -15,9 +15,9 @@ module objects_mux(
 	input	logic [7:0]	RGBStatusLevel,
 	input	logic		drawIndications,
 	input	logic [7:0]	RGBIndications,
-	input	logic		drawWord,
-	input	logic [7:0]	RGBWord,
 	input	logic [7:0] RGB_backGround,
+	input	logic [7:0] RGB_screen_welcome,
+	input	logic		start,
 	output	logic [7:0] RGB
 );
 
@@ -27,24 +27,25 @@ begin
 	if (!resetN)
 		RGB <= 8'b0;
 	else begin
-		if (draw_smiley == 1'b1)
-			RGB <= RGB_smiley;
-		else if (draw_flipper == 1'b1)
-			RGB <= RGB_flipper;
-		else if (drawScore == 1'b1)
-			RGB <= RGBScore;
-		else if (drawLevel == 1'b1)
-			RGB <= RGBLevel;
-		else if (drawStatusLevel == 1'b1)
-			RGB <= RGBStatusLevel;
-		else if (drawObstacle == 1'b1)
-			RGB <= RGBObstacle;
-		else if (drawIndications == 1'b1)
-			RGB <= RGBIndications;
-		else if (drawWord == 1'b1)
-			RGB <= RGBWord;
+		if (!start)
+			RGB <= RGB_screen_welcome;
 		else
-			RGB <= RGB_backGround;
+			if (draw_smiley == 1'b1)
+				RGB <= RGB_smiley;
+			else if (draw_flipper == 1'b1)
+				RGB <= RGB_flipper;
+			else if (drawScore == 1'b1)
+				RGB <= RGBScore;
+			else if (drawLevel == 1'b1)
+				RGB <= RGBLevel;
+			else if (drawStatusLevel == 1'b1)
+				RGB <= RGBStatusLevel;
+			else if (drawObstacle == 1'b1)
+				RGB <= RGBObstacle;
+			else if (drawIndications == 1'b1)
+				RGB <= RGBIndications;
+			else
+				RGB <= RGB_backGround;
 	end
 
 end

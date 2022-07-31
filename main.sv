@@ -25,7 +25,7 @@ logic	[7:0]	RGBScore;
 logic	[7:0]	RGBLevel;
 logic	[7:0]	RGBStatusLevel;
 logic	[7:0]	RGBIndications;
-logic	[7:0]	RGBWord;
+logic 	[7:0]	RGB_screen_welcome;
 logic	[7:0]	RGB;
 
 logic			draw_top_boarder;
@@ -39,7 +39,6 @@ logic 			drawScore;
 logic 			drawLevel;
 logic 			drawStatusLevel;
 logic 			drawIndications;
-logic 			drawWord;
 
 logic 			startOfFrame;
 
@@ -72,6 +71,8 @@ logic	[31:0]	flipperSpeedX;
 logic	[3:0] 	score;
 logic	[3:0] 	level;
 logic	[3:0] 	life;
+
+logic 			start;
 
 assign reset = !resetN;
 
@@ -163,9 +164,9 @@ objects_mux objects_mux_inst(
 	.RGBStatusLevel(RGBStatusLevel),
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications),
-	.drawWord(drawWord),
-	.RGBWord(RGBWord),
 	.RGB_backGround(RGB_backGround),
+	.RGB_screen_welcome(RGB_screen_welcome),
+	.start(start),
 // output
 	.RGB(RGB)
 );
@@ -201,7 +202,8 @@ game_controller game_controller_inst(
 	.reset_level(reset_level),
 	.score(score),
 	.level(level),
-	.life(life)
+	.life(life),
+	.start(start)
 );
 
 CollisionDetector CollisionDetector_inst(
@@ -316,15 +318,14 @@ indications_block indications_block_inst(
 	.RGBIndications(RGBIndications)
 );
 
-word word_inst(
+screen_welcome screen_welcome_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
 // output
-	.drawWord(drawWord),
-	.RGBWord(RGBWord)
+	.RGB_screen_welcome(RGB_screen_welcome)
 );
 
 endmodule
