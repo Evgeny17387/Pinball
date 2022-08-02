@@ -9,11 +9,10 @@ module game_controller(
 	output 	logic 			reset_level,
 	output 	logic [3:0] 	score,
 	output 	logic [3:0] 	level,
-	output 	logic [3:0] 	life,
-	output 	logic 			start
+	output 	logic [3:0] 	life
 );
 
-enum logic [2:0] {state_0, state_1, state_2} state_present, state_next;
+enum logic [2:0] {state_0, state_1} state_present, state_next;
 
 logic [3:0] score_current, score_next;
 logic [3:0] level_current, level_next;
@@ -60,13 +59,13 @@ begin
 
 	reset_level = 0;
 
-	start = 1;
-
 	case (state_present)
 
 		state_0: begin
 
-			start = 0;
+			score_next = 0;
+
+			reset_level = 1;
 
 			if (key5IsPressed) begin
 				state_next = state_1;
@@ -76,27 +75,15 @@ begin
 
 		state_1: begin
 
-			score_next = 0;
-
-			reset_level = 1;
-
-			if (key5IsPressed) begin
-				state_next = state_2;
-			end
-
-		end
-
-		state_2: begin
-
 			pause = 0;
 
 			if (collisionSmileyBorderBottom) begin
-				state_next = state_1;
-				life_next <= life_current - 1;
+				state_next = state_0;
+				life_next = life_current - 1;
 			end
 			else if (collisionSmileyObstacleReal) begin
 				if (score == 4'h1) begin
-					state_next = state_1;
+					state_next = state_0;
 					level_next = level_current + 1;
 				end
 				else begin

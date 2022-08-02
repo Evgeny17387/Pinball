@@ -6,6 +6,7 @@ module keyboard_block(
 	output 	logic 		key4IsPressed,
 	output 	logic 		key5IsPressed,
 	output 	logic 		key6IsPressed,
+	output 	logic 		key0IsPressed,
 	output	logic [8:0]	key_code
 );
 
@@ -55,6 +56,17 @@ key_decoder #(.KEY_VALUE(9'h073)) key_decoder_5_inst(
 	.key_code(key_code),
 // output
 	.keyIsPressed(key5IsPressed)
+);
+
+key_decoder #(.KEY_VALUE(9'h070)) key_decoder_0_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.make(make),
+	.breakk(breakk),
+	.key_code(key_code),
+// output
+	.keyIsPressed(key0IsPressed)
 );
 
 endmodule
