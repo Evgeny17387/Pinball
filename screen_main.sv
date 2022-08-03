@@ -18,7 +18,6 @@ logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBScore;
 logic	[7:0]	RGBLevel;
-logic	[7:0]	RGBStatusLevel;
 logic	[7:0]	RGBIndications;
 
 logic			draw_top_boarder;
@@ -30,7 +29,6 @@ logic 			draw_flipper;
 logic 			drawObstacle;
 logic 			drawScore;
 logic 			drawLevel;
-logic 			drawStatusLevel;
 logic 			drawIndications;
 
 logic			collisionSmileyBorderTop;
@@ -69,8 +67,6 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.RGBScore(RGBScore),
 	.drawLevel(drawLevel),
 	.RGBLevel(RGBLevel),
-	.drawStatusLevel(drawStatusLevel),
-	.RGBStatusLevel(RGBStatusLevel),
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications),
 	.RGB_backGround(RGB_backGround),
@@ -206,18 +202,6 @@ level_block level_block_inst(
 // output
 	.drawLevel(drawLevel),
 	.RGBLevel(RGBLevel)
-);
-
-status_level_block status_level_block_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-	.reset_level(reset_level),
-// output
-	.drawStatusLevel(drawStatusLevel),
-	.RGBStatusLevel(RGBStatusLevel)
 );
 
 indications_block indications_block_inst(

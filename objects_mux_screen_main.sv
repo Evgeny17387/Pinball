@@ -11,8 +11,6 @@ module objects_mux_screen_main(
 	input	logic [7:0]	RGBScore,
 	input	logic		drawLevel,
 	input	logic [7:0]	RGBLevel,
-	input	logic		drawStatusLevel,
-	input	logic [7:0]	RGBStatusLevel,
 	input	logic		drawIndications,
 	input	logic [7:0]	RGBIndications,
 	input	logic [7:0] RGB_backGround,
@@ -33,8 +31,6 @@ begin
 			RGB_screen_main <= RGBScore;
 		else if (drawLevel == 1'b1)
 			RGB_screen_main <= RGBLevel;
-		else if (drawStatusLevel == 1'b1)
-			RGB_screen_main <= RGBStatusLevel;
 		else if (drawObstacle == 1'b1)
 			RGB_screen_main <= RGBObstacle;
 		else if (drawIndications == 1'b1)
