@@ -80,6 +80,7 @@ screen_welcome screen_welcome_inst(
 );
 
 logic [7:0] RGB_screen_main;
+logic [3:0] life;
 
 screen_main screen_main_inst(
 // input
@@ -92,18 +93,33 @@ screen_main screen_main_inst(
 	.key6IsPressed(key6IsPressed),
 	.startOfFrame(startOfFrame),
 // output
-	.RGB_screen_main(RGB_screen_main)
+	.RGB_screen_main(RGB_screen_main),
+	.life(life)
 );
 
-logic start;
+logic [7:0] RGB_screen_end;
+
+screen_end screen_end_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.RGB_screen_end(RGB_screen_end)
+);
+
+logic game_end;
 
 screen_controller screen_controller_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
+	.life(life),
 // output
 	.key0IsPressed(key0IsPressed),
-	.start(start)
+	.start(start),
+	.game_end(game_end)
 );
 
 objects_mux objects_mux_inst(
@@ -111,8 +127,10 @@ objects_mux objects_mux_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.start(start),
+	.game_end(game_end),
 	.RGB_screen_welcome(RGB_screen_welcome),
 	.RGB_screen_main(RGB_screen_main),
+	.RGB_screen_end(RGB_screen_end),
 // output
 	.RGB(RGB)
 );

@@ -9,7 +9,8 @@ module screen_main(
 	input	logic 			key5IsPressed,
 	input	logic 			key6IsPressed,
 	input	logic 			startOfFrame,
-	output	logic	[7:0]	RGB_screen_main
+	output	logic	[7:0]	RGB_screen_main,
+	output	logic	[3:0]	life
 );
 
 logic	[7:0]	RGB_backGround;
@@ -51,7 +52,6 @@ logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	score;
 logic	[3:0] 	level;
-logic	[3:0] 	life;
 
 objects_mux_screen_main objects_mux_screen_main_inst(
 // input
