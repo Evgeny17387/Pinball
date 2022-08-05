@@ -1,5 +1,6 @@
 import defines::COLOR_TRANSPARENT, defines::COLOR_DEFAULT;
 import defines::LETTER_HEIGHT, defines::LETTER_WIDTH;
+import defines::LETTER_SPACE;
 
 module word_end
 #(parameter TOP_LEFT_X = 0, TOP_LEFT_Y = 0)
