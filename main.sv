@@ -79,8 +79,9 @@ screen_welcome screen_welcome_inst(
 	.RGB_screen_welcome(RGB_screen_welcome)
 );
 
-logic [7:0] RGB_screen_main;
-logic [3:0] life;
+logic 	[7:0] 	RGB_screen_main;
+logic 	[3:0] 	life;
+logic	[3:0]	score;
 
 screen_main screen_main_inst(
 // input
@@ -94,7 +95,10 @@ screen_main screen_main_inst(
 	.startOfFrame(startOfFrame),
 // output
 	.RGB_screen_main(RGB_screen_main),
-	.life(life)
+	.life(life),
+	.score(score),
+	.HEX2(HEX2),
+	.HEX3(HEX3)
 );
 
 logic [7:0] RGB_screen_end;
@@ -105,6 +109,7 @@ screen_end screen_end_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.score(score),
 // output
 	.RGB_screen_end(RGB_screen_end)
 );
