@@ -1,4 +1,5 @@
 import defines::COLOR_WHITE;
+import defines::WORD_END_TOP_LEFT_X, defines::WORD_END_TOP_LEFT_Y, defines::WORD_END_SIZE, defines::WORD_END_LETTERS;
 
 module screen_end(
 	input	logic			clk,
@@ -11,7 +12,7 @@ module screen_end(
 logic	[7:0]	RGBWord;
 logic 			drawWord;
 
-word_end word_end_inst(
+word #(.TOP_LEFT_X(WORD_END_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_TOP_LEFT_Y), .WORD_SIZE(WORD_END_SIZE), .LETTERS(WORD_END_LETTERS)) word_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
