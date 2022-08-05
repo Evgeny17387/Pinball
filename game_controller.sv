@@ -31,7 +31,7 @@ begin
 
 		score_current <= 0;
 		level_current <= 0;
-		life_current <= 3;
+		life_current <= 1;
 
 	end
 	else begin

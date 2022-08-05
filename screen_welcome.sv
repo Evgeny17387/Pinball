@@ -11,12 +11,13 @@ module screen_welcome(
 	output	logic	[7:0]	RGB_screen_welcome
 );
 
-logic	[7:0]	RGBWord_1;
-logic	[7:0]	RGBWord_2;
-logic	[7:0]	RGBWord_3;
 logic 			drawWord_1;
 logic 			drawWord_2;
 logic 			drawWord_3;
+
+logic	[7:0]	RGBWord_1;
+logic	[7:0]	RGBWord_2;
+logic	[7:0]	RGBWord_3;
 
 word #(.TOP_LEFT_X(WORD_WELCOME_TOP_LEFT_X), .TOP_LEFT_Y(WORD_WELCOME_TOP_LEFT_Y), .WORD_SIZE(WORD_WELCOME_SIZE), .LETTERS(WORD_WELCOME_LETTERS)) word_inst(
 // input
