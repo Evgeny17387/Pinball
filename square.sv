@@ -1,5 +1,5 @@
 module square
-#(parameter OBJECT_WIDTH = 0, OBJECT_HEIGHT = 0, TOP_LEFT_X = 0, TOP_LEFT_Y = 0)
+#(parameter OBJECT_WIDTH, OBJECT_HEIGHT, TOP_LEFT_X, TOP_LEFT_Y)
 (
 	input 	logic signed	[10:0] 	pixelX,
 	input 	logic signed	[10:0] 	pixelY,

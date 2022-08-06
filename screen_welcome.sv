@@ -1,7 +1,6 @@
 import defines::COLOR_WHITE;
 import defines::WORD_WELCOME_TOP_LEFT_X, defines::WORD_WELCOME_TOP_LEFT_Y, defines::WORD_WELCOME_SIZE, defines::WORD_WELCOME_LETTERS;
 import defines::WORD_WELCOME_2_TOP_LEFT_X, defines::WORD_WELCOME_2_TOP_LEFT_Y, defines::WORD_WELCOME_2_SIZE, defines::WORD_WELCOME_2_LETTERS;
-import defines::WORD_WELCOME_3_TOP_LEFT_X, defines::WORD_WELCOME_3_TOP_LEFT_Y, defines::WORD_WELCOME_3_SIZE, defines::WORD_WELCOME_3_LETTERS;
 
 module screen_welcome(
 	input	logic			clk,
@@ -39,17 +38,6 @@ word #(.TOP_LEFT_X(WORD_WELCOME_2_TOP_LEFT_X), .TOP_LEFT_Y(WORD_WELCOME_2_TOP_LE
 // output
 	.drawWord(drawWord_2),
 	.RGBWord(RGBWord_2)
-);
-
-word #(.TOP_LEFT_X(WORD_WELCOME_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_WELCOME_3_TOP_LEFT_Y), .WORD_SIZE(WORD_WELCOME_3_SIZE), .LETTERS(WORD_WELCOME_3_LETTERS)) word_3_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.drawWord(drawWord_3),
-	.RGBWord(RGBWord_3)
 );
 
 assign RGB_screen_welcome = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawWord_3 ? RGBWord_3 : COLOR_WHITE;

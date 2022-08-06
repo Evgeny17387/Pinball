@@ -1,0 +1,9 @@
+localparam WORD_WELCOME_TOP_LEFT_X = 125;
+localparam WORD_WELCOME_TOP_LEFT_Y = 100;
+localparam WORD_WELCOME_SIZE = 8;
+localparam int WORD_WELCOME_LETTERS[WORD_WELCOME_SIZE-1:0] = '{4, 12, 14, 2, 11, 11, 4, 22};
+
+localparam WORD_WELCOME_2_TOP_LEFT_X = 1;
+localparam WORD_WELCOME_2_TOP_LEFT_Y = 300;
+localparam WORD_WELCOME_2_SIZE = 16;
+localparam int WORD_WELCOME_2_LETTERS[WORD_WELCOME_2_SIZE-1:0] = '{19, 17, 0, 19, 18, 26, 14, 19, 26, 28, 26, 18, 18, 4, 17, 15};

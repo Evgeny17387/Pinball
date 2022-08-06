@@ -10,12 +10,14 @@ package defines;
 
     `include "defines/score.svh"
 
-    `include "defines/life.svh"
-
     `include "defines/letter.svh"
 
     `include "defines/words.svh"
 
+    `include "defines/life.svh"
+
+    `include "defines/screen_welcome.svh"
+    `include "defines/screen_main.svh"
     `include "defines/screen_end.svh"
 
     parameter logic [10:0]  NUMBER_WIDTH            = 16;

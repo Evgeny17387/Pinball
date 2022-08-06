@@ -1,3 +1,5 @@
+import defines::LIFE_INIT;
+
 module indications_block(
 	input 	logic 			clk,
 	input 	logic 			resetN,
@@ -8,7 +10,7 @@ module indications_block(
 	output	logic	[7:0]	RGBIndications
 );
 
-life_block life_block_inst(
+life_block #(.LIFE_INIT(LIFE_INIT)) life_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

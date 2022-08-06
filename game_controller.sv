@@ -1,3 +1,5 @@
+import defines::LIFE_INIT;
+
 module game_controller(	
 	input	logic 			clk,
 	input	logic 			resetN,
@@ -31,7 +33,7 @@ begin
 
 		score_current <= 0;
 		level_current <= 0;
-		life_current <= 1;
+		life_current <= LIFE_INIT;
 
 	end
 	else begin
