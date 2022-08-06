@@ -6,10 +6,6 @@ package defines;
 
     `include "defines/background.svh"
 
-    `include "defines/level.svh"
-
-    `include "defines/score.svh"
-
     `include "defines/letter.svh"
 
     `include "defines/words.svh"
