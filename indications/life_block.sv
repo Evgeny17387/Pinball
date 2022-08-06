@@ -1,10 +1,10 @@
+import defines::LIFE_INIT;
 import defines::LIFE_WIDTH, defines::LIFE_HEIGHT;
 import defines::LIFE_TOP_LEFT_X, defines::LIFE_TOP_LEFT_Y;
 import defines::LIFE_SPACE;
+import defines::LIFE_INIT;
 
-module life_block
-#(parameter LIFE_INIT)
-(
+module life_block(
 	input 	logic 			clk,
 	input 	logic 			resetN,
 	input 	logic	[10:0]	pixelX,

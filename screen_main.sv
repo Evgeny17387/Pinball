@@ -1,5 +1,3 @@
-import defines::COLOR_WHITE;
-
 module screen_main(
 	input	logic			clk,
 	input	logic			resetN,
@@ -20,8 +18,6 @@ logic	[7:0]	RGB_backGround;
 logic	[7:0]	RGB_smiley;
 logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
-logic	[7:0]	RGBScore;
-logic	[7:0]	RGBLevel;
 logic	[7:0]	RGBIndications;
 
 logic			draw_top_boarder;
@@ -31,8 +27,6 @@ logic			draw_right_boarder;
 logic 			draw_smiley;
 logic 			draw_flipper;
 logic 			drawObstacle;
-logic 			drawScore;
-logic 			drawLevel;
 logic 			drawIndications;
 
 logic			collisionSmileyBorderTop;
@@ -65,10 +59,6 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.RGB_flipper(RGB_flipper),
 	.drawObstacle(drawObstacle),
 	.RGBObstacle(RGBObstacle),
-	.drawScore(drawScore),
-	.RGBScore(RGBScore),
-	.drawLevel(drawLevel),
-	.RGBLevel(RGBLevel),
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications),
 	.RGB_backGround(RGB_backGround),
@@ -182,30 +172,6 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyObstacle(collisionSmileyObstacle)
 );
 
-score_block score_block_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.score(score),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.drawScore(drawScore),
-	.RGBScore(RGBScore)
-);
-
-level_block level_block_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.level(level),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.drawLevel(drawLevel),
-	.RGBLevel(RGBLevel)
-);
-
 indications_block indications_block_inst(
 // input
 	.clk(clk),
@@ -213,6 +179,7 @@ indications_block indications_block_inst(
 	.pixelX(pixelX),
 	.pixelY(pixelY),
 	.life(life),
+	.score(score),
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)
