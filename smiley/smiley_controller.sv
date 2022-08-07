@@ -17,8 +17,7 @@ module smiley_controller(
 	input 	logic			[3:0]	hitEdgeCode,
 	input	logic 			[3:0]	level,
 	output	logic signed 	[10:0]	topLeftX,
-	output	logic signed	[10:0]	topLeftY,
-	output	logic					collisionSmileyObstacleReal
+	output	logic signed	[10:0]	topLeftY
 );
 
 const 		int Y_GRAVITY 					= 0;
@@ -34,96 +33,31 @@ int Yspeed;
 int topLeftX_FixedPoint;
 int topLeftY_FixedPoint;
 
-logic isCollisionXHappened;
-logic isCollisionYHappened;
-
-logic collisionXSmileyObstacleReal;
-logic collisionYSmileyObstacleReal;
-
-logic collisionSmileyObstacleInFrameDetected;
-
-always_ff@(posedge clk or negedge resetN)
-begin
-
-	if (!resetN) begin
-		collisionSmileyObstacleReal <= 0;
-		collisionSmileyObstacleInFrameDetected <= 0;
-	end 
-	else begin
-
-		if (reset_level) begin
-			collisionSmileyObstacleReal <= 0;
-			collisionSmileyObstacleInFrameDetected <= 0;
-		end
-		else begin
-
-			if (startOfFrame)
-				collisionSmileyObstacleInFrameDetected <= 0;
-
-			if (collisionSmileyObstacleReal)
-				collisionSmileyObstacleReal <= 0;
-
-			if (!collisionSmileyObstacleInFrameDetected) begin
-
-				if (collisionXSmileyObstacleReal || collisionYSmileyObstacleReal) begin
-					collisionSmileyObstacleInFrameDetected <= 1;
-					collisionSmileyObstacleReal <= 1;
-				end
-
-			end
-
-		end
-
-	end
-
-end
-
 always_ff@(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
 		Yspeed <= INITIAL_Y_SPEED;
 		topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
-		isCollisionXHappened <= 0;
-		collisionYSmileyObstacleReal <= 0;
 	end 
 	else begin
 
 		if (reset_level) begin
 			Yspeed <= INITIAL_Y_SPEED * (level + 1);
 			topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
-			isCollisionXHappened <= 0;
-			collisionYSmileyObstacleReal <= 0;
 		end
 		else if (!pause) begin
 
-			if (!isCollisionXHappened) begin
-
-				if (
-					(collisionSmileyBorderTop && (Yspeed < 0)) ||
-					(collisionSmileyFlipper && (Yspeed > 0))
-				)
-				begin
-					Yspeed <= -Yspeed;
-					isCollisionXHappened <= 1;
-				end
-				else if (
-					(collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) ||
-					(collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0))
-				)
-				begin
-					Yspeed <= -Yspeed;
-					isCollisionXHappened <= 1;
-					collisionYSmileyObstacleReal <= 1;
-				end
-
+			if ((collisionSmileyBorderTop && (Yspeed < 0)) || (collisionSmileyFlipper && (Yspeed > 0))) begin
+				Yspeed <= -Yspeed;
+			end
+			else if ((collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0))) begin
+				Yspeed <= -Yspeed;
 			end
 
 			if (startOfFrame) begin
 				topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
 				Yspeed <= Yspeed + Y_GRAVITY;
-				isCollisionXHappened <= 0;
-				collisionYSmileyObstacleReal <= 0;
 			end
 
 		end
@@ -138,49 +72,27 @@ begin
 	if (!resetN) begin
 		Xspeed <= 0;
 		topLeftX_FixedPoint <= INITIAL_X * FIXED_POINT_MULTIPLIER;
-		isCollisionYHappened <= 0;
-		collisionXSmileyObstacleReal <= 0;
 	end
 	else begin
 
 		if (reset_level) begin
 			Xspeed <= 0;
 			topLeftX_FixedPoint <= INITIAL_X * FIXED_POINT_MULTIPLIER;
-			isCollisionYHappened <= 0;
-			collisionXSmileyObstacleReal <= 0;
 		end
 		else if (!pause) begin
 
-			if (!isCollisionYHappened) begin
-
-				if (
-					(collisionSmileyBorderLeft && (Xspeed < 0)) ||
-					(collisionSmileyBorderRight && (Xspeed > 0))
-				)
-				begin
-					Xspeed <= -Xspeed;
-					isCollisionYHappened <= 1;
-				end
-				else if (
-					(collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) ||
-					(collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0))
-				)
-				begin
-					Xspeed <= -Xspeed;
-					isCollisionYHappened <= 1;
-					collisionXSmileyObstacleReal <= 1;
-				end
-				else if (collisionSmileyFlipper && (Yspeed > 0)) begin
-					Xspeed <= Xspeed + flipperSpeedX;
-					isCollisionYHappened <= 1;
-				end
-
+			if ((collisionSmileyBorderLeft && (Xspeed < 0)) || (collisionSmileyBorderRight && (Xspeed > 0))) begin
+				Xspeed <= -Xspeed;
+			end
+			else if ((collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0))) begin
+				Xspeed <= -Xspeed;
+			end
+			else if (collisionSmileyFlipper && (Yspeed > 0)) begin
+				Xspeed <= Xspeed + flipperSpeedX;
 			end
 
 			if (startOfFrame == 1'b1) begin
 				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
-				isCollisionYHappened <= 0;
-				collisionXSmileyObstacleReal <= 0;
 			end
 
 		end

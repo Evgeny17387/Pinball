@@ -38,7 +38,6 @@ logic 			collisionFlipperBorderLeft;
 logic 			collisionFlipperBorderRight;
 
 logic 			collisionSmileyObstacle;
-logic			collisionSmileyObstacleReal;
 
 logic			pause;
 logic			reset_level;
@@ -66,8 +65,7 @@ smiley_block smiley_block_inst(
 	.level(level),
 // output
 	.RGB_smiley(RGB_smiley),
-	.draw_smiley(draw_smiley),
-	.collisionSmileyObstacleReal(collisionSmileyObstacleReal)
+	.draw_smiley(draw_smiley)
 );
 
 flipper_block flipper_block_inst(
@@ -154,7 +152,6 @@ game_controller game_controller_inst(
 	.key5IsPressed(key5IsPressed),
 	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
-	.collisionSmileyObstacleReal(collisionSmileyObstacleReal),
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
 // output

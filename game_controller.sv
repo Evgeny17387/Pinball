@@ -6,7 +6,6 @@ module game_controller(
 	input	logic 			key5IsPressed,
 	input	logic 			collisionSmileyBorderBottom,
 	input	logic 			collisionSmileyObstacle,
-	input	logic			collisionSmileyObstacleReal,
 	input	logic			collisionSmileyObstacleGood,
 	input	logic			collisionSmileyObstacleBad,
 	output 	logic 			pause,
@@ -93,7 +92,7 @@ begin
 				end
 
 			end
-			else if (collisionSmileyObstacleReal) begin
+			else if (collisionSmileyObstacle) begin
 
 				if (collisionSmileyObstacleGood) begin
 

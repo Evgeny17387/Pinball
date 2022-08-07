@@ -17,8 +17,7 @@ module smiley_block(
 	input	logic 					collisionSmileyObstacle,
 	input	logic 			[3:0]	level,
 	output	logic			[7:0]	RGB_smiley,
-	output	logic					draw_smiley,
-	output	logic					collisionSmileyObstacleReal
+	output	logic					draw_smiley
 );
 
 logic 					draw_smiley_inner;
@@ -49,8 +48,7 @@ smiley_controller smiley_controller_inst(
 	.level(level),
 // output
 	.topLeftX(topLeftX),
-	.topLeftY(topLeftY),
-	.collisionSmileyObstacleReal(collisionSmileyObstacleReal)
+	.topLeftY(topLeftY)
 );
 
 // ToDo: make sure width\height of the object and bitmap are equal
