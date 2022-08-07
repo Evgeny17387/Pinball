@@ -1,7 +1,8 @@
-module screen_controller(	
+module screen_controller(
 	input	logic 			clk,
 	input	logic 			resetN,
 	input	logic 			key0IsPressed,
+	input	logic 			key1IsPressed,
 	input	logic	[3:0]	life,
 	output 	logic 			start,
 	output 	logic 			game_end
@@ -60,8 +61,11 @@ begin
 
 			game_end = 1;
 
-		end
+			if (key1IsPressed) begin
+				state_next = state_0;
+			end
 
+		end
 
 	endcase
 

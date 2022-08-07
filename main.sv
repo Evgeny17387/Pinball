@@ -3,8 +3,7 @@ module main(
 	input	logic			CLOCK_50,
 	input 	logic 			PS2_CLK,
 	input 	logic 			PS2_DAT,
-	output	logic	[28:0] 	OVGA,
-	output	logic	[1:0]	LEDR
+	output	logic	[28:0] 	OVGA
 );
 
 logic			clk;
@@ -39,12 +38,11 @@ VGA_Controller VGA_Controller_inst(
 	.startOfFrame(startOfFrame)
 );
 
-logic	[8:0]	key_code;
-
+logic  			key0IsPressed;
+logic  			key1IsPressed;
 logic 			key4IsPressed;
 logic 			key5IsPressed;
 logic  			key6IsPressed;
-logic  			key0IsPressed;
 
 keyboard_block keyboard_block_inst(
 // input
@@ -53,15 +51,12 @@ keyboard_block keyboard_block_inst(
 	.in(PS2_CLK),
 	.kbd_dat(PS2_DAT),
 // output
-	.key_code(key_code),
+	.key0IsPressed(key0IsPressed),
+	.key1IsPressed(key1IsPressed),
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
-	.key6IsPressed(key6IsPressed),
-	.key0IsPressed(key0IsPressed)
+	.key6IsPressed(key6IsPressed)
 );
-
-assign LEDR[0] = key6IsPressed;
-assign LEDR[1] = key4IsPressed;
 
 logic [7:0] RGB_screen_welcome;
 
@@ -114,9 +109,10 @@ screen_controller screen_controller_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
+	.key0IsPressed(key0IsPressed),
+	.key1IsPressed(key1IsPressed),
 	.life(life),
 // output
-	.key0IsPressed(key0IsPressed),
 	.start(start),
 	.game_end(game_end)
 );
