@@ -7,6 +7,8 @@ module game_controller(
 	input	logic 			collisionSmileyBorderBottom,
 	input	logic 			collisionSmileyObstacle,
 	input	logic			collisionSmileyObstacleReal,
+	input	logic			collisionSmileyObstacleGood,
+	input	logic			collisionSmileyObstacleBad,
 	output 	logic 			pause,
 	output 	logic 			reset_level,
 	output 	logic [3:0] 	score,
@@ -93,12 +95,26 @@ begin
 			end
 			else if (collisionSmileyObstacleReal) begin
 
-				if (score == 4'h1) begin
-					state_next = state_1;
-					level_next = level_current + 1;
+				if (collisionSmileyObstacleGood) begin
+
+					if (score_current == 4'h1) begin
+						state_next = state_1;
+						level_next = level_current + 1;
+					end
+					else begin
+						score_next = score_current + 1;
+					end
+
 				end
 				else begin
-					score_next = score_current + 1;
+
+					if (score_current == 4'h0) begin
+
+					end
+					else begin
+						score_next = score_current - 1;
+					end
+
 				end
 
 			end

@@ -1,56 +1,50 @@
+import defines::NUMBER_WIDTH, defines::NUMBER_HEIGHT;
+
 module Obstacle(
 	input	logic					clk,
 	input	logic					resetN,
 	input 	logic signed	[10:0] 	pixelX,
 	input 	logic signed	[10:0] 	pixelY,
+	input 	logic 			[4:0] 	goodNumber,
 	output	logic					drawObstacle,
-	output	logic			[7:0]	RGBObstacle
+	output	logic			[7:0]	RGBObstacle,
+	output 	logic 					drawGoodNumber
 );
 
-parameter  int 			OBJECT_WIDTH_X 			= 128;
-parameter  int 			OBJECT_HEIGHT_Y			= 128;
+logic [10:0] 	offsetX;
+logic [10:0] 	offsetY;
+logic 			insideRectangle;
 
-parameter  logic [7:0] 	OBJECT_COLOR 			= 8'h55;
+square #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT), .TOP_LEFT_X(200), .TOP_LEFT_Y(200)) square_inst(
+// input
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.draw(insideRectangle),
+	.offsetX(offsetX),
+	.offsetY(offsetY)
+);
 
-localparam logic [7:0] 	TRANSPARENT_ENCODING 	= 8'hFF;
+logic			drawNumber;
+logic	[7:0]	RGBNumber;
 
-int rightX;
-int bottomY;
+number_bitmap number_bitmap_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.offsetX(offsetX),
+	.offsetY(offsetY),
+	.number(goodNumber),
+	.insideRectangle(insideRectangle),
+// output
+	.drawNumber(drawNumber),
+	.RGBNumber(RGBNumber)
+);
 
-logic insideBracket;
+assign drawObstacle = drawNumber;
 
-logic signed	[10:0] 	topLeftX = 100;
-logic signed 	[10:0] 	topLeftY = 100;
+assign RGBObstacle = RGBNumber;
 
-assign rightX 			= topLeftX + OBJECT_WIDTH_X;
-assign bottomY 			= topLeftY + OBJECT_HEIGHT_Y;
-
-assign insideBracket	= ((pixelX >= topLeftX) && (pixelX < rightX) && (pixelY >= topLeftY) && (pixelY < bottomY));
-
-always_ff@(posedge clk or negedge resetN)
-begin
-
-	if (!resetN) begin
-
-		RGBObstacle <= 8'b0;
-		drawObstacle <= 1'b0;
-
-	end
-
-	else begin
-
-		RGBObstacle <= TRANSPARENT_ENCODING;
-		drawObstacle <= 1'b0;
-
-		if (insideBracket) begin
-
-			RGBObstacle <= OBJECT_COLOR;
-			drawObstacle <= 1'b1;
-
-		end 
-
-	end
-
-end 
+assign drawGoodNumber = drawNumber && (2 == goodNumber ? 1'b1 : 1'b0);
 
 endmodule

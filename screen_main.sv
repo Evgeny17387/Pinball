@@ -47,37 +47,6 @@ logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	level;
 
-objects_mux_screen_main objects_mux_screen_main_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.draw_smiley(draw_smiley),
-	.RGB_smiley(RGB_smiley),
-	.draw_flipper(draw_flipper),
-	.RGB_flipper(RGB_flipper),
-	.drawObstacle(drawObstacle),
-	.RGBObstacle(RGBObstacle),
-	.drawIndications(drawIndications),
-	.RGBIndications(RGBIndications),
-	.RGB_backGround(RGB_backGround),
-// output
-	.RGB_screen_main(RGB_screen_main)
-);
-
-background background_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),//
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.RGB_backGround(RGB_backGround),
-	.draw_top_boarder(draw_top_boarder),
-	.draw_bottom_boarder(draw_bottom_boarder),
-	.draw_left_boarder(draw_left_boarder),
-	.draw_right_boarder(draw_right_boarder)
-);
-
 smiley_block smiley_block_inst(
 // input
 	.clk(clk),
@@ -120,32 +89,37 @@ flipper_block flipper_block_inst(
 	.speedX(flipperSpeedX)
 );
 
+logic drawGoodNumber;
+
 Obstacle Obstacle_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.goodNumber(2),
 // output
 	.drawObstacle(drawObstacle),
-	.RGBObstacle(RGBObstacle)
+	.RGBObstacle(RGBObstacle),
+	.drawGoodNumber(drawGoodNumber)
 );
 
-game_controller game_controller_inst(
+background background_inst(
 // input
 	.clk(clk),
-	.resetN(resetN),
-	.key5IsPressed(key5IsPressed),
-	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
-	.collisionSmileyObstacle(collisionSmileyObstacle),
-	.collisionSmileyObstacleReal(collisionSmileyObstacleReal),
+	.resetN(resetN),//
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 // output
-	.pause(pause),
-	.reset_level(reset_level),
-	.score(score),
-	.level(level),
-	.life(life)
+	.RGB_backGround(RGB_backGround),
+	.draw_top_boarder(draw_top_boarder),
+	.draw_bottom_boarder(draw_bottom_boarder),
+	.draw_left_boarder(draw_left_boarder),
+	.draw_right_boarder(draw_right_boarder)
 );
+
+logic collisionSmileyObstacleGood;
+logic collisionSmileyObstacleBad;
 
 CollisionDetector CollisionDetector_inst(
 // input
@@ -158,6 +132,7 @@ CollisionDetector CollisionDetector_inst(
 	.draw_right_boarder(draw_right_boarder),
 	.draw_flipper(draw_flipper),
 	.drawObstacle(drawObstacle),
+	.drawGoodNumber(drawGoodNumber),
 	.startOfFrame(startOfFrame),
 // output
 	.collisionSmileyBorderTop(collisionSmileyBorderTop),
@@ -167,7 +142,27 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
 	.collisionFlipperBorderRight(collisionFlipperBorderRight),
-	.collisionSmileyObstacle(collisionSmileyObstacle)
+	.collisionSmileyObstacle(collisionSmileyObstacle),
+	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
+	.collisionSmileyObstacleBad(collisionSmileyObstacleBad)
+);
+
+game_controller game_controller_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.key5IsPressed(key5IsPressed),
+	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
+	.collisionSmileyObstacle(collisionSmileyObstacle),
+	.collisionSmileyObstacleReal(collisionSmileyObstacleReal),
+	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
+	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
+// output
+	.pause(pause),
+	.reset_level(reset_level),
+	.score(score),
+	.level(level),
+	.life(life)
 );
 
 indications_block indications_block_inst(
@@ -182,6 +177,23 @@ indications_block indications_block_inst(
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)
+);
+
+objects_mux_screen_main objects_mux_screen_main_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.draw_smiley(draw_smiley),
+	.RGB_smiley(RGB_smiley),
+	.draw_flipper(draw_flipper),
+	.RGB_flipper(RGB_flipper),
+	.drawObstacle(drawObstacle),
+	.RGBObstacle(RGBObstacle),
+	.drawIndications(drawIndications),
+	.RGBIndications(RGBIndications),
+	.RGB_backGround(RGB_backGround),
+// output
+	.RGB_screen_main(RGB_screen_main)
 );
 
 endmodule
