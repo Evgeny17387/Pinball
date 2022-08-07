@@ -93,7 +93,7 @@ begin
 			end
 			else if (collisionSmileyObstacleReal) begin
 
-				if (score == 4'h0) begin
+				if (score == 4'h1) begin
 					state_next = state_1;
 					level_next = level_current + 1;
 				end

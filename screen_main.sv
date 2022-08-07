@@ -178,6 +178,7 @@ indications_block indications_block_inst(
 	.pixelY(pixelY),
 	.life(life),
 	.score(score),
+	.level(level),
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)
