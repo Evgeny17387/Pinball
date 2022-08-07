@@ -4,10 +4,6 @@ module main(
 	input 	logic 			PS2_CLK,
 	input 	logic 			PS2_DAT,
 	output	logic	[28:0] 	OVGA,
-	output	logic	[6:0]	HEX0,
-	output	logic	[6:0]	HEX1,
-	output	logic	[6:0]	HEX2,
-	output	logic	[6:0]	HEX3,
 	output	logic	[1:0]	LEDR
 );
 
@@ -96,9 +92,7 @@ screen_main screen_main_inst(
 // output
 	.RGB_screen_main(RGB_screen_main),
 	.life(life),
-	.score(score),
-	.HEX2(HEX2),
-	.HEX3(HEX3)
+	.score(score)
 );
 
 logic [7:0] RGB_screen_end;
@@ -138,20 +132,6 @@ objects_mux objects_mux_inst(
 	.RGB_screen_end(RGB_screen_end),
 // output
 	.RGB(RGB)
-);
-
-hex_ss hexSS_inst_1(
-// input
-	.i_dig(key_code[3:0]),
-// output
-	.o_seg(HEX0)
-);
-
-hex_ss hexSS_inst_2(
-// input
-	.i_dig(key_code[7:4]),
-// output
-	.o_seg(HEX1)
 );
 
 endmodule

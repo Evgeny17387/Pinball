@@ -9,9 +9,7 @@ module screen_main(
 	input	logic 			startOfFrame,
 	output	logic	[7:0]	RGB_screen_main,
 	output	logic	[3:0]	life,
-	output	logic	[3:0] 	score,
-	output	logic	[6:0]	HEX2,
-	output	logic	[6:0]	HEX3
+	output	logic	[3:0] 	score
 );
 
 logic	[7:0]	RGB_backGround;
@@ -183,20 +181,6 @@ indications_block indications_block_inst(
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)
-);
-
-hex_ss hexSS_inst_3(
-// input
-	.i_dig(score[3:0]),
-// output
-	.o_seg(HEX2)
-);
-
-hex_ss hexSS_inst_4(
-// input
-	.i_dig(level[3:0]),
-// output
-	.o_seg(HEX3)
 );
 
 endmodule
