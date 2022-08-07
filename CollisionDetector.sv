@@ -29,9 +29,31 @@ assign collisionSmileyBorderRight 	= draw_smiley && draw_right_boarder;
 
 assign collisionSmileyFlipper 		= draw_smiley && draw_flipper;
 
-assign collisionSmileyObstacle		= draw_smiley && drawObstacle;
+assign collisionSmileyObstacle		= draw_smiley && drawObstacle && !collisionDetectedInFrame;
 assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawGoodNumber;
 assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawGoodNumber;
+
+logic collisionDetectedInFrame;
+
+always_ff @(posedge clk or negedge resetN)
+begin
+
+	if (!resetN) begin
+		collisionDetectedInFrame <= 0;
+	end
+	else begin
+
+		if (startOfFrame) begin
+			collisionDetectedInFrame <= 0;
+		end
+
+		if (draw_smiley && drawObstacle) begin
+			collisionDetectedInFrame <= 1;
+		end
+
+	end
+
+end
 
 always_ff @(posedge clk or negedge resetN)
 begin

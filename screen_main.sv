@@ -37,8 +37,6 @@ logic			collisionSmileyFlipper;
 logic 			collisionFlipperBorderLeft;
 logic 			collisionFlipperBorderRight;
 
-logic 			collisionSmileyObstacle;
-
 logic			pause;
 logic			reset_level;
 
@@ -116,6 +114,7 @@ background background_inst(
 	.draw_right_boarder(draw_right_boarder)
 );
 
+logic collisionSmileyObstacle;
 logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
 
