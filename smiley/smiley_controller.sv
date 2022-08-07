@@ -1,4 +1,5 @@
 import defines::INITIAL_X, defines::INITIAL_Y;
+import defines::INITIAL_Y_SPEED;
 
 module smiley_controller(
 	input	logic					clk,
@@ -19,8 +20,6 @@ module smiley_controller(
 	output	logic signed	[10:0]	topLeftY,
 	output	logic					collisionSmileyObstacleReal
 );
-
-parameter 	int INITIAL_Y_SPEED 			= 100;
 
 const 		int Y_GRAVITY 					= 0;
 

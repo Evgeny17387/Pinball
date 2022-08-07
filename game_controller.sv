@@ -93,7 +93,7 @@ begin
 			end
 			else if (collisionSmileyObstacleReal) begin
 
-				if (score == 4'h1) begin
+				if (score == 4'h0) begin
 					state_next = state_1;
 					level_next = level_current + 1;
 				end
@@ -111,8 +111,10 @@ begin
 			level_next = 0;
 			life_next = LIFE_INIT;
 
+			reset_level = 1;
+
 			if (key5IsPressed) begin
-				state_next = state_1;
+				state_next = state_2;
 			end
 
 		end

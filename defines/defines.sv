@@ -12,6 +12,8 @@ package defines;
 
     `include "defines/life.svh"
 
+    `include "defines/ball.svh"
+
     `include "defines/screen_welcome.svh"
     `include "defines/screen_main.svh"
     `include "defines/screen_end.svh"
