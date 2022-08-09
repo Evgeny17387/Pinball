@@ -13,31 +13,12 @@ module word
 	output	logic	[7:0]	RGBWord
 );
 
-logic [4:0] letter;
-
 logic drawLetter;
-logic drawSquare [WORD_SIZE-1:0];
-
-logic [10:0] offsetXLetter;
-logic [10:0] offsetYLetter;
-logic [10:0] offsetXSquare [WORD_SIZE-1:0];
-logic [10:0] offsetYSquare [WORD_SIZE-1:0];
-
 assign drawLetter = drawSquare.or();
 
-always_comb begin
-    letter = LETTERS[0];
-    offsetXLetter = offsetXSquare[0];
-    offsetYLetter = offsetYSquare[0];
-
-    for (int i = 1; i < WORD_SIZE; i = i + 1) begin
-        if (drawSquare[i]) begin
-            letter = LETTERS[i];
-            offsetXLetter = offsetXSquare[i];
-            offsetYLetter = offsetYSquare[i];
-        end
-    end
-end
+logic drawSquare [WORD_SIZE-1:0];
+logic [10:0] offsetXSquare [WORD_SIZE-1:0];
+logic [10:0] offsetYSquare [WORD_SIZE-1:0];
 
 genvar i;
 generate
@@ -58,6 +39,25 @@ generate
         );
     end
 endgenerate
+
+logic [4:0] letter;
+
+logic [10:0] offsetXLetter;
+logic [10:0] offsetYLetter;
+
+always_comb begin
+    letter = LETTERS[0];
+    offsetXLetter = offsetXSquare[0];
+    offsetYLetter = offsetYSquare[0];
+
+    for (int i = 1; i < WORD_SIZE; i = i + 1) begin
+        if (drawSquare[i]) begin
+            letter = LETTERS[i];
+            offsetXLetter = offsetXSquare[i];
+            offsetYLetter = offsetYSquare[i];
+        end
+    end
+end
 
 letter letter_inst(
 // input

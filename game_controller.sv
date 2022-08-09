@@ -105,16 +105,6 @@ begin
 					end
 
 				end
-				else begin
-
-					if (score_current == 4'h0) begin
-
-					end
-					else begin
-						score_next = score_current - 1;
-					end
-
-				end
 
 			end
 

@@ -5,36 +5,71 @@ module Obstacle(
 	input	logic					resetN,
 	input 	logic signed	[10:0] 	pixelX,
 	input 	logic signed	[10:0] 	pixelY,
-	input 	logic 			[4:0] 	goodNumber,
+	input 	logic 			[3:0] 	goodNumber,
 	output	logic					drawObstacle,
 	output	logic			[7:0]	RGBObstacle,
 	output 	logic 					drawGoodNumber
 );
 
-logic [10:0] 	offsetX;
-logic [10:0] 	offsetY;
-logic 			insideRectangle;
+localparam NUMBERS = 10;
+localparam NUMBERS_SPACE = 60;
 
-square #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT), .TOP_LEFT_X(200), .TOP_LEFT_Y(200)) square_inst(
-// input
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.draw(insideRectangle),
-	.offsetX(offsetX),
-	.offsetY(offsetY)
-);
+logic drawSquare [NUMBERS-1:0];
+logic [10:0] offsetXSquare [NUMBERS-1:0];
+logic [10:0] offsetYSquare [NUMBERS-1:0];
+
+genvar i;
+generate
+    for (i = 0; i < NUMBERS; i = i + 1) begin : block_squares_inst
+        square #(
+                .OBJECT_WIDTH(NUMBER_WIDTH),
+                .OBJECT_HEIGHT(NUMBER_HEIGHT),
+                .TOP_LEFT_X(30 + i * NUMBERS_SPACE),
+                .TOP_LEFT_Y(60)
+                ) square_inst_0 (
+        // input
+            .pixelX(pixelX),
+            .pixelY(pixelY),
+        // output
+            .draw(drawSquare[i]),
+            .offsetX(offsetXSquare[i]),
+            .offsetY(offsetYSquare[i])
+        );
+    end
+endgenerate
+
+logic [3:0] numberToDraw;
+
+logic [10:0] offsetXNumber;
+logic [10:0] offsetYNumber;
+
+always_comb begin
+    numberToDraw = 0;
+    offsetXNumber = offsetXSquare[0];
+    offsetYNumber = offsetYSquare[0];
+
+    for (int i = 1; i < NUMBERS; i = i + 1) begin
+        if (drawSquare[i]) begin
+    		numberToDraw = i;
+            offsetXNumber = offsetXSquare[i];
+            offsetYNumber = offsetYSquare[i];
+        end
+    end
+end
 
 logic			drawNumber;
 logic	[7:0]	RGBNumber;
+
+logic insideRectangle;
+assign insideRectangle = drawSquare.or();
 
 number_bitmap number_bitmap_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.offsetX(offsetX),
-	.offsetY(offsetY),
-	.number(goodNumber),
+	.offsetX(offsetXNumber),
+	.offsetY(offsetYNumber),
+	.number(numberToDraw),
 	.insideRectangle(insideRectangle),
 // output
 	.drawNumber(drawNumber),
@@ -45,6 +80,6 @@ assign drawObstacle = drawNumber;
 
 assign RGBObstacle = RGBNumber;
 
-assign drawGoodNumber = drawNumber && (2 == goodNumber ? 1'b1 : 1'b0);
+assign drawGoodNumber = drawNumber && (numberToDraw == goodNumber ? 1'b1 : 1'b0);
 
 endmodule
