@@ -195,6 +195,7 @@ spring_block spring_block_inst(
 	.pixelY(pixelY),
 	.key5IsPressed(key5IsPressed),
 	.startOfFrame(startOfFrame),
+	.reset_level(reset_level),
 // output
 	.drawSpring(drawSpring),
 	.RGBSpring(RGBSpring),

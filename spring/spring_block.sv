@@ -8,6 +8,7 @@ module spring_block(
 	input 	logic signed	[10:0] 	pixelY,
 	input	logic 					key5IsPressed,
 	input	logic					startOfFrame,
+	input	logic					reset_level,
 	output	logic			[7:0]	RGBSpring,
 	output 	logic 					drawSpring,
 	output	int						speedY
@@ -21,6 +22,7 @@ spring_controller spring_controller_inst(
 	.resetN(resetN),
 	.key5IsPressed(key5IsPressed),
 	.startOfFrame(startOfFrame),
+	.reset_level(reset_level),
 // output
 	.topLeftY(topLeftY),
 	.speedY(speedY)

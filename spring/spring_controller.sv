@@ -10,6 +10,7 @@ module spring_controller(
 	input	logic					resetN,
 	input	logic					key5IsPressed,
 	input	logic					startOfFrame,
+	input	logic					reset_level,
 	output	logic signed	[10:0]	topLeftY,
 	output	int						speedY
 );
@@ -27,25 +28,35 @@ begin
 	end 
 	else begin
 
-		if (key5IsPressed)
-			speedY <= SPRING_SPEED_DOWN;
-		else if (topLeftY > SCREEN_MAIN_SPRING_TOP_LEFT_Y)
-			speedY <= SPRING_SPEED_UP;
-		else
+		if (reset_level) begin
+
 			speedY <= 0;
+			topLeftY_FixedPoint <= SCREEN_MAIN_SPRING_TOP_LEFT_Y * FIXED_POINT_MULTIPLIER;
 
-		if (startOfFrame) begin
+		end
+		else begin
 
-			if (topLeftY > FRAME_SIZE_Y - SPRING_Y_MARGIN) begin
-				if (speedY < 0)
-					topLeftY_FixedPoint <= topLeftY_FixedPoint + speedY;
-			end
-			else if (topLeftY < SCREEN_MAIN_SPRING_TOP_LEFT_Y) begin
-				if (speedY > 0)
-					topLeftY_FixedPoint <= topLeftY_FixedPoint + speedY;
-			end
+			if (key5IsPressed)
+				speedY <= SPRING_SPEED_DOWN;
+			else if (topLeftY > SCREEN_MAIN_SPRING_TOP_LEFT_Y)
+				speedY <= SPRING_SPEED_UP;
 			else
-				topLeftY_FixedPoint <= topLeftY_FixedPoint + speedY;
+				speedY <= 0;
+
+			if (startOfFrame) begin
+
+				if (topLeftY > FRAME_SIZE_Y - SPRING_Y_MARGIN) begin
+					if (speedY < 0)
+						topLeftY_FixedPoint <= topLeftY_FixedPoint + speedY;
+				end
+				else if (topLeftY < SCREEN_MAIN_SPRING_TOP_LEFT_Y) begin
+					if (speedY > 0)
+						topLeftY_FixedPoint <= topLeftY_FixedPoint + speedY;
+				end
+				else
+					topLeftY_FixedPoint <= topLeftY_FixedPoint + speedY;
+
+			end
 
 		end
 

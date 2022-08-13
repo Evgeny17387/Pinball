@@ -54,7 +54,7 @@ begin
 				if (springSpeedY < 0)
 					Yspeed <= Yspeed + springSpeedY;
 				else
-					Yspeed <= 0;
+					Yspeed <= -Yspeed;
 			end
 
 			if (startOfFrame) begin
