@@ -43,6 +43,7 @@ logic  			key1IsPressed;
 logic 			key4IsPressed;
 logic 			key5IsPressed;
 logic  			key6IsPressed;
+logic  			key9IsPressed;
 
 keyboard_block keyboard_block_inst(
 // input
@@ -55,7 +56,8 @@ keyboard_block keyboard_block_inst(
 	.key1IsPressed(key1IsPressed),
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
-	.key6IsPressed(key6IsPressed)
+	.key6IsPressed(key6IsPressed),
+	.key9IsPressed(key9IsPressed)
 );
 
 logic [7:0] RGB_screen_welcome;

@@ -23,3 +23,8 @@ parameter logic [10:0] SCREEN_MAIN_SCORE_NUMBER_TOP_LEFT_Y = 5;
 
 parameter logic [10:0] LEVEL_NUMBER_TOP_LEFT_X = 300;
 parameter logic [10:0] LEVEL_NUMBER_TOP_LEFT_Y = 5;
+
+// Equation
+
+parameter logic [10:0] SCREEN_MAIN_EQUATION_TOP_LEFT_X = 500;
+parameter logic [10:0] SCREEN_MAIN_EQUATION_TOP_LEFT_Y = 5;

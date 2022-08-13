@@ -85,7 +85,18 @@ flipper_block flipper_block_inst(
 	.speedX(flipperSpeedX)
 );
 
-logic drawGoodNumber;
+logic [3:0] scoreNumber;
+
+random_number random_number_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.getRandomNumber(reset_level_pulse),
+// output
+	.randomNumber(scoreNumber)
+);
+
+logic drawScoreNumber;
 
 Obstacle Obstacle_inst(
 // input
@@ -93,11 +104,11 @@ Obstacle Obstacle_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.goodNumber(2),
+	.scoreNumber(scoreNumber),
 // output
 	.drawObstacle(drawObstacle),
 	.RGBObstacle(RGBObstacle),
-	.drawGoodNumber(drawGoodNumber)
+	.drawScoreNumber(drawScoreNumber)
 );
 
 background background_inst(
@@ -129,7 +140,7 @@ CollisionDetector CollisionDetector_inst(
 	.draw_right_boarder(draw_right_boarder),
 	.draw_flipper(draw_flipper),
 	.drawObstacle(drawObstacle),
-	.drawGoodNumber(drawGoodNumber),
+	.drawScoreNumber(drawScoreNumber),
 	.startOfFrame(startOfFrame),
 // output
 	.collisionSmileyBorderTop(collisionSmileyBorderTop),
@@ -144,6 +155,8 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad)
 );
 
+logic reset_level_pulse;
+
 game_controller game_controller_inst(
 // input
 	.clk(clk),
@@ -156,6 +169,7 @@ game_controller game_controller_inst(
 // output
 	.pause(pause),
 	.reset_level(reset_level),
+	.reset_level_pulse(reset_level_pulse),
 	.score(score),
 	.level(level),
 	.life(life)
@@ -170,6 +184,7 @@ indications_block indications_block_inst(
 	.life(life),
 	.score(score),
 	.level(level),
+	.scoreNumber(scoreNumber),
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)

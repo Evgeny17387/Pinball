@@ -5,10 +5,10 @@ module Obstacle(
 	input	logic					resetN,
 	input 	logic signed	[10:0] 	pixelX,
 	input 	logic signed	[10:0] 	pixelY,
-	input 	logic 			[3:0] 	goodNumber,
+	input 	logic 			[3:0] 	scoreNumber,
 	output	logic					drawObstacle,
 	output	logic			[7:0]	RGBObstacle,
-	output 	logic 					drawGoodNumber
+	output 	logic 					drawScoreNumber
 );
 
 localparam NUMBERS = 10;
@@ -80,6 +80,6 @@ assign drawObstacle = drawNumber;
 
 assign RGBObstacle = RGBNumber;
 
-assign drawGoodNumber = drawNumber && (numberToDraw == goodNumber ? 1'b1 : 1'b0);
+assign drawScoreNumber = drawNumber && (numberToDraw == scoreNumber ? 1'b1 : 1'b0);
 
 endmodule

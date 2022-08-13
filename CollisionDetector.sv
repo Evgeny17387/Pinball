@@ -8,7 +8,7 @@ module CollisionDetector(
 	input	logic 			draw_right_boarder,
 	input	logic 			draw_flipper,
 	input	logic 			drawObstacle,
-	input	logic			drawGoodNumber,
+	input	logic			drawScoreNumber,
 	input 	logic 			startOfFrame,
 	output	logic 			collisionSmileyBorderTop,
 	output	logic 			collisionSmileyBorderBottom,
@@ -30,8 +30,8 @@ assign collisionSmileyBorderRight 	= draw_smiley && draw_right_boarder;
 assign collisionSmileyFlipper 		= draw_smiley && draw_flipper;
 
 assign collisionSmileyObstacle		= draw_smiley && drawObstacle && !collisionDetectedInFrame;
-assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawGoodNumber;
-assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawGoodNumber;
+assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawScoreNumber;
+assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawScoreNumber;
 
 logic collisionDetectedInFrame;
 

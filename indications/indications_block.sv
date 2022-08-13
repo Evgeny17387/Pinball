@@ -6,17 +6,13 @@ module indications_block(
 	input	logic	[3:0] 	life,
 	input	logic	[3:0] 	score,
 	input	logic	[3:0] 	level,
+	input	logic	[3:0] 	scoreNumber,
 	output	logic			drawIndications,
 	output	logic	[7:0]	RGBIndications
 );
 
 logic 			drawLife;
-logic 			drawScore;
-logic 			drawLevel;
-
 logic	[7:0]	RGBLife;
-logic	[7:0]	RGBScore;
-logic	[7:0]	RGBLevel;
 
 life_block life_block_inst(
 // input
@@ -30,6 +26,9 @@ life_block life_block_inst(
 	.RGBLife(RGBLife)
 );
 
+logic 			drawScore;
+logic	[7:0]	RGBScore;
+
 score_block score_block_inst(
 // input
 	.clk(clk),
@@ -41,6 +40,9 @@ score_block score_block_inst(
 	.drawScore(drawScore),
 	.RGBScore(RGBScore)
 );
+
+logic 			drawLevel;
+logic	[7:0]	RGBLevel;
 
 level_block level_block_inst(
 // input
@@ -54,7 +56,22 @@ level_block level_block_inst(
 	.RGBLevel(RGBLevel)
 );
 
-assign drawIndications = drawLife || drawScore || drawLevel;
-assign RGBIndications = drawLife ? RGBLife : drawScore ? RGBScore : RGBLevel;
+logic 			drawEquation;
+logic	[7:0]	RGBEquation;
+
+equation_block equation_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.scoreNumber(scoreNumber),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.drawEquation(drawEquation),
+	.RGBEquation(RGBEquation)
+);
+
+assign drawIndications = drawLife || drawScore || drawLevel || drawEquation;
+assign RGBIndications = drawLife ? RGBLife : drawScore ? RGBScore : drawLevel ? RGBLevel : RGBEquation;
 
 endmodule

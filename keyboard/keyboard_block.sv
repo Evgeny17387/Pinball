@@ -7,7 +7,8 @@ module keyboard_block(
 	output 	logic 		key1IsPressed,
 	output 	logic 		key4IsPressed,
 	output 	logic 		key5IsPressed,
-	output 	logic 		key6IsPressed
+	output 	logic 		key6IsPressed,
+	output 	logic 		key9IsPressed
 );
 
 logic 		make;
@@ -60,6 +61,17 @@ key_decoder #(.KEY_VALUE(9'h06B)) key_decoder_4_inst(
 	.keyIsPressed(key4IsPressed)
 );
 
+key_decoder #(.KEY_VALUE(9'h073)) key_decoder_5_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.make(make),
+	.breakk(breakk),
+	.key_code(key_code),
+// output
+	.keyIsPressed(key5IsPressed)
+);
+
 key_decoder #(.KEY_VALUE(9'h074)) key_decoder_6_inst(
 // input
 	.clk(clk),
@@ -71,7 +83,7 @@ key_decoder #(.KEY_VALUE(9'h074)) key_decoder_6_inst(
 	.keyIsPressed(key6IsPressed)
 );
 
-key_decoder #(.KEY_VALUE(9'h073)) key_decoder_5_inst(
+key_decoder #(.KEY_VALUE(9'h07D)) key_decoder_9_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
@@ -79,7 +91,7 @@ key_decoder #(.KEY_VALUE(9'h073)) key_decoder_5_inst(
 	.breakk(breakk),
 	.key_code(key_code),
 // output
-	.keyIsPressed(key5IsPressed)
+	.keyIsPressed(key9IsPressed)
 );
 
 endmodule
