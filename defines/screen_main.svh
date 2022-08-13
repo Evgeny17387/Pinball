@@ -26,5 +26,11 @@ parameter logic [10:0] LEVEL_NUMBER_TOP_LEFT_Y = 5;
 
 // Equation
 
-parameter logic [10:0] SCREEN_MAIN_EQUATION_TOP_LEFT_X = 500;
-parameter logic [10:0] SCREEN_MAIN_EQUATION_TOP_LEFT_Y = 5;
+parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_WIDTH = 32;
+parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_HEIGHT = 32;
+
+parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_TOP_LEFT_X = 450;
+parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_TOP_LEFT_Y = 5;
+
+parameter logic [10:0] SCREEN_MAIN_LUCK_NUMBER_TOP_LEFT_X = 500;
+parameter logic [10:0] SCREEN_MAIN_LUCK_NUMBER_TOP_LEFT_Y = 5;

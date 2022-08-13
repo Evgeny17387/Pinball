@@ -23,54 +23,54 @@ begin
 
 	if (!resetN) begin
 
-		redBits <= COLOR_DARK;
-		greenBits <= COLOR_DARK;
-		blueBits <= COLOR_DARK;
+		redBits 				<= COLOR_DARK;
+		greenBits 				<= COLOR_DARK;
+		blueBits 				<= COLOR_DARK;
 
-		draw_top_boarder <= 1'b0;
-		draw_bottom_boarder <= 1'b0;
-		draw_left_boarder <= 1'b0;
-		draw_right_boarder <= 1'b0;
+		draw_top_boarder 		<= 1'b0;
+		draw_bottom_boarder 	<= 1'b0;
+		draw_left_boarder 		<= 1'b0;
+		draw_right_boarder 		<= 1'b0;
 
 	end 
 	else begin
 
-		greenBits <= 3'b110;
-		redBits <= 3'b010;
-		blueBits <= COLOR_LIGHT;
+		greenBits 				<= COLOR_LIGHT;
+		redBits 				<= COLOR_LIGHT;
+		blueBits 				<= COLOR_LIGHT;
 
-		draw_top_boarder <= 1'b0;
-		draw_bottom_boarder <= 1'b0;
-		draw_left_boarder <= 1'b0;
-		draw_right_boarder <= 1'b0;
+		draw_top_boarder 		<= 1'b0;
+		draw_bottom_boarder 	<= 1'b0;
+		draw_left_boarder 		<= 1'b0;
+		draw_right_boarder	 	<= 1'b0;
 
 		if (pixelY == bracketOffset_top) begin
-			redBits <= COLOR_DARK;
-			greenBits <= COLOR_DARK;
-			blueBits <= COLOR_DARK;
+			redBits 			<= COLOR_DARK;
+			greenBits 			<= COLOR_DARK;
+			blueBits 			<= COLOR_DARK;
 
-			draw_top_boarder <= 1'b1;
+			draw_top_boarder 	<= 1'b1;
 		end
 		else if (pixelY == (yFrameSize - bracketOffset_bottom)) begin
-			redBits <= COLOR_DARK;
-			greenBits <= COLOR_DARK;
-			blueBits <= COLOR_DARK;
+			redBits 			<= COLOR_DARK;
+			greenBits 			<= COLOR_DARK;
+			blueBits 			<= COLOR_DARK;
 
 			draw_bottom_boarder <= 1'b1;
 		end
 		else if (pixelX == bracketOffset_h) begin
-			redBits <= COLOR_DARK;
-			greenBits <= COLOR_DARK;
-			blueBits <= COLOR_DARK;
+			redBits 			<= COLOR_DARK;
+			greenBits 			<= COLOR_DARK;
+			blueBits 			<= COLOR_DARK;
 
-			draw_left_boarder <= 1'b1;
+			draw_left_boarder 	<= 1'b1;
 		end
 		else if (pixelX == (xFrameSize - bracketOffset_h)) begin
-			redBits <= COLOR_DARK;
-			greenBits <= COLOR_DARK;
-			blueBits <= COLOR_DARK;
+			redBits 			<= COLOR_DARK;
+			greenBits 			<= COLOR_DARK;
+			blueBits 			<= COLOR_DARK;
 
-			draw_right_boarder <= 1'b1;
+			draw_right_boarder 	<= 1'b1;
 		end
 
 	end
