@@ -23,9 +23,6 @@ package defines;
     parameter logic [10:0]  NUMBER_WIDTH            = 16;
     parameter logic [10:0]  NUMBER_HEIGHT           = 32;
 
-    parameter int           INITIAL_X               = 280;
-    parameter int           INITIAL_Y               = 185;
-
 endpackage
 
 package defines_ball;

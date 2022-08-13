@@ -1,2 +1,2 @@
 
-parameter int INITIAL_Y_SPEED = 200;
+const int GRAVITY = 1;

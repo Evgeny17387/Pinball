@@ -63,6 +63,8 @@ smiley_block smiley_block_inst(
 	.reset_level(reset_level),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
 	.level(level),
+	.collisionSmileySpringPulse(collisionSmileySpringPulse),
+	.springSpeedY(springSpeedY),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -130,6 +132,7 @@ background background_inst(
 logic collisionSmileyObstacle;
 logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
+logic collisionSmileySpringPulse;
 
 CollisionDetector CollisionDetector_inst(
 // input
@@ -142,6 +145,7 @@ CollisionDetector CollisionDetector_inst(
 	.draw_right_boarder(draw_right_boarder),
 	.draw_flipper(draw_flipper),
 	.drawObstacle(drawObstacle),
+	.drawSpring(drawSpring),
 	.drawScoreNumber(drawScoreNumber),
 	.startOfFrame(startOfFrame),
 // output
@@ -154,7 +158,8 @@ CollisionDetector CollisionDetector_inst(
 	.collisionFlipperBorderRight(collisionFlipperBorderRight),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
-	.collisionSmileyObstacleBad(collisionSmileyObstacleBad)
+	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
+	.collisionSmileySpringPulse(collisionSmileySpringPulse)
 );
 
 logic reset_level_pulse;
@@ -180,6 +185,7 @@ game_controller game_controller_inst(
 
 logic 			drawSpring;
 logic	[7:0]	RGBSpring;
+int				springSpeedY;
 
 spring_block spring_block_inst(
 // input
@@ -191,7 +197,8 @@ spring_block spring_block_inst(
 	.startOfFrame(startOfFrame),
 // output
 	.drawSpring(drawSpring),
-	.RGBSpring(RGBSpring)
+	.RGBSpring(RGBSpring),
+	.speedY(springSpeedY)
 );
 
 indications_block indications_block_inst(

@@ -8,6 +8,7 @@ module CollisionDetector(
 	input	logic 			draw_right_boarder,
 	input	logic 			draw_flipper,
 	input	logic 			drawObstacle,
+	input	logic 			drawSpring,
 	input	logic			drawScoreNumber,
 	input 	logic 			startOfFrame,
 	output	logic 			collisionSmileyBorderTop,
@@ -19,7 +20,8 @@ module CollisionDetector(
 	output 	logic 			collisionFlipperBorderRight,
 	output	logic 			collisionSmileyObstacle,
 	output	logic 			collisionSmileyObstacleGood,
-	output	logic 			collisionSmileyObstacleBad
+	output	logic 			collisionSmileyObstacleBad,
+	output	logic			collisionSmileySpringPulse
 );
 
 assign collisionSmileyBorderTop 	= draw_smiley && draw_top_boarder;
@@ -33,7 +35,31 @@ assign collisionSmileyObstacle		= draw_smiley && drawObstacle && !collisionDetec
 assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawScoreNumber;
 assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawScoreNumber;
 
+assign collisionSmileySpring 		= draw_smiley && drawSpring;
+
 logic collisionDetectedInFrame;
+
+logic collisionSmileySpring_d;
+
+assign collisionSmileySpringPulse = !collisionSmileySpring_d && collisionSmileySpring;
+
+always_ff @(posedge clk or negedge resetN)
+begin
+
+	if (!resetN) begin
+		collisionSmileySpring_d <= 0;
+	end
+	else begin
+
+		if (startOfFrame)
+			collisionSmileySpring_d <= 0;
+
+		if (collisionSmileySpring)
+			collisionSmileySpring_d <= 1;
+
+	end
+
+end
 
 always_ff @(posedge clk or negedge resetN)
 begin

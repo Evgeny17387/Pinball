@@ -9,7 +9,8 @@ module spring_block(
 	input	logic 					key5IsPressed,
 	input	logic					startOfFrame,
 	output	logic			[7:0]	RGBSpring,
-	output 	logic 					drawSpring
+	output 	logic 					drawSpring,
+	output	int						speedY
 );
 
 logic signed [10:0] topLeftY;
@@ -21,7 +22,8 @@ spring_controller spring_controller_inst(
 	.key5IsPressed(key5IsPressed),
 	.startOfFrame(startOfFrame),
 // output
-	.topLeftY(topLeftY)
+	.topLeftY(topLeftY),
+	.speedY(speedY)
 );
 
 logic 			drawSquare;

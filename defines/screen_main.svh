@@ -37,8 +37,13 @@ parameter logic [10:0] SCREEN_MAIN_LUCK_NUMBER_TOP_LEFT_Y = 5;
 
 // Spring
 
-parameter logic [10:0] SCREEN_MAIN_SPRING_WIDTH = 32;
+parameter logic [10:0] SCREEN_MAIN_SPRING_WIDTH = 64;
 parameter logic [10:0] SCREEN_MAIN_SPRING_HEIGHT = 220;
 
-parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_X = 575;
+parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_X = 550;
 parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_Y = 275;
+
+// Ball
+
+parameter int SCREEN_MAIN_BALL_INITIAL_X = 550;
+parameter int SCREEN_MAIN_BALL_INITIAL_Y = 212;
