@@ -19,6 +19,7 @@ module smiley_controller(
 	input	logic 			[3:0]	level,
 	input	logic					collisionSmileySpringPulse,
 	input	int						springSpeedY,
+	input	logic					collisionSmileyBumperPulse,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -48,6 +49,9 @@ begin
 				Yspeed <= -Yspeed;
 			end
 			else if ((collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0))) begin
+				Yspeed <= -Yspeed;
+			end
+			else if ((collisionSmileyBumperPulse && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyBumperPulse && hitEdgeCode[0] && (Yspeed > 0))) begin
 				Yspeed <= -Yspeed;
 			end
 			else if (collisionSmileySpringPulse && hitEdgeCode[0]) begin
@@ -87,6 +91,9 @@ begin
 				Xspeed <= -Xspeed;
 			end
 			else if ((collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0))) begin
+				Xspeed <= -Xspeed;
+			end
+			else if ((collisionSmileyBumperPulse && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyBumperPulse && hitEdgeCode[1] && (Xspeed > 0))) begin
 				Xspeed <= -Xspeed;
 			end
 			else if (collisionSmileyFlipper && (Yspeed > 0)) begin

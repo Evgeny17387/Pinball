@@ -65,6 +65,7 @@ smiley_block smiley_block_inst(
 	.level(level),
 	.collisionSmileySpringPulse(collisionSmileySpringPulse),
 	.springSpeedY(springSpeedY),
+	.collisionSmileyBumperPulse(collisionSmileyBumperPulse),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -133,6 +134,7 @@ logic collisionSmileyObstacle;
 logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
 logic collisionSmileySpringPulse;
+logic collisionSmileyBumperPulse;
 
 CollisionDetector CollisionDetector_inst(
 // input
@@ -146,6 +148,7 @@ CollisionDetector CollisionDetector_inst(
 	.draw_flipper(draw_flipper),
 	.drawObstacle(drawObstacle),
 	.drawSpring(drawSpring),
+	.drawBumper(drawBumper),
 	.drawScoreNumber(drawScoreNumber),
 	.startOfFrame(startOfFrame),
 // output
@@ -159,7 +162,8 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyObstacle(collisionSmileyObstacle),
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
-	.collisionSmileySpringPulse(collisionSmileySpringPulse)
+	.collisionSmileySpringPulse(collisionSmileySpringPulse),
+	.collisionSmileyBumperPulse(collisionSmileyBumperPulse)
 );
 
 logic reset_level_pulse;
@@ -202,6 +206,20 @@ spring_block spring_block_inst(
 	.speedY(springSpeedY)
 );
 
+logic 			drawBumper;
+logic	[7:0]	RGBBumper;
+
+bumpers_block bumpers_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.drawBumper(drawBumper),
+	.RGBBumper(RGBBumper)
+);
+
 indications_block indications_block_inst(
 // input
 	.clk(clk),
@@ -231,6 +249,8 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.RGBIndications(RGBIndications),
 	.drawSpring(drawSpring),
 	.RGBSpring(RGBSpring),
+	.drawBumper(drawBumper),
+	.RGBBumper(RGBBumper),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB_screen_main(RGB_screen_main)

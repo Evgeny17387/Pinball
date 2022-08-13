@@ -12,7 +12,7 @@ module Obstacle(
 );
 
 localparam NUMBERS = 10;
-localparam NUMBERS_SPACE = 60;
+localparam NUMBERS_SPACE = 40;
 
 logic drawSquare [NUMBERS-1:0];
 logic [10:0] offsetXSquare [NUMBERS-1:0];
@@ -24,7 +24,7 @@ generate
         square #(
                 .OBJECT_WIDTH(NUMBER_WIDTH),
                 .OBJECT_HEIGHT(NUMBER_HEIGHT),
-                .TOP_LEFT_X(30 + i * NUMBERS_SPACE),
+                .TOP_LEFT_X(20 + i * NUMBERS_SPACE),
                 .TOP_LEFT_Y(60)
                 ) square_inst_0 (
         // input
