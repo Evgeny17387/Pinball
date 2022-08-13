@@ -86,6 +86,7 @@ screen_main screen_main_inst(
 	.key5IsPressed(key5IsPressed),
 	.key6IsPressed(key6IsPressed),
 	.startOfFrame(startOfFrame),
+	.start(start),
 // output
 	.RGB_screen_main(RGB_screen_main),
 	.life(life),
@@ -106,6 +107,7 @@ screen_end screen_end_inst(
 );
 
 logic game_end;
+logic start;
 
 screen_controller screen_controller_inst(
 // input

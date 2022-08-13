@@ -8,6 +8,7 @@ module game_controller(
 	input	logic 			collisionSmileyObstacle,
 	input	logic			collisionSmileyObstacleGood,
 	input	logic			collisionSmileyObstacleBad,
+	input	logic			start,
 	output 	logic 			pause,
 	output 	logic 			reset_level,
 	output 	logic 			reset_level_pulse,
@@ -83,7 +84,9 @@ begin
 
 		state_0: begin
 
-			state_next = state_1;
+			if (start) begin
+				state_next = state_1;
+			end
 
 		end
 
