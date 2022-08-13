@@ -99,6 +99,9 @@ begin
 			else if (collisionSmileyFlipper && (Yspeed > 0)) begin
 				Xspeed <= Xspeed + flipperSpeedX;
 			end
+			else if (collisionSmileyBumperPulse) begin
+				Xspeed <= -50;
+			end
 
 			if (startOfFrame == 1'b1) begin
 				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
