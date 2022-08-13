@@ -14,7 +14,6 @@ module screen_main(
 );
 
 logic	[7:0]	RGB_backGround;
-logic	[7:0]	RGB_smiley;
 logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBIndications;
@@ -23,7 +22,6 @@ logic			draw_top_boarder;
 logic			draw_bottom_boarder;
 logic			draw_left_boarder;
 logic			draw_right_boarder;
-logic 			draw_smiley;
 logic 			draw_flipper;
 logic 			drawObstacle;
 logic 			drawIndications;
@@ -44,6 +42,9 @@ logic			reset_level;
 logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	level;
+
+logic	[7:0]	RGB_smiley;
+logic 			draw_smiley;
 
 smiley_block smiley_block_inst(
 // input
@@ -177,6 +178,22 @@ game_controller game_controller_inst(
 	.life(life)
 );
 
+logic 			drawSpring;
+logic	[7:0]	RGBSpring;
+
+spring_block spring_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.key5IsPressed(key5IsPressed),
+	.startOfFrame(startOfFrame),
+// output
+	.drawSpring(drawSpring),
+	.RGBSpring(RGBSpring)
+);
+
 indications_block indications_block_inst(
 // input
 	.clk(clk),
@@ -204,6 +221,8 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.RGBObstacle(RGBObstacle),
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications),
+	.drawSpring(drawSpring),
+	.RGBSpring(RGBSpring),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB_screen_main(RGB_screen_main)

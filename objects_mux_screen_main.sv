@@ -9,6 +9,8 @@ module objects_mux_screen_main(
 	input	logic [7:0]	RGBObstacle,
 	input	logic		drawIndications,
 	input	logic [7:0]	RGBIndications,
+	input	logic		drawSpring,
+	input	logic [7:0]	RGBSpring,
 	input	logic [7:0] RGB_backGround,
 	output	logic [7:0] RGB_screen_main
 );
@@ -27,6 +29,8 @@ begin
 			RGB_screen_main <= RGBObstacle;
 		else if (drawIndications == 1'b1)
 			RGB_screen_main <= RGBIndications;
+		else if (drawSpring == 1'b1)
+			RGB_screen_main <= RGBSpring;
 		else
 			RGB_screen_main <= RGB_backGround;
 	end

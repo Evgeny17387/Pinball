@@ -1,5 +1,5 @@
 import defines::bracketOffset_h, defines::bracketOffset_top, defines::bracketOffset_bottom;
-import defines::xFrameSize, defines::yFrameSize;
+import defines::FRAME_SIZE_X, defines::FRAME_SIZE_Y;
 import defines::COLOR_DARK, defines::COLOR_LIGHT;
 
 module background(
@@ -51,7 +51,7 @@ begin
 
 			draw_top_boarder 	<= 1'b1;
 		end
-		else if (pixelY == (yFrameSize - bracketOffset_bottom)) begin
+		else if (pixelY == (FRAME_SIZE_Y - bracketOffset_bottom)) begin
 			redBits 			<= COLOR_DARK;
 			greenBits 			<= COLOR_DARK;
 			blueBits 			<= COLOR_DARK;
@@ -65,7 +65,7 @@ begin
 
 			draw_left_boarder 	<= 1'b1;
 		end
-		else if (pixelX == (xFrameSize - bracketOffset_h)) begin
+		else if (pixelX == (FRAME_SIZE_X - bracketOffset_h)) begin
 			redBits 			<= COLOR_DARK;
 			greenBits 			<= COLOR_DARK;
 			blueBits 			<= COLOR_DARK;

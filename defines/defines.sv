@@ -14,6 +14,8 @@ package defines;
 
     `include "defines/ball.svh"
 
+    `include "defines/spring.svh"
+
     `include "defines/screen_welcome.svh"
     `include "defines/screen_main.svh"
     `include "defines/screen_end.svh"
@@ -23,9 +25,6 @@ package defines;
 
     parameter int           INITIAL_X               = 280;
     parameter int           INITIAL_Y               = 185;
-
-    parameter logic [10:0]  LEVEL_STATUS_TOP_LEFT_X = 550;
-    parameter logic [10:0]  LEVEL_STATUS_TOP_LEFT_Y = 50;
 
 endpackage
 

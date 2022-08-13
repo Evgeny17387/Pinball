@@ -1,5 +1,6 @@
 import defines::INITIAL_X, defines::INITIAL_Y;
 import defines::INITIAL_Y_SPEED;
+import defines::FIXED_POINT_MULTIPLIER;
 
 module smiley_controller(
 	input	logic					clk,
@@ -21,11 +22,6 @@ module smiley_controller(
 );
 
 const 		int Y_GRAVITY 					= 0;
-
-const 		int FIXED_POINT_MULTIPLIER		= 64;
-
-const 		int x_FRAME_SIZE				= 639 * FIXED_POINT_MULTIPLIER;
-const 		int y_FRAME_SIZE				= 479 * FIXED_POINT_MULTIPLIER;
 
 int Xspeed;
 int Yspeed;

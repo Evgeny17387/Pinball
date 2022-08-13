@@ -342,6 +342,10 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=32" -se
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=32" -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_BITS=32" -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_Project_auto_signaltap_0_1_ed45," -section_id auto_signaltap_0
+set_global_assignment -name SYSTEMVERILOG_FILE square_dynamic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/luck_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/equation_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE random_number.sv
@@ -357,7 +361,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE defines/defines.sv
 set_global_assignment -name SYSTEMVERILOG_FILE level/level_label_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE status_level_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE level/level_block.sv
-set_global_assignment -name SOURCE_FILE defines/background.svh
 set_global_assignment -name SYSTEMVERILOG_FILE smiley/smiley_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley/smiley_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE smiley/smiley_bitmap.sv
