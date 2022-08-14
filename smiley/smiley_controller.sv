@@ -45,25 +45,30 @@ begin
 		end
 		else if (!pause) begin
 
-			if ((collisionSmileyBorderTop && (Yspeed < 0)) || (collisionSmileyFlipper && (Yspeed > 0))) begin
-				Yspeed <= -Yspeed;
-			end
-			else if ((collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0))) begin
-				Yspeed <= -Yspeed;
-			end
-			else if ((collisionSmileyBumperPulse && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyBumperPulse && hitEdgeCode[0] && (Yspeed > 0))) begin
-				Yspeed <= -Yspeed;
-			end
-			else if (collisionSmileySpringPulse && hitEdgeCode[0]) begin
-				if (springSpeedY < 0)
-					Yspeed <= Yspeed + springSpeedY;
-				else
-					Yspeed <= -Yspeed;
-			end
-
 			if (startOfFrame) begin
+
 				topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
 				Yspeed <= Yspeed + GRAVITY;
+
+			end
+			else begin
+
+				if ((collisionSmileyBorderTop && (Yspeed < 0)) || (collisionSmileyFlipper && (Yspeed > 0))) begin
+					Yspeed <= -Yspeed;
+				end
+				else if ((collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0))) begin
+					Yspeed <= -Yspeed;
+				end
+				else if (collisionSmileySpringPulse && hitEdgeCode[0]) begin
+					if (springSpeedY < 0)
+						Yspeed <= Yspeed + springSpeedY;
+					else
+						Yspeed <= -Yspeed;
+				end
+				else if (collisionSmileyBumperPulse) begin
+					Yspeed <= -Yspeed;
+				end
+
 			end
 
 		end
@@ -87,24 +92,24 @@ begin
 		end
 		else if (!pause) begin
 
-			if ((collisionSmileyBorderLeft && (Xspeed < 0)) || (collisionSmileyBorderRight && (Xspeed > 0))) begin
-				Xspeed <= -Xspeed;
-			end
-			else if ((collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0))) begin
-				Xspeed <= -Xspeed;
-			end
-			else if ((collisionSmileyBumperPulse && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyBumperPulse && hitEdgeCode[1] && (Xspeed > 0))) begin
-				Xspeed <= -Xspeed;
-			end
-			else if (collisionSmileyFlipper && (Yspeed > 0)) begin
-				Xspeed <= Xspeed + flipperSpeedX;
-			end
-			else if (collisionSmileyBumperPulse) begin
-				Xspeed <= -50;
-			end
-
 			if (startOfFrame == 1'b1) begin
 				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+			end
+			else begin
+
+				if ((collisionSmileyBorderLeft && (Xspeed < 0)) || (collisionSmileyBorderRight && (Xspeed > 0))) begin
+					Xspeed <= -Xspeed;
+				end
+				else if ((collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0))) begin
+					Xspeed <= -Xspeed;
+				end
+				else if (collisionSmileyFlipper && (Yspeed > 0)) begin
+					Xspeed <= Xspeed + flipperSpeedX;
+				end
+				else if (collisionSmileyBumperPulse) begin
+					Xspeed <= Yspeed;
+				end
+
 			end
 
 		end
