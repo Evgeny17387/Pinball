@@ -6,6 +6,7 @@ module CollisionDetector(
 	input	logic 			draw_bottom_boarder,
 	input	logic 			draw_left_boarder,
 	input	logic 			draw_right_boarder,
+	input	logic 			drawFrame,
 	input	logic 			draw_flipper,
 	input	logic 			drawObstacle,
 	input	logic 			drawSpring,
@@ -16,6 +17,7 @@ module CollisionDetector(
 	output	logic 			collisionSmileyBorderBottom,
 	output 	logic 			collisionSmileyBorderLeft,
 	output 	logic 			collisionSmileyBorderRight,
+	output 	logic 			collisionSmileyFrame,
 	output 	logic 			collisionSmileyFlipper,
 	output 	logic 			collisionFlipperBorderLeft,
 	output 	logic 			collisionFlipperBorderRight,
@@ -30,6 +32,7 @@ assign collisionSmileyBorderTop 	= draw_smiley && draw_top_boarder;
 assign collisionSmileyBorderBottom	= draw_smiley && draw_bottom_boarder;
 assign collisionSmileyBorderLeft 	= draw_smiley && draw_left_boarder;
 assign collisionSmileyBorderRight 	= draw_smiley && draw_right_boarder;
+assign collisionSmileyFrame 		= draw_smiley && drawFrame;
 
 assign collisionSmileyFlipper 		= draw_smiley && draw_flipper;
 

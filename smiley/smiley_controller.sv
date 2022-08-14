@@ -20,6 +20,7 @@ module smiley_controller(
 	input	logic					collisionSmileySpringPulse,
 	input	int						springSpeedY,
 	input	logic					collisionSmileyBumperPulse,
+	input	logic					collisionSmileyFrame,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -53,21 +54,18 @@ begin
 			end
 			else begin
 
-				if ((collisionSmileyBorderTop && (Yspeed < 0)) || (collisionSmileyFlipper && (Yspeed > 0))) begin
+				if ((collisionSmileyBorderTop && (Yspeed < 0)) || (collisionSmileyFlipper && (Yspeed > 0)))
 					Yspeed <= -Yspeed;
-				end
-				else if ((collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0))) begin
+				else if ((collisionSmileyObstacle && hitEdgeCode[2] && (Yspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[0] && (Yspeed > 0)))
 					Yspeed <= -Yspeed;
-				end
 				else if (collisionSmileySpringPulse && hitEdgeCode[0]) begin
 					if (springSpeedY < 0)
 						Yspeed <= Yspeed + springSpeedY;
 					else
 						Yspeed <= -Yspeed;
 				end
-				else if (collisionSmileyBumperPulse) begin
+				else if (collisionSmileyBumperPulse && (Yspeed < 0))
 					Yspeed <= -Yspeed;
-				end
 
 			end
 
@@ -92,23 +90,22 @@ begin
 		end
 		else if (!pause) begin
 
-			if (startOfFrame == 1'b1) begin
+			if (startOfFrame == 1'b1)
+
 				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
-			end
+
 			else begin
 
-				if ((collisionSmileyBorderLeft && (Xspeed < 0)) || (collisionSmileyBorderRight && (Xspeed > 0))) begin
+				if ((collisionSmileyBorderLeft && (Xspeed < 0)) || (collisionSmileyBorderRight && (Xspeed > 0)))
 					Xspeed <= -Xspeed;
-				end
-				else if ((collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0))) begin
+				else if ((collisionSmileyObstacle && hitEdgeCode[3] && (Xspeed < 0)) || (collisionSmileyObstacle && hitEdgeCode[1] && (Xspeed > 0)))
 					Xspeed <= -Xspeed;
-				end
-				else if (collisionSmileyFlipper && (Yspeed > 0)) begin
+				else if (collisionSmileyFlipper && (Yspeed > 0))
 					Xspeed <= Xspeed + flipperSpeedX;
-				end
-				else if (collisionSmileyBumperPulse) begin
+				else if (collisionSmileyBumperPulse && (Yspeed < 0))
 					Xspeed <= Yspeed;
-				end
+				else if (collisionSmileyFrame)
+					Xspeed <= -Xspeed;
 
 			end
 

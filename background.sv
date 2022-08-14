@@ -11,7 +11,8 @@ module background(
 	output	logic			draw_top_boarder,
 	output	logic			draw_bottom_boarder,
 	output	logic			draw_left_boarder,
-	output	logic			draw_right_boarder
+	output	logic			draw_right_boarder,
+	output	logic			drawFrame
 );
 
 logic [2:0] redBits;
@@ -43,6 +44,7 @@ begin
 		draw_bottom_boarder 	<= 1'b0;
 		draw_left_boarder 		<= 1'b0;
 		draw_right_boarder	 	<= 1'b0;
+		drawFrame				<= 1'b0;
 
 		if (pixelY == bracketOffset_top) begin
 			redBits 			<= COLOR_DARK;
@@ -71,6 +73,13 @@ begin
 			blueBits 			<= COLOR_DARK;
 
 			draw_right_boarder 	<= 1'b1;
+		end
+		else if ((pixelX == 540) && (pixelY > 200)) begin
+			redBits 			<= COLOR_DARK;
+			greenBits 			<= COLOR_DARK;
+			blueBits 			<= COLOR_DARK;
+
+			drawFrame 	<= 1'b1;
 		end
 
 	end

@@ -13,28 +13,13 @@ module screen_main(
 	output	logic	[3:0] 	score
 );
 
-logic	[7:0]	RGB_backGround;
 logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBIndications;
 
-logic			draw_top_boarder;
-logic			draw_bottom_boarder;
-logic			draw_left_boarder;
-logic			draw_right_boarder;
 logic 			draw_flipper;
 logic 			drawObstacle;
 logic 			drawIndications;
-
-logic			collisionSmileyBorderTop;
-logic			collisionSmileyBorderBottom;
-logic			collisionSmileyBorderLeft;
-logic			collisionSmileyBorderRight;
-
-logic			collisionSmileyFlipper;
-
-logic 			collisionFlipperBorderLeft;
-logic 			collisionFlipperBorderRight;
 
 logic			pause;
 logic			reset_level;
@@ -66,6 +51,7 @@ smiley_block smiley_block_inst(
 	.collisionSmileySpringPulse(collisionSmileySpringPulse),
 	.springSpeedY(springSpeedY),
 	.collisionSmileyBumperPulse(collisionSmileyBumperPulse),
+	.collisionSmileyFrame(collisionSmileyFrame),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -116,6 +102,13 @@ Obstacle Obstacle_inst(
 	.drawScoreNumber(drawScoreNumber)
 );
 
+logic [7:0] RGB_backGround;
+logic 		draw_top_boarder;
+logic 		draw_bottom_boarder;
+logic 		draw_left_boarder;
+logic 		draw_right_boarder;
+logic 		drawFrame;
+
 background background_inst(
 // input
 	.clk(clk),
@@ -127,9 +120,18 @@ background background_inst(
 	.draw_top_boarder(draw_top_boarder),
 	.draw_bottom_boarder(draw_bottom_boarder),
 	.draw_left_boarder(draw_left_boarder),
-	.draw_right_boarder(draw_right_boarder)
+	.draw_right_boarder(draw_right_boarder),
+	.drawFrame(drawFrame)
 );
 
+logic collisionSmileyBorderTop;
+logic collisionSmileyBorderBottom;
+logic collisionSmileyBorderLeft;
+logic collisionSmileyBorderRight;
+logic collisionSmileyFrame;
+logic collisionSmileyFlipper;
+logic collisionFlipperBorderLeft;
+logic collisionFlipperBorderRight;
 logic collisionSmileyObstacle;
 logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
@@ -145,6 +147,7 @@ CollisionDetector CollisionDetector_inst(
 	.draw_bottom_boarder(draw_bottom_boarder),
 	.draw_left_boarder(draw_left_boarder),
 	.draw_right_boarder(draw_right_boarder),
+	.drawFrame(drawFrame),
 	.draw_flipper(draw_flipper),
 	.drawObstacle(drawObstacle),
 	.drawSpring(drawSpring),
@@ -156,6 +159,7 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
 	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
 	.collisionSmileyBorderRight(collisionSmileyBorderRight),
+	.collisionSmileyFrame(collisionSmileyFrame),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
 	.collisionFlipperBorderRight(collisionFlipperBorderRight),
