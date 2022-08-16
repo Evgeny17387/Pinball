@@ -104,8 +104,12 @@ begin
 					Xspeed <= Xspeed + flipperSpeedX;
 				else if (collisionSmileyBumperPulse && (Yspeed < 0))
 					Xspeed <= Yspeed;
-				else if (collisionSmileyFrame)
-					Xspeed <= -Xspeed;
+				else if (collisionSmileyFrame) begin
+					if (hitEdgeCode[1] && (Xspeed > 0))
+						Xspeed <= -Xspeed;
+					else if (hitEdgeCode[3] && (Xspeed < 0))
+						Xspeed <= -Xspeed;
+				end
 
 			end
 
