@@ -1,6 +1,7 @@
-import defines::bracketOffset_h, defines::bracketOffset_top, defines::bracketOffset_bottom;
+import defines::FRAME_OFFSET_HORIZONTAL, defines::FRAME_OFFSET_TOP, defines::FRAME_OFFSET_BOTTOM;
+import defines::FRAME_SPRING_OFFSET_LEFT, defines::FRAME_SPRING_OFFSET_TOP;
 import defines::FRAME_SIZE_X, defines::FRAME_SIZE_Y;
-import defines::COLOR_DARK, defines::COLOR_LIGHT;
+import defines::COLOR_WHITE, defines::COLOR_BLACK;
 
 module background(
 	input	logic			clk,
@@ -8,83 +9,46 @@ module background(
 	input	logic	[10:0]	pixelX,
 	input	logic	[10:0]	pixelY,
 	output	logic	[7:0]	RGB_backGround,
-	output	logic			draw_top_boarder,
-	output	logic			draw_bottom_boarder,
-	output	logic			draw_left_boarder,
-	output	logic			draw_right_boarder,
-	output	logic			drawFrame
+	output	logic			drawFrame,
+	output	logic			drawBottom
 );
-
-logic [2:0] redBits;
-logic [2:0] greenBits;
-logic [1:0] blueBits;
 
 always_ff@(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
 
-		redBits 				<= COLOR_DARK;
-		greenBits 				<= COLOR_DARK;
-		blueBits 				<= COLOR_DARK;
-
-		draw_top_boarder 		<= 1'b0;
-		draw_bottom_boarder 	<= 1'b0;
-		draw_left_boarder 		<= 1'b0;
-		draw_right_boarder 		<= 1'b0;
+		drawFrame <= 1'b0;
+		RGB_backGround =  COLOR_BLACK;
+		drawBottom <= 1'b0;
 
 	end 
 	else begin
 
-		greenBits 				<= COLOR_LIGHT;
-		redBits 				<= COLOR_LIGHT;
-		blueBits 				<= COLOR_LIGHT;
+		drawFrame <= 1'b0;
+		RGB_backGround =  COLOR_BLACK;
+		drawBottom <= 1'b0;
 
-		draw_top_boarder 		<= 1'b0;
-		draw_bottom_boarder 	<= 1'b0;
-		draw_left_boarder 		<= 1'b0;
-		draw_right_boarder	 	<= 1'b0;
-		drawFrame				<= 1'b0;
+		if (
+			(pixelY == FRAME_OFFSET_TOP) ||
+			(pixelX == FRAME_OFFSET_HORIZONTAL) ||
+			(pixelX == (FRAME_SIZE_X - FRAME_OFFSET_HORIZONTAL)) ||
+			((pixelX == FRAME_SPRING_OFFSET_LEFT) && (pixelY > FRAME_SPRING_OFFSET_TOP))
+		) begin
 
-		if (pixelY == bracketOffset_top) begin
-			redBits 			<= COLOR_DARK;
-			greenBits 			<= COLOR_DARK;
-			blueBits 			<= COLOR_DARK;
-
-			draw_top_boarder 	<= 1'b1;
-		end
-		else if (pixelY == (FRAME_SIZE_Y - bracketOffset_bottom)) begin
-			redBits 			<= COLOR_DARK;
-			greenBits 			<= COLOR_DARK;
-			blueBits 			<= COLOR_DARK;
-
-			draw_bottom_boarder <= 1'b1;
-		end
-		else if (pixelX == bracketOffset_h) begin
-			redBits 			<= COLOR_DARK;
-			greenBits 			<= COLOR_DARK;
-			blueBits 			<= COLOR_DARK;
-
-			draw_left_boarder 	<= 1'b1;
-		end
-		else if (pixelX == (FRAME_SIZE_X - bracketOffset_h)) begin
-			redBits 			<= COLOR_DARK;
-			greenBits 			<= COLOR_DARK;
-			blueBits 			<= COLOR_DARK;
-
-			draw_right_boarder 	<= 1'b1;
-		end
-		else if ((pixelX == 540) && (pixelY > 200)) begin
-			redBits 			<= COLOR_DARK;
-			greenBits 			<= COLOR_DARK;
-			blueBits 			<= COLOR_DARK;
-
+			RGB_backGround <= COLOR_WHITE;
 			drawFrame 	<= 1'b1;
+
+		end
+		else if (pixelY == (FRAME_SIZE_Y - FRAME_OFFSET_BOTTOM)) begin
+
+			RGB_backGround <= COLOR_BLACK;
+			drawBottom <= 1'b1;
+
 		end
 
 	end
 
-	RGB_backGround =  {redBits , greenBits , blueBits};
 
 end
 

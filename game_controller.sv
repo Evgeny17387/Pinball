@@ -4,11 +4,11 @@ module game_controller(
 	input	logic 			clk,
 	input	logic 			resetN,
 	input	logic 			key5IsPressed,
-	input	logic 			collisionSmileyBorderBottom,
 	input	logic 			collisionSmileyObstacle,
 	input	logic			collisionSmileyObstacleGood,
 	input	logic			collisionSmileyObstacleBad,
 	input	logic			start,
+	input	logic			collisionSmileyBottom,
 	output 	logic 			pause,
 	output 	logic 			reset_level,
 	output 	logic 			reset_level_pulse,
@@ -106,7 +106,7 @@ begin
 
 			pause = 0;
 
-			if (collisionSmileyBorderBottom) begin
+			if (collisionSmileyBottom) begin
 
 				life_next = life_current - 1;
 

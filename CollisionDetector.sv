@@ -1,22 +1,15 @@
 module CollisionDetector(
 	input	logic 			clk,
 	input	logic 			resetN,
+	input 	logic 			startOfFrame,
 	input	logic 			draw_smiley,
-	input	logic 			draw_top_boarder,
-	input	logic 			draw_bottom_boarder,
-	input	logic 			draw_left_boarder,
-	input	logic 			draw_right_boarder,
 	input	logic 			drawFrame,
-	input	logic 			draw_flipper,
+	input	logic 			drawFlipper,
 	input	logic 			drawObstacle,
 	input	logic 			drawSpring,
 	input	logic 			drawBumper,
 	input	logic			drawScoreNumber,
-	input 	logic 			startOfFrame,
-	output	logic 			collisionSmileyBorderTop,
-	output	logic 			collisionSmileyBorderBottom,
-	output 	logic 			collisionSmileyBorderLeft,
-	output 	logic 			collisionSmileyBorderRight,
+	input	logic			drawBottom,
 	output 	logic 			collisionSmileyFrame,
 	output 	logic 			collisionSmileyFlipper,
 	output 	logic 			collisionFlipperBorderLeft,
@@ -25,25 +18,60 @@ module CollisionDetector(
 	output	logic 			collisionSmileyObstacleGood,
 	output	logic 			collisionSmileyObstacleBad,
 	output	logic			collisionSmileySpringPulse,
-	output	logic			collisionSmileyBumperPulse
+	output	logic			collisionSmileyBumperPulse,
+	output	logic			collisionSmileyBottom
 );
 
-assign collisionSmileyBorderTop 	= draw_smiley && draw_top_boarder;
-assign collisionSmileyBorderBottom	= draw_smiley && draw_bottom_boarder;
-assign collisionSmileyBorderLeft 	= draw_smiley && draw_left_boarder;
-assign collisionSmileyBorderRight 	= draw_smiley && draw_right_boarder;
-assign collisionSmileyFrame 		= draw_smiley && drawFrame;
+assign collisionSmileyBottom = drawBottom && draw_smiley;
 
-assign collisionSmileyFlipper 		= draw_smiley && draw_flipper;
+logic collisionSmileyFlipper_c;
+assign collisionSmileyFlipper_c = draw_smiley && drawFlipper;
+logic collisionSmileyFlipper_d;
+assign collisionSmileyFlipper = !collisionSmileyFlipper_d && collisionSmileyFlipper_c;
 
-assign collisionSmileyObstacle		= draw_smiley && drawObstacle && !collisionDetectedInFrame;
-assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawScoreNumber;
-assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawScoreNumber;
+always_ff @(posedge clk or negedge resetN)
+begin
 
-logic collisionDetectedInFrame;
+	if (!resetN) begin
+		collisionSmileyFlipper_d <= 0;
+	end
+	else begin
+
+		if (startOfFrame)
+			collisionSmileyFlipper_d <= 0;
+
+		if (collisionSmileyFlipper_c)
+			collisionSmileyFlipper_d <= 1;
+
+	end
+
+end
+
+logic collisionSmileyFrame_c;
+assign collisionSmileyFrame_c = draw_smiley && drawFrame;
+logic collisionSmileyFrame_d;
+assign collisionSmileyFrame = !collisionSmileyFrame_d && collisionSmileyFrame_c;
+
+always_ff @(posedge clk or negedge resetN)
+begin
+
+	if (!resetN) begin
+		collisionSmileyFrame_d <= 0;
+	end
+	else begin
+
+		if (startOfFrame)
+			collisionSmileyFrame_d <= 0;
+
+		if (collisionSmileyFrame_c)
+			collisionSmileyFrame_d <= 1;
+
+	end
+
+end
 
 logic collisionSmileyBumper;
-assign collisionSmileyBumper 		= draw_smiley && drawBumper;
+assign collisionSmileyBumper = draw_smiley && drawBumper;
 logic collisionSmileyBumper_d;
 assign collisionSmileyBumperPulse = !collisionSmileyBumper_d && collisionSmileyBumper;
 
@@ -66,7 +94,7 @@ begin
 end
 
 logic collisionSmileySpring;
-assign collisionSmileySpring 		= draw_smiley && drawSpring;
+assign collisionSmileySpring = draw_smiley && drawSpring;
 logic collisionSmileySpring_d;
 assign collisionSmileySpringPulse = !collisionSmileySpring_d && collisionSmileySpring;
 
@@ -87,6 +115,11 @@ begin
 	end
 
 end
+
+logic collisionDetectedInFrame;
+assign collisionSmileyObstacle		= draw_smiley && drawObstacle && !collisionDetectedInFrame;
+assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawScoreNumber;
+assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawScoreNumber;
 
 always_ff @(posedge clk or negedge resetN)
 begin
@@ -121,10 +154,10 @@ begin
 			collisionFlipperBorderRight <= 0;
 		end
 		else begin
-			if (draw_flipper && draw_left_boarder)
+			if (drawFlipper && drawFrame) begin
 				collisionFlipperBorderLeft <= 1;
-			if (draw_flipper && draw_right_boarder)
 				collisionFlipperBorderRight <= 1;
+			end
 		end
 	end
 

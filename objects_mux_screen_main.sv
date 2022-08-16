@@ -3,7 +3,7 @@ module objects_mux_screen_main(
 	input	logic		resetN,
 	input	logic		draw_smiley,
 	input	logic [7:0]	RGB_smiley,
-	input	logic		draw_flipper,
+	input	logic		drawFlipper,
 	input	logic [7:0] RGB_flipper,
 	input	logic		drawObstacle,
 	input	logic [7:0]	RGBObstacle,
@@ -25,7 +25,7 @@ begin
 	else begin
 		if (draw_smiley == 1'b1)
 			RGB_screen_main <= RGB_smiley;
-		else if (draw_flipper == 1'b1)
+		else if (drawFlipper == 1'b1)
 			RGB_screen_main <= RGB_flipper;
 		else if (drawObstacle == 1'b1)
 			RGB_screen_main <= RGBObstacle;

@@ -17,7 +17,7 @@ logic	[7:0]	RGB_flipper;
 logic	[7:0]	RGBObstacle;
 logic	[7:0]	RGBIndications;
 
-logic 			draw_flipper;
+logic 			drawFlipper;
 logic 			drawObstacle;
 logic 			drawIndications;
 
@@ -38,9 +38,6 @@ smiley_block smiley_block_inst(
 	.pixelX(pixelX),
 	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
-	.collisionSmileyBorderTop(collisionSmileyBorderTop),
-	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
-	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.key5IsPressed(key5IsPressed),
 	.pause(pause),
@@ -72,7 +69,7 @@ flipper_block flipper_block_inst(
 	.collisionFlipperBorderRight(collisionFlipperBorderRight),
 // output
 	.RGB_flipper(RGB_flipper),
-	.draw_flipper(draw_flipper),
+	.drawFlipper(drawFlipper),
 	.speedX(flipperSpeedX)
 );
 
@@ -103,11 +100,8 @@ Obstacle Obstacle_inst(
 );
 
 logic [7:0] RGB_backGround;
-logic 		draw_top_boarder;
-logic 		draw_bottom_boarder;
-logic 		draw_left_boarder;
-logic 		draw_right_boarder;
 logic 		drawFrame;
+logic		drawBottom;
 
 background background_inst(
 // input
@@ -117,17 +111,10 @@ background background_inst(
 	.pixelY(pixelY),
 // output
 	.RGB_backGround(RGB_backGround),
-	.draw_top_boarder(draw_top_boarder),
-	.draw_bottom_boarder(draw_bottom_boarder),
-	.draw_left_boarder(draw_left_boarder),
-	.draw_right_boarder(draw_right_boarder),
-	.drawFrame(drawFrame)
+	.drawFrame(drawFrame),
+	.drawBottom(drawBottom)
 );
 
-logic collisionSmileyBorderTop;
-logic collisionSmileyBorderBottom;
-logic collisionSmileyBorderLeft;
-logic collisionSmileyBorderRight;
 logic collisionSmileyFrame;
 logic collisionSmileyFlipper;
 logic collisionFlipperBorderLeft;
@@ -137,28 +124,22 @@ logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
 logic collisionSmileySpringPulse;
 logic collisionSmileyBumperPulse;
+logic collisionSmileyBottom;
 
 CollisionDetector CollisionDetector_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
+	.startOfFrame(startOfFrame),
 	.draw_smiley(draw_smiley),
-	.draw_top_boarder(draw_top_boarder),
-	.draw_bottom_boarder(draw_bottom_boarder),
-	.draw_left_boarder(draw_left_boarder),
-	.draw_right_boarder(draw_right_boarder),
 	.drawFrame(drawFrame),
-	.draw_flipper(draw_flipper),
+	.drawFlipper(drawFlipper),
 	.drawObstacle(drawObstacle),
 	.drawSpring(drawSpring),
 	.drawBumper(drawBumper),
 	.drawScoreNumber(drawScoreNumber),
-	.startOfFrame(startOfFrame),
+	.drawBottom(drawBottom),
 // output
-	.collisionSmileyBorderTop(collisionSmileyBorderTop),
-	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
-	.collisionSmileyBorderLeft(collisionSmileyBorderLeft),
-	.collisionSmileyBorderRight(collisionSmileyBorderRight),
 	.collisionSmileyFrame(collisionSmileyFrame),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
 	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
@@ -167,7 +148,8 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
 	.collisionSmileySpringPulse(collisionSmileySpringPulse),
-	.collisionSmileyBumperPulse(collisionSmileyBumperPulse)
+	.collisionSmileyBumperPulse(collisionSmileyBumperPulse),
+	.collisionSmileyBottom(collisionSmileyBottom)
 );
 
 logic reset_level_pulse;
@@ -177,11 +159,11 @@ game_controller game_controller_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.key5IsPressed(key5IsPressed),
-	.collisionSmileyBorderBottom(collisionSmileyBorderBottom),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
 	.start(start),
+	.collisionSmileyBottom(collisionSmileyBottom),
 // output
 	.pause(pause),
 	.reset_level(reset_level),
@@ -245,7 +227,7 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.resetN(resetN),
 	.draw_smiley(draw_smiley),
 	.RGB_smiley(RGB_smiley),
-	.draw_flipper(draw_flipper),
+	.drawFlipper(drawFlipper),
 	.RGB_flipper(RGB_flipper),
 	.drawObstacle(drawObstacle),
 	.RGBObstacle(RGBObstacle),

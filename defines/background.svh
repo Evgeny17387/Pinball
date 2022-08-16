@@ -1,4 +1,7 @@
 
-const int bracketOffset_h = 10;
-const int bracketOffset_top = 50;
-const int bracketOffset_bottom = 10;
+const int FRAME_OFFSET_HORIZONTAL = 0;
+const int FRAME_OFFSET_TOP = 50;
+const int FRAME_OFFSET_BOTTOM = 1;
+
+const int FRAME_SPRING_OFFSET_LEFT = 540;
+const int FRAME_SPRING_OFFSET_TOP = 275;

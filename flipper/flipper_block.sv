@@ -11,7 +11,7 @@ module flipper_block(
 	input 	logic 					collisionFlipperBorderLeft,
 	input 	logic 					collisionFlipperBorderRight,
 	output	logic			[7:0]	RGB_flipper,
-	output	logic					draw_flipper,
+	output	logic					drawFlipper,
 	output	logic			[31:0]	speedX
 );
 
@@ -44,7 +44,7 @@ flipper_object flipper_object_inst(
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY),
 // output
-	.draw(draw_flipper),
+	.draw(drawFlipper),
 	.RGB(RGB_flipper)
 );
 
