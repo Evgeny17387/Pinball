@@ -1,0 +1,14 @@
+
+const int FLIPPER_INITIAL_X = 280;
+const int FLIPPER_INITIAL_Y = 400;
+
+parameter  logic [7:0] 	FLIPPER_COLOR 		= 8'h5b;
+
+localparam int FLIPPER_NUMBER_OF_Y_BITS = 5;
+localparam int FLIPPER_NUMBER_OF_X_BITS = 7;
+
+localparam int FLIPPER_HEIGHT_Y = 1 << FLIPPER_NUMBER_OF_Y_BITS;
+localparam int FLIPPER_WIDTH_X = 1 << FLIPPER_NUMBER_OF_X_BITS;
+
+localparam int FLIPPER_HEIGHT_Y_DIVIDER = FLIPPER_NUMBER_OF_Y_BITS - 2;
+localparam int FLIPPER_WIDTH_X_DIVIDER = FLIPPER_NUMBER_OF_X_BITS - 2;

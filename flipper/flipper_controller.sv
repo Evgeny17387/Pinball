@@ -1,3 +1,6 @@
+import defines::FLIPPER_INITIAL_X, defines::FLIPPER_INITIAL_Y;
+import defines::FIXED_POINT_MULTIPLIER;
+
 module flipper_controller(
 	input	logic					clk,
 	input	logic					resetN,
@@ -6,31 +9,23 @@ module flipper_controller(
 	input	logic					key6IsPressed,
 	input	logic					pause,
 	input	logic					reset_level,
-	input 	logic 					collisionFlipperBorderLeft,
-	input 	logic 					collisionFlipperBorderRight,
+	input 	logic 					collisionFlipperFrame,
+	input 	logic 			[3:0] 	hitEdgeCode,
 	output	logic signed 	[10:0]	topLeftX,
-	output	logic signed	[10:0]	topLeftY,
 	output	logic			[31:0]	speedX
 );
 
-const int FIXED_POINT_MULTIPLIER	= 64;
-
-const int INITIAL_X 				= 280;
-const int INITIAL_Y 				= 400;
-
-const int Xspeed 					= 500;
 const int XspeedCollisionAdd		= 100;
+const int Xspeed					= 500;
 
 int topLeftX_FixedPoint;
-int topLeftY_FixedPoint;
 
 always_ff@(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
 
-		topLeftX_FixedPoint <= INITIAL_X * FIXED_POINT_MULTIPLIER;
-		topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
+		topLeftX_FixedPoint <= FLIPPER_INITIAL_X * FIXED_POINT_MULTIPLIER;
 		speedX <= 0;
 
 	end
@@ -39,20 +34,19 @@ begin
 
 		if (reset_level) begin
 
-			topLeftX_FixedPoint <= INITIAL_X * FIXED_POINT_MULTIPLIER;
-			topLeftY_FixedPoint <= INITIAL_Y * FIXED_POINT_MULTIPLIER;
+			topLeftX_FixedPoint <= FLIPPER_INITIAL_X * FIXED_POINT_MULTIPLIER;
 			speedX <= 0;
 
 		end
 		else if (!pause) begin
 
-			if (startOfFrame == 1'b1) begin
+			if (startOfFrame) begin
 
-				if (key6IsPressed && !collisionFlipperBorderRight) begin
+				if (key6IsPressed && !(collisionFlipperFrame && hitEdgeCode[1])) begin
 					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
 					speedX <= XspeedCollisionAdd;
 				end
-				else if (key4IsPressed && !collisionFlipperBorderLeft) begin
+				else if (key4IsPressed && !(collisionFlipperFrame && hitEdgeCode[3])) begin
 					topLeftX_FixedPoint <= topLeftX_FixedPoint - Xspeed;
 					speedX <= -XspeedCollisionAdd;
 				end
@@ -69,6 +63,5 @@ begin
 end
 
 assign topLeftX = topLeftX_FixedPoint / FIXED_POINT_MULTIPLIER;
-assign topLeftY = topLeftY_FixedPoint / FIXED_POINT_MULTIPLIER;
 
 endmodule

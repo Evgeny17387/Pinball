@@ -12,8 +12,7 @@ module CollisionDetector(
 	input	logic			drawBottom,
 	output 	logic 			collisionSmileyFrame,
 	output 	logic 			collisionSmileyFlipper,
-	output 	logic 			collisionFlipperBorderLeft,
-	output 	logic 			collisionFlipperBorderRight,
+	output 	logic 			collisionFlipperFrame,
 	output	logic 			collisionSmileyObstacle,
 	output	logic 			collisionSmileyObstacleGood,
 	output	logic 			collisionSmileyObstacleBad,
@@ -21,6 +20,39 @@ module CollisionDetector(
 	output	logic			collisionSmileyBumperPulse,
 	output	logic			collisionSmileyBottom
 );
+
+logic collisionFlipperFrame_c;
+assign collisionFlipperFrame_c = drawFlipper && drawFrame;
+logic collisionFlipperFrame_d;
+assign collisionFlipperFrame = !collisionFlipperFrame_d && collisionFlipperFrame_c;
+
+always_ff @(posedge clk or negedge resetN)
+begin
+
+	if (!resetN) begin
+
+		collisionFlipperFrame_d <= 0;
+
+	end
+	else begin
+
+		if (startOfFrame) begin
+
+			collisionFlipperFrame_d <= 0;
+
+		end
+		else begin
+
+			if (collisionFlipperFrame_c) begin
+
+				collisionFlipperFrame_d <= 1;
+
+			end
+
+		end
+	end
+
+end
 
 assign collisionSmileyBottom = drawBottom && draw_smiley;
 
@@ -137,28 +169,6 @@ begin
 			collisionDetectedInFrame <= 1;
 		end
 
-	end
-
-end
-
-always_ff @(posedge clk or negedge resetN)
-begin
-
-	if (!resetN) begin
-
-	end
-	else begin
-
-		if (startOfFrame) begin
-			collisionFlipperBorderLeft <= 0;
-			collisionFlipperBorderRight <= 0;
-		end
-		else begin
-			if (drawFlipper && drawFrame) begin
-				collisionFlipperBorderLeft <= 1;
-				collisionFlipperBorderRight <= 1;
-			end
-		end
 	end
 
 end

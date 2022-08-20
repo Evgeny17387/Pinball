@@ -65,8 +65,7 @@ flipper_block flipper_block_inst(
 	.key6IsPressed(key6IsPressed),
 	.pause(pause),
 	.reset_level(reset_level),
-	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
-	.collisionFlipperBorderRight(collisionFlipperBorderRight),
+	.collisionFlipperFrame(collisionFlipperFrame),
 // output
 	.RGB_flipper(RGB_flipper),
 	.drawFlipper(drawFlipper),
@@ -117,8 +116,7 @@ background background_inst(
 
 logic collisionSmileyFrame;
 logic collisionSmileyFlipper;
-logic collisionFlipperBorderLeft;
-logic collisionFlipperBorderRight;
+logic collisionFlipperFrame;
 logic collisionSmileyObstacle;
 logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
@@ -142,8 +140,7 @@ CollisionDetector CollisionDetector_inst(
 // output
 	.collisionSmileyFrame(collisionSmileyFrame),
 	.collisionSmileyFlipper(collisionSmileyFlipper),
-	.collisionFlipperBorderLeft(collisionFlipperBorderLeft),
-	.collisionFlipperBorderRight(collisionFlipperBorderRight),
+	.collisionFlipperFrame(collisionFlipperFrame),
 	.collisionSmileyObstacle(collisionSmileyObstacle),
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),

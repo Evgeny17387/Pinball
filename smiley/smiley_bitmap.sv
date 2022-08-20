@@ -1,3 +1,5 @@
+import defines::COLOR_TRANSPARENT;
+
 module smiley_bitmap(	
 	input	logic			clk,
 	input	logic			resetN,
@@ -18,7 +20,18 @@ localparam  int OBJECT_WIDTH_X = 1 <<  OBJECT_NUMBER_OF_X_BITS;
 localparam  int OBJECT_HEIGHT_Y_DIVIDER = OBJECT_NUMBER_OF_Y_BITS - 2;
 localparam  int OBJECT_WIDTH_X_DIVIDER =  OBJECT_NUMBER_OF_X_BITS - 2;
 
-localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF;
+// {Left, Top, Right, Bottom}
+// Left 	- 3
+// Top 		- 2
+// Right 	- 1
+// Bottom 	- 0
+logic [0:3] [0:3] [3:0] HIT_COLORS = 
+{
+	16'hC446,
+	16'h8C62,
+	16'h8932,
+	16'h9113
+};
 
 `ifdef PICTURES
 logic [0:OBJECT_HEIGHT_Y-1] [0:OBJECT_WIDTH_X-1] [7:0] object_colors = {
@@ -89,19 +102,6 @@ logic [0:OBJECT_HEIGHT_Y-1] [0:OBJECT_WIDTH_X-1] [7:0] object_colors = {
 };
 `endif
 
-// {Left, Top, Right, Bottom}
-// Left 	- 3
-// Top 		- 2
-// Right 	- 1
-// Bottom 	- 0
-logic [0:3] [0:3] [3:0] hit_colors = 
-{
-	16'hC446,
-	16'h8C62,
-	16'h8932,
-	16'h9113
-};
-
 always_ff@(posedge clk or negedge resetN)
 begin
 
@@ -112,7 +112,7 @@ begin
 
 	else begin
 
-		RGB_smiley <= TRANSPARENT_ENCODING;
+		RGB_smiley <= COLOR_TRANSPARENT;
 		hitEdgeCode <= 4'h0;
 
 		if (InsideRectangle == 1'b1) begin
@@ -123,12 +123,12 @@ begin
 			RGB_smiley <= 8'h55;
 `endif
 
-			hitEdgeCode <= hit_colors[offsetY >> OBJECT_HEIGHT_Y_DIVIDER][offsetX >> OBJECT_WIDTH_X_DIVIDER];
+			hitEdgeCode <= HIT_COLORS[offsetY >> OBJECT_HEIGHT_Y_DIVIDER][offsetX >> OBJECT_WIDTH_X_DIVIDER];
 		end
 	end
 
 end
 
-assign draw_smiley = (RGB_smiley != TRANSPARENT_ENCODING) ? 1'b1 : 1'b0;
+assign draw_smiley = (RGB_smiley != COLOR_TRANSPARENT) ? 1'b1 : 1'b0;
 
 endmodule
