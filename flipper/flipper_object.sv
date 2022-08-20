@@ -1,6 +1,7 @@
 import defines::COLOR_TRANSPARENT;
 import defines::FLIPPER_HEIGHT_Y_DIVIDER, defines::FLIPPER_WIDTH_X_DIVIDER;
 import defines::FLIPPER_COLOR;
+import defines::HIT_COLORS;
 
 module flipper_object(
 	input	logic					clk,
@@ -12,19 +13,6 @@ module flipper_object(
 	output	logic			[7:0]	RGB,
 	output 	logic			[3:0]	hitEdgeCode
 );
-
-// {Left, Top, Right, Bottom}
-// Left 	- 3
-// Top 		- 2
-// Right 	- 1
-// Bottom 	- 0
-logic [0:3] [0:3] [3:0] HIT_COLORS = 
-{
-	16'hC446,
-	16'h8C62,
-	16'h8932,
-	16'h9113
-};
 
 always_ff@(posedge clk or negedge resetN)
 begin

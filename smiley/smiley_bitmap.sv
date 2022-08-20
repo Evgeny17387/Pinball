@@ -1,4 +1,5 @@
 import defines::COLOR_TRANSPARENT;
+import defines::HIT_COLORS;
 
 module smiley_bitmap(	
 	input	logic			clk,
@@ -19,19 +20,6 @@ localparam  int OBJECT_WIDTH_X = 1 <<  OBJECT_NUMBER_OF_X_BITS;
 
 localparam  int OBJECT_HEIGHT_Y_DIVIDER = OBJECT_NUMBER_OF_Y_BITS - 2;
 localparam  int OBJECT_WIDTH_X_DIVIDER =  OBJECT_NUMBER_OF_X_BITS - 2;
-
-// {Left, Top, Right, Bottom}
-// Left 	- 3
-// Top 		- 2
-// Right 	- 1
-// Bottom 	- 0
-logic [0:3] [0:3] [3:0] HIT_COLORS = 
-{
-	16'hC446,
-	16'h8C62,
-	16'h8932,
-	16'h9113
-};
 
 `ifdef PICTURES
 logic [0:OBJECT_HEIGHT_Y-1] [0:OBJECT_WIDTH_X-1] [7:0] object_colors = {
