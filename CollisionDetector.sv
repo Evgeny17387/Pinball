@@ -17,9 +17,20 @@ module CollisionDetector(
 	output	logic 			collisionSmileyObstacleGood,
 	output	logic 			collisionSmileyObstacleBad,
 	output	logic			collisionSmileySpringPulse,
-	output	logic			collisionSmileyBumperPulse,
+	output	logic			collisionSmileyBumper,
 	output	logic			collisionSmileyBottom
 );
+
+edge_dectector edge_dectector_ball_bumper_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.startOfFrame(startOfFrame),
+	.signal(draw_smiley && drawBumper),
+// output
+	.edgeDetected(collisionSmileyBumper)
+);
+
 
 logic collisionFlipperFrame_c;
 assign collisionFlipperFrame_c = drawFlipper && drawFrame;
@@ -97,29 +108,6 @@ begin
 
 		if (collisionSmileyFrame_c)
 			collisionSmileyFrame_d <= 1;
-
-	end
-
-end
-
-logic collisionSmileyBumper;
-assign collisionSmileyBumper = draw_smiley && drawBumper;
-logic collisionSmileyBumper_d;
-assign collisionSmileyBumperPulse = !collisionSmileyBumper_d && collisionSmileyBumper;
-
-always_ff @(posedge clk or negedge resetN)
-begin
-
-	if (!resetN) begin
-		collisionSmileyBumper_d <= 0;
-	end
-	else begin
-
-		if (startOfFrame)
-			collisionSmileyBumper_d <= 0;
-
-		if (collisionSmileyBumper)
-			collisionSmileyBumper_d <= 1;
 
 	end
 

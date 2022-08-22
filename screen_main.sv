@@ -47,7 +47,7 @@ smiley_block smiley_block_inst(
 	.level(level),
 	.collisionSmileySpringPulse(collisionSmileySpringPulse),
 	.springSpeedY(springSpeedY),
-	.collisionSmileyBumperPulse(collisionSmileyBumperPulse),
+	.collisionSmileyBumper(collisionSmileyBumper),
 	.collisionSmileyFrame(collisionSmileyFrame),
 // output
 	.RGB_smiley(RGB_smiley),
@@ -121,7 +121,7 @@ logic collisionSmileyObstacle;
 logic collisionSmileyObstacleGood;
 logic collisionSmileyObstacleBad;
 logic collisionSmileySpringPulse;
-logic collisionSmileyBumperPulse;
+logic collisionSmileyBumper;
 logic collisionSmileyBottom;
 
 CollisionDetector CollisionDetector_inst(
@@ -145,7 +145,7 @@ CollisionDetector CollisionDetector_inst(
 	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
 	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
 	.collisionSmileySpringPulse(collisionSmileySpringPulse),
-	.collisionSmileyBumperPulse(collisionSmileyBumperPulse),
+	.collisionSmileyBumper(collisionSmileyBumper),
 	.collisionSmileyBottom(collisionSmileyBottom)
 );
 
