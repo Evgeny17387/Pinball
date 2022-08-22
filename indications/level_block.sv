@@ -11,33 +11,29 @@ module level_block(
 	output	logic	[28:0]	RGBLevel
 );
 
-logic [10:0] 	offsetXNumber;
-logic [10:0] 	offsetYNumber;
+logic [10:0] 	offsetX;
+logic [10:0] 	offsetY;
 
-logic 			insideRectangleNumber;
+logic 			draw;
 
-square_object #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT)) square_object_number_inst(
+square #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT), .TOP_LEFT_X(LEVEL_NUMBER_TOP_LEFT_X), .TOP_LEFT_Y(LEVEL_NUMBER_TOP_LEFT_Y)) square_inst(
 // input
-	.clk(clk),
-	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.topLeftX(LEVEL_NUMBER_TOP_LEFT_X),
-	.topLeftY(LEVEL_NUMBER_TOP_LEFT_Y),
 // output
-	.offsetX(offsetXNumber),
-	.offsetY(offsetYNumber),
-	.draw(insideRectangleNumber),
+	.offsetX(offsetX),
+	.offsetY(offsetY),
+	.draw(draw),
 );
 
 number_bitmap number_bitmap_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.offsetX(offsetXNumber),
-	.offsetY(offsetYNumber),
+	.offsetX(offsetX),
+	.offsetY(offsetY),
 	.number(level),
-	.insideRectangle(insideRectangleNumber),
+	.insideRectangle(draw),
 // output
 	.drawNumber(drawLevel),
 	.RGBNumber(RGBLevel)

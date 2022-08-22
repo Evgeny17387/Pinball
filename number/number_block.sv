@@ -12,33 +12,29 @@ module number_block
 	output	logic	[7:0]	RGBNumber
 );
 
-logic [10:0] 	offsetXNumber;
-logic [10:0] 	offsetYNumber;
+logic [10:0] 	offsetX;
+logic [10:0] 	offsetY;
 
-logic 			insideRectangleNumber;
+logic 			draw;
 
-square_object #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT)) square_object_inst(
+square #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT), .TOP_LEFT_X(TOP_LEFT_X), .TOP_LEFT_Y(TOP_LEFT_Y)) square_object_inst(
 // input
-	.clk(clk),
-	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.topLeftX(TOP_LEFT_X),
-	.topLeftY(TOP_LEFT_Y),
 // output
-	.offsetX(offsetXNumber),
-	.offsetY(offsetYNumber),
-	.draw(insideRectangleNumber),
+	.offsetX(offsetX),
+	.offsetY(offsetY),
+	.draw(draw),
 );
 
 number_bitmap number_bitmap_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.offsetX(offsetXNumber),
-	.offsetY(offsetYNumber),
+	.offsetX(offsetX),
+	.offsetY(offsetY),
 	.number(number),
-	.insideRectangle(insideRectangleNumber),
+	.insideRectangle(draw),
 // output
 	.drawNumber(drawNumber),
 	.RGBNumber(RGBNumber)

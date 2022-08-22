@@ -47,3 +47,5 @@ parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_Y = 275;
 
 parameter int SCREEN_MAIN_BALL_INITIAL_X = 550;
 parameter int SCREEN_MAIN_BALL_INITIAL_Y = 212;
+
+// Bumpers

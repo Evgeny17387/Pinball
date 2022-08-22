@@ -18,6 +18,8 @@ package defines;
 
     `include "defines/flipper.svh"
 
+    `include "defines/bumpers.svh"
+
     `include "defines/screen_welcome.svh"
     `include "defines/screen_main.svh"
     `include "defines/screen_end.svh"
