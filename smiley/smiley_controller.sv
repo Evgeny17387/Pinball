@@ -81,7 +81,7 @@ begin
 						Yspeed <= -Yspeed;
 				end
 				else if (collisionSmileyBumper) begin
-					Yspeed <= Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor;
+					Yspeed <= (Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor) >>> 1;
 				end
 
 			end
@@ -128,7 +128,7 @@ begin
 						Xspeed <= Xspeed + flipperSpeedX;
 				end
 				else if (collisionSmileyBumper) begin
-					Xspeed <= Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor;
+					Xspeed <= (Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor) >>> 1;
 				end
 
 			end

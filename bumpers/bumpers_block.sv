@@ -83,9 +83,9 @@ bumper_bitmap bumper_bitmap_inst(
 assign drawBumper 	= drawBumper1 ? drawBumper1 : drawTriangle1 ? drawTriangle1 : drawTriangle2;
 assign RGBBumper 	= drawBumper1 ? RGBBumper1 : drawTriangle1 ? RGBTriangle1 : RGBTriangle2;
 
-assign collisionFactor.xxFactor = drawBumper1 ? 1 : drawTriangle1 ? 1 : 1;
-assign collisionFactor.yyFactor = drawBumper1 ? -1 : drawTriangle1 ? 1 : 1;
-assign collisionFactor.xyFactor = drawBumper1 ? 1 : drawTriangle1 ? 1 : 1;
-assign collisionFactor.yxFactor = drawBumper1 ? 1 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.xxFactor = drawBumper1 ? 0 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.yyFactor = drawBumper1 ? 0 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.xyFactor = drawBumper1 ? 2 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.yxFactor = drawBumper1 ? 2 : drawTriangle1 ? 1 : 1;
 
 endmodule
