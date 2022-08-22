@@ -76,10 +76,12 @@ number_bitmap number_bitmap_inst(
 	.RGBNumber(RGBNumber)
 );
 
-assign drawObstacle = drawNumber;
+// assign drawObstacle = drawNumber;
+assign drawObstacle = 1'b0;
 
 assign RGBObstacle = RGBNumber;
 
-assign drawScoreNumber = drawNumber && (numberToDraw == scoreNumber ? 1'b1 : 1'b0);
+// assign drawScoreNumber = drawNumber && (numberToDraw == scoreNumber ? 1'b1 : 1'b0);
+assign drawScoreNumber = 1'b0;
 
 endmodule

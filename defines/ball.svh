@@ -1,2 +1,2 @@
 
-const int GRAVITY = 2;
+const int GRAVITY = 5;
