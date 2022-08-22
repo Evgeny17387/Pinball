@@ -35,6 +35,8 @@ int topLeftY_FixedPoint;
 // Right 	- 1
 // Bottom 	- 0
 
+int counter;
+
 always_ff@(posedge clk or negedge resetN)
 begin
 
@@ -42,6 +44,8 @@ begin
 
 		Yspeed <= 0;
 		topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_Y * FIXED_POINT_MULTIPLIER;
+		
+		counter <= 0;
 
 	end 
 	else begin
@@ -51,6 +55,8 @@ begin
 			Yspeed <= 0;
 			topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_Y * FIXED_POINT_MULTIPLIER;
 
+			counter <= 0;
+
 		end
 		else if (!pause) begin
 
@@ -58,6 +64,9 @@ begin
 
 				Yspeed <= Yspeed + GRAVITY;
 				topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
+
+				if (counter > 0)
+					counter <= counter - 1;
 
 			end
 			else begin
@@ -69,19 +78,20 @@ begin
 						Yspeed <= -Yspeed;
 				end
 				else if (collisionSmileySpringPulse) begin
-				 	if (hitEdgeCode[0]) begin
+					if (hitEdgeCode[0]) begin
 						if (springSpeedY < 0)
 							Yspeed <= Yspeed + springSpeedY;
 						else
 							Yspeed <= -Yspeed;
-					 end
+					end
 				end
 				else if (collisionSmileyFlipper) begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Yspeed <= -Yspeed;
 				end
-				else if (collisionSmileyBumper) begin
+				else if ((counter == 0) && collisionSmileyBumper) begin
 					Yspeed <= (Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor) >>> 1;
+					counter <= 10;
 				end
 
 			end
@@ -127,7 +137,7 @@ begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Xspeed <= Xspeed + flipperSpeedX;
 				end
-				else if (collisionSmileyBumper) begin
+				else if ((counter == 0) && collisionSmileyBumper) begin
 					Xspeed <= (Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor) >>> 1;
 				end
 
