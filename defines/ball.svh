@@ -1,7 +1,7 @@
 
 const int GRAVITY = 5;
 
-parameter logic [7:0] BALL_COLOR = COLOR_GRAY;
+parameter logic [7:0] BALL_COLOR = COLOR_BLUE_DARK;
 
 localparam logic [10:0] BALL_HEIGHT_NUMBER_OF_Y_BITS = 5;
 localparam logic [10:0] BALL_WIDTH_NUMBER_OF_X_BITS = 5;

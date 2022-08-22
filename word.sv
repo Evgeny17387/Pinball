@@ -1,4 +1,4 @@
-import defines::COLOR_TRANSPARENT, defines::COLOR_DEFAULT;
+import defines::COLOR_TRANSPARENT;
 import defines::LETTER_HEIGHT, defines::LETTER_WIDTH;
 import defines::LETTER_SPACE;
 

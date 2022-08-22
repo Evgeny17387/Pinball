@@ -121,10 +121,14 @@ begin
 		end
 		else if (!pause) begin
 
-			if (startOfFrame == 1'b1)
+			if (startOfFrame == 1'b1) begin
 
-				topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
+				if (topLeftX_FixedPoint + Xspeed < 0)
+					Xspeed <= Xspeed >>> 1;
+				else
+					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
 
+			end
 			else begin
 
 				if (collisionBallFrame || collisionBallObstacle) begin
