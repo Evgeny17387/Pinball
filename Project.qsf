@@ -344,7 +344,6 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_Project_auto_signaltap_0_1_ed45," -section_id auto_signaltap_0
 set_global_assignment -name SYSTEMVERILOG_FILE defines/structs.sv
 set_global_assignment -name SYSTEMVERILOG_FILE edge_detector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE bumpers/bumper_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE bumpers/bumpers_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE square_dynamic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_controller.sv

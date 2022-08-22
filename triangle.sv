@@ -24,7 +24,7 @@ assign offsetXR = rightX - pixelX;
 assign draw = (
 				(pixelX >= TOP_LEFT_X) && (pixelX < rightX) &&
 				(pixelY >= TOP_LEFT_Y) && (pixelY < bottomY) &&
-				(ORIENTATION == 0 ? (offsetX <= offsetY << 1) : (offsetXR <= offsetY << 1))
+				(ORIENTATION == 0 ? (offsetX <= offsetY << 1) : ORIENTATION == 1 ? (offsetXR <= offsetY << 1) : (offsetX >= offsetY << 1) )
 			);
 
 endmodule
