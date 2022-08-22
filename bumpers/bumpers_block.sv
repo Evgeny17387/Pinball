@@ -6,10 +6,11 @@ module bumpers_block(
 	input 	logic signed	[10:0] 	pixelX,
 	input 	logic signed	[10:0] 	pixelY,
 	output	logic			[7:0]	RGBBumper,
-	output 	logic 					drawBumper
+	output 	logic 					drawBumper,
+	output	COLLISION_FACTOR		collisionFactor
 );
 
-logic 			drawTriangle1;
+logic drawTriangle1;
 
 triangle #(.OBJECT_WIDTH(128), .OBJECT_HEIGHT(64), .TOP_LEFT_X(1), .TOP_LEFT_Y(400), .ORIENTATION(0)) triangle_1_inst(
 // input
@@ -30,7 +31,7 @@ object #(.COLOR(BUMPER_COLOR)) object_1_inst(
 	.RGBObject(RGBTriangle1)
 );
 
-logic 			drawTriangle2;
+logic drawTriangle2;
 
 triangle #(.OBJECT_WIDTH(128), .OBJECT_HEIGHT(64), .TOP_LEFT_X(400), .TOP_LEFT_Y(400), .ORIENTATION(1)) triangle_2_inst(
 // input
@@ -51,7 +52,7 @@ object #(.COLOR(BUMPER_COLOR)) object_2_inst(
 	.RGBObject(RGBTriangle2)
 );
 
-logic 			drawSquare;
+logic			drawSquare;
 logic [10:0] 	offsetXSquare;
 logic [10:0] 	offsetYSquare;
 logic [7:0] 	RGBBumper1;
@@ -81,5 +82,10 @@ bumper_bitmap bumper_bitmap_inst(
 
 assign drawBumper 	= drawBumper1 ? drawBumper1 : drawTriangle1 ? drawTriangle1 : drawTriangle2;
 assign RGBBumper 	= drawBumper1 ? RGBBumper1 : drawTriangle1 ? RGBTriangle1 : RGBTriangle2;
+
+assign collisionFactor.xxFactor = drawBumper1 ? 1 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.yyFactor = drawBumper1 ? -1 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.xyFactor = drawBumper1 ? 1 : drawTriangle1 ? 1 : 1;
+assign collisionFactor.yxFactor = drawBumper1 ? 1 : drawTriangle1 ? 1 : 1;
 
 endmodule

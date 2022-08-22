@@ -17,6 +17,7 @@ module smiley_block(
 	input	int						springSpeedY,
 	input	logic					collisionSmileyBumper,
 	input	logic					collisionSmileyFrame,
+	input	COLLISION_FACTOR		collisionFactor,
 	output	logic			[7:0]	RGB_smiley,
 	output	logic					draw_smiley
 );
@@ -48,6 +49,7 @@ smiley_controller smiley_controller_inst(
 	.springSpeedY(springSpeedY),
 	.collisionSmileyBumper(collisionSmileyBumper),
 	.collisionSmileyFrame(collisionSmileyFrame),
+	.collisionFactor(collisionFactor),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY)

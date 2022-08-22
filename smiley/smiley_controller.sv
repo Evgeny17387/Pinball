@@ -18,6 +18,7 @@ module smiley_controller(
 	input	int						springSpeedY,
 	input	logic					collisionSmileyBumper,
 	input	logic					collisionSmileyFrame,
+	input	COLLISION_FACTOR		collisionFactor,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -75,13 +76,12 @@ begin
 							Yspeed <= -Yspeed;
 					 end
 				end
-				else if (collisionSmileyBumper) begin
-					if (Yspeed < 0)
-						Yspeed <= -Yspeed;
-				end
 				else if (collisionSmileyFlipper) begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Yspeed <= -Yspeed;
+				end
+				else if (collisionSmileyBumper) begin
+					Yspeed <= Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor;
 				end
 
 			end
@@ -128,8 +128,7 @@ begin
 						Xspeed <= Xspeed + flipperSpeedX;
 				end
 				else if (collisionSmileyBumper) begin
-					if (Yspeed < 0)
-						Xspeed <= Yspeed;
+					Xspeed <= Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor;
 				end
 
 			end

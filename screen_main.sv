@@ -49,6 +49,7 @@ smiley_block smiley_block_inst(
 	.springSpeedY(springSpeedY),
 	.collisionSmileyBumper(collisionSmileyBumper),
 	.collisionSmileyFrame(collisionSmileyFrame),
+	.collisionFactor(collisionFactor),
 // output
 	.RGB_smiley(RGB_smiley),
 	.draw_smiley(draw_smiley)
@@ -189,8 +190,9 @@ spring_block spring_block_inst(
 	.speedY(springSpeedY)
 );
 
-logic 			drawBumper;
-logic	[7:0]	RGBBumper;
+logic 						drawBumper;
+logic				[7:0]	RGBBumper;
+COLLISION_FACTOR			collisionFactor;
 
 bumpers_block bumpers_block_inst(
 // input
@@ -200,7 +202,8 @@ bumpers_block bumpers_block_inst(
 	.pixelY(pixelY),
 // output
 	.drawBumper(drawBumper),
-	.RGBBumper(RGBBumper)
+	.RGBBumper(RGBBumper),
+	.collisionFactor(collisionFactor)
 );
 
 indications_block indications_block_inst(
