@@ -28,31 +28,31 @@ logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	level;
 
-logic	[7:0]	RGB_smiley;
-logic 			draw_smiley;
+logic	[7:0]	RGBBall;
+logic 			drawBall;
 
-smiley_block smiley_block_inst(
+ball_block ball_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
-	.collisionSmileyFlipper(collisionSmileyFlipper),
+	.collisionBallFlipper(collisionBallFlipper),
 	.key5IsPressed(key5IsPressed),
 	.pause(pause),
 	.flipperSpeedX(flipperSpeedX),
 	.reset_level(reset_level),
-	.collisionSmileyObstacle(collisionSmileyObstacle),
+	.collisionBallObstacle(collisionBallObstacle),
 	.level(level),
-	.collisionSmileySpringPulse(collisionSmileySpringPulse),
+	.collisionBallSpringPulse(collisionBallSpringPulse),
 	.springSpeedY(springSpeedY),
-	.collisionSmileyBumper(collisionSmileyBumper),
-	.collisionSmileyFrame(collisionSmileyFrame),
+	.collisionBallBumper(collisionBallBumper),
+	.collisionBallFrame(collisionBallFrame),
 	.collisionFactor(collisionFactor),
 // output
-	.RGB_smiley(RGB_smiley),
-	.draw_smiley(draw_smiley)
+	.RGBBall(RGBBall),
+	.drawBall(drawBall)
 );
 
 flipper_block flipper_block_inst(
@@ -115,22 +115,22 @@ background background_inst(
 	.drawBottom(drawBottom)
 );
 
-logic collisionSmileyFrame;
-logic collisionSmileyFlipper;
+logic collisionBallFrame;
+logic collisionBallFlipper;
 logic collisionFlipperFrame;
-logic collisionSmileyObstacle;
-logic collisionSmileyObstacleGood;
-logic collisionSmileyObstacleBad;
-logic collisionSmileySpringPulse;
-logic collisionSmileyBumper;
-logic collisionSmileyBottom;
+logic collisionBallObstacle;
+logic collisionBallObstacleGood;
+logic collisionBallObstacleBad;
+logic collisionBallSpringPulse;
+logic collisionBallBumper;
+logic collisionBallBottom;
 
 CollisionDetector CollisionDetector_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.startOfFrame(startOfFrame),
-	.draw_smiley(draw_smiley),
+	.drawBall(drawBall),
 	.drawFrame(drawFrame),
 	.drawFlipper(drawFlipper),
 	.drawObstacle(drawObstacle),
@@ -139,15 +139,15 @@ CollisionDetector CollisionDetector_inst(
 	.drawScoreNumber(drawScoreNumber),
 	.drawBottom(drawBottom),
 // output
-	.collisionSmileyFrame(collisionSmileyFrame),
-	.collisionSmileyFlipper(collisionSmileyFlipper),
+	.collisionBallFrame(collisionBallFrame),
+	.collisionBallFlipper(collisionBallFlipper),
 	.collisionFlipperFrame(collisionFlipperFrame),
-	.collisionSmileyObstacle(collisionSmileyObstacle),
-	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
-	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
-	.collisionSmileySpringPulse(collisionSmileySpringPulse),
-	.collisionSmileyBumper(collisionSmileyBumper),
-	.collisionSmileyBottom(collisionSmileyBottom)
+	.collisionBallObstacle(collisionBallObstacle),
+	.collisionBallObstacleGood(collisionBallObstacleGood),
+	.collisionBallObstacleBad(collisionBallObstacleBad),
+	.collisionBallSpringPulse(collisionBallSpringPulse),
+	.collisionBallBumper(collisionBallBumper),
+	.collisionBallBottom(collisionBallBottom)
 );
 
 logic reset_level_pulse;
@@ -157,11 +157,11 @@ game_controller game_controller_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.key5IsPressed(key5IsPressed),
-	.collisionSmileyObstacle(collisionSmileyObstacle),
-	.collisionSmileyObstacleGood(collisionSmileyObstacleGood),
-	.collisionSmileyObstacleBad(collisionSmileyObstacleBad),
+	.collisionBallObstacle(collisionBallObstacle),
+	.collisionBallObstacleGood(collisionBallObstacleGood),
+	.collisionBallObstacleBad(collisionBallObstacleBad),
 	.start(start),
-	.collisionSmileyBottom(collisionSmileyBottom),
+	.collisionBallBottom(collisionBallBottom),
 // output
 	.pause(pause),
 	.reset_level(reset_level),
@@ -225,8 +225,8 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.draw_smiley(draw_smiley),
-	.RGB_smiley(RGB_smiley),
+	.drawBall(drawBall),
+	.RGBBall(RGBBall),
 	.drawFlipper(drawFlipper),
 	.RGB_flipper(RGB_flipper),
 	.drawObstacle(drawObstacle),

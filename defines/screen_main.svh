@@ -1,8 +1,8 @@
 
 // Ball
 
-parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X = 565;
-parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y = 345;
+parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X = 600;
+parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y = 375;
 
 // Background
 
@@ -10,15 +10,15 @@ const int FRAME_OFFSET_HORIZONTAL = 0;
 const int FRAME_OFFSET_TOP = 50;
 const int FRAME_OFFSET_BOTTOM = 1;
 
-const int FRAME_SPRING_OFFSET_LEFT = 560;
+const int FRAME_SPRING_OFFSET_LEFT = 595;
 const int FRAME_SPRING_OFFSET_TOP = 410;
 
 // Spring
 
-parameter logic [10:0] SCREEN_MAIN_SPRING_WIDTH = 64;
+parameter logic [10:0] SCREEN_MAIN_SPRING_WIDTH = 32;
 parameter logic [10:0] SCREEN_MAIN_SPRING_HEIGHT = 65;
 
-parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_X = 565;
+parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_X = 600;
 parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_Y = 410;
 
 localparam SPRING_Y_MARGIN = 5;
@@ -33,7 +33,7 @@ parameter logic [10:0] SCREEN_MAIN_BUMPER_1_TOP_LEFT_X = 5;
 parameter logic [10:0] SCREEN_MAIN_BUMPER_1_TOP_LEFT_Y = 410;
 
 parameter logic [10:0] SCREEN_MAIN_BUMPER_2_ORIENTATION = 1;
-parameter logic [10:0] SCREEN_MAIN_BUMPER_2_TOP_LEFT_X = 430;
+parameter logic [10:0] SCREEN_MAIN_BUMPER_2_TOP_LEFT_X = 460;
 parameter logic [10:0] SCREEN_MAIN_BUMPER_2_TOP_LEFT_Y = 410;
 
 parameter logic [10:0] SCREEN_MAIN_BUMPER_3_ORIENTATION = 2;

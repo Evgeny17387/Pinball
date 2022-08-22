@@ -41,10 +41,3 @@ package defines;
     };
 
 endpackage
-
-package defines_ball;
-
-    parameter int           WIDTH                   = 64;
-    parameter int           HEIGHT                  = 64;
-
-endpackage

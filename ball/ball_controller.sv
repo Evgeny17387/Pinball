@@ -2,22 +2,22 @@ import defines::SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X, defines::SCREEN_MAIN_BALL_I
 import defines::FIXED_POINT_MULTIPLIER;
 import defines::GRAVITY;
 
-module smiley_controller(
+module ball_controller(
 	input	logic					clk,
 	input	logic					resetN,
 	input	logic					startOfFrame,
-	input 	logic					collisionSmileyFlipper,
+	input 	logic					collisionBallFlipper,
 	input	logic					key5IsPressed,
 	input	logic					pause,
 	input	logic			[31:0]	flipperSpeedX,
 	input	logic					reset_level,
-	input	logic 					collisionSmileyObstacle,
+	input	logic 					collisionBallObstacle,
 	input 	logic			[3:0]	hitEdgeCode,
 	input	logic 			[3:0]	level,
-	input	logic					collisionSmileySpringPulse,
+	input	logic					collisionBallSpringPulse,
 	input	int						springSpeedY,
-	input	logic					collisionSmileyBumper,
-	input	logic					collisionSmileyFrame,
+	input	logic					collisionBallBumper,
+	input	logic					collisionBallFrame,
 	input	COLLISION_FACTOR		collisionFactor,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
@@ -71,13 +71,13 @@ begin
 			end
 			else begin
 
-				if (collisionSmileyFrame || collisionSmileyObstacle) begin
+				if (collisionBallFrame || collisionBallObstacle) begin
 					if (hitEdgeCode[2] && (Yspeed < 0))
 						Yspeed <= -Yspeed;
 					else if (hitEdgeCode[0] && (Yspeed > 0))
 						Yspeed <= -Yspeed;
 				end
-				else if (collisionSmileySpringPulse) begin
+				else if (collisionBallSpringPulse) begin
 					if (hitEdgeCode[0]) begin
 						if (springSpeedY < 0)
 							Yspeed <= Yspeed + springSpeedY;
@@ -85,11 +85,11 @@ begin
 							Yspeed <= -Yspeed;
 					end
 				end
-				else if (collisionSmileyFlipper) begin
+				else if (collisionBallFlipper) begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Yspeed <= -Yspeed;
 				end
-				else if ((counter == 0) && collisionSmileyBumper) begin
+				else if ((counter == 0) && collisionBallBumper) begin
 					Yspeed <= (Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor) >>> 1;
 					counter <= 10;
 				end
@@ -127,17 +127,17 @@ begin
 
 			else begin
 
-				if (collisionSmileyFrame || collisionSmileyObstacle) begin
+				if (collisionBallFrame || collisionBallObstacle) begin
 					if (hitEdgeCode[3] && (Xspeed < 0))
 						Xspeed <= -Xspeed;
 					else if (hitEdgeCode[1] && (Xspeed > 0))
 						Xspeed <= -Xspeed;
 				end
-				else if (collisionSmileyFlipper) begin
+				else if (collisionBallFlipper) begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Xspeed <= Xspeed + flipperSpeedX;
 				end
-				else if ((counter == 0) && collisionSmileyBumper) begin
+				else if ((counter == 0) && collisionBallBumper) begin
 					Xspeed <= (Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor) >>> 1;
 				end
 

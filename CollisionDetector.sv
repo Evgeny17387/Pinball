@@ -2,7 +2,7 @@ module CollisionDetector(
 	input	logic 			clk,
 	input	logic 			resetN,
 	input 	logic 			startOfFrame,
-	input	logic 			draw_smiley,
+	input	logic 			drawBall,
 	input	logic 			drawFrame,
 	input	logic 			drawFlipper,
 	input	logic 			drawObstacle,
@@ -10,15 +10,15 @@ module CollisionDetector(
 	input	logic 			drawBumper,
 	input	logic			drawScoreNumber,
 	input	logic			drawBottom,
-	output 	logic 			collisionSmileyFrame,
-	output 	logic 			collisionSmileyFlipper,
+	output 	logic 			collisionBallFrame,
+	output 	logic 			collisionBallFlipper,
 	output 	logic 			collisionFlipperFrame,
-	output	logic 			collisionSmileyObstacle,
-	output	logic 			collisionSmileyObstacleGood,
-	output	logic 			collisionSmileyObstacleBad,
-	output	logic			collisionSmileySpringPulse,
-	output	logic			collisionSmileyBumper,
-	output	logic			collisionSmileyBottom
+	output	logic 			collisionBallObstacle,
+	output	logic 			collisionBallObstacleGood,
+	output	logic 			collisionBallObstacleBad,
+	output	logic			collisionBallSpringPulse,
+	output	logic			collisionBallBumper,
+	output	logic			collisionBallBottom
 );
 
 edge_dectector edge_dectector_ball_bumper_inst(
@@ -26,9 +26,9 @@ edge_dectector edge_dectector_ball_bumper_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.startOfFrame(startOfFrame),
-	.signal(draw_smiley && drawBumper),
+	.signal(drawBall && drawBumper),
 // output
-	.edgeDetected(collisionSmileyBumper)
+	.edgeDetected(collisionBallBumper)
 );
 
 
@@ -65,81 +65,81 @@ begin
 
 end
 
-assign collisionSmileyBottom = drawBottom && draw_smiley;
+assign collisionBallBottom = drawBottom && drawBall;
 
-logic collisionSmileyFlipper_c;
-assign collisionSmileyFlipper_c = draw_smiley && drawFlipper;
-logic collisionSmileyFlipper_d;
-assign collisionSmileyFlipper = !collisionSmileyFlipper_d && collisionSmileyFlipper_c;
+logic collisionBallFlipper_c;
+assign collisionBallFlipper_c = drawBall && drawFlipper;
+logic collisionBallFlipper_d;
+assign collisionBallFlipper = !collisionBallFlipper_d && collisionBallFlipper_c;
 
 always_ff @(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
-		collisionSmileyFlipper_d <= 0;
+		collisionBallFlipper_d <= 0;
 	end
 	else begin
 
 		if (startOfFrame)
-			collisionSmileyFlipper_d <= 0;
+			collisionBallFlipper_d <= 0;
 
-		if (collisionSmileyFlipper_c)
-			collisionSmileyFlipper_d <= 1;
+		if (collisionBallFlipper_c)
+			collisionBallFlipper_d <= 1;
 
 	end
 
 end
 
-logic collisionSmileyFrame_c;
-assign collisionSmileyFrame_c = draw_smiley && drawFrame;
-logic collisionSmileyFrame_d;
-assign collisionSmileyFrame = !collisionSmileyFrame_d && collisionSmileyFrame_c;
+logic collisionBallFrame_c;
+assign collisionBallFrame_c = drawBall && drawFrame;
+logic collisionBallFrame_d;
+assign collisionBallFrame = !collisionBallFrame_d && collisionBallFrame_c;
 
 always_ff @(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
-		collisionSmileyFrame_d <= 0;
+		collisionBallFrame_d <= 0;
 	end
 	else begin
 
 		if (startOfFrame)
-			collisionSmileyFrame_d <= 0;
+			collisionBallFrame_d <= 0;
 
-		if (collisionSmileyFrame_c)
-			collisionSmileyFrame_d <= 1;
+		if (collisionBallFrame_c)
+			collisionBallFrame_d <= 1;
 
 	end
 
 end
 
-logic collisionSmileySpring;
-assign collisionSmileySpring = draw_smiley && drawSpring;
-logic collisionSmileySpring_d;
-assign collisionSmileySpringPulse = !collisionSmileySpring_d && collisionSmileySpring;
+logic collisionBallSpring;
+assign collisionBallSpring = drawBall && drawSpring;
+logic collisionBallSpring_d;
+assign collisionBallSpringPulse = !collisionBallSpring_d && collisionBallSpring;
 
 always_ff @(posedge clk or negedge resetN)
 begin
 
 	if (!resetN) begin
-		collisionSmileySpring_d <= 0;
+		collisionBallSpring_d <= 0;
 	end
 	else begin
 
 		if (startOfFrame)
-			collisionSmileySpring_d <= 0;
+			collisionBallSpring_d <= 0;
 
-		if (collisionSmileySpring)
-			collisionSmileySpring_d <= 1;
+		if (collisionBallSpring)
+			collisionBallSpring_d <= 1;
 
 	end
 
 end
 
 logic collisionDetectedInFrame;
-assign collisionSmileyObstacle		= draw_smiley && drawObstacle && !collisionDetectedInFrame;
-assign collisionSmileyObstacleGood	= collisionSmileyObstacle && drawScoreNumber;
-assign collisionSmileyObstacleBad	= collisionSmileyObstacle && !drawScoreNumber;
+assign collisionBallObstacle		= drawBall && drawObstacle && !collisionDetectedInFrame;
+assign collisionBallObstacleGood	= collisionBallObstacle && drawScoreNumber;
+assign collisionBallObstacleBad	= collisionBallObstacle && !drawScoreNumber;
 
 always_ff @(posedge clk or negedge resetN)
 begin
@@ -153,7 +153,7 @@ begin
 			collisionDetectedInFrame <= 0;
 		end
 
-		if (draw_smiley && drawObstacle) begin
+		if (drawBall && drawObstacle) begin
 			collisionDetectedInFrame <= 1;
 		end
 
