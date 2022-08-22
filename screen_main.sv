@@ -28,6 +28,20 @@ logic	[31:0]	flipperSpeedX;
 
 logic	[3:0] 	level;
 
+logic	[7:0]	RGBCredit;
+logic 			drawCredit;
+
+credit_block credit_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.RGBCredit(RGBCredit),
+	.drawCredit(drawCredit)
+);
+
 logic	[7:0]	RGBBall;
 logic 			drawBall;
 
@@ -237,6 +251,8 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.RGBSpring(RGBSpring),
 	.drawBumper(drawBumper),
 	.RGBBumper(RGBBumper),
+	.drawCredit(drawCredit),
+	.RGBCredit(RGBCredit),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB_screen_main(RGB_screen_main)
