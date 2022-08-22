@@ -1,4 +1,4 @@
-import defines::SCREEN_MAIN_BALL_INITIAL_X, defines::SCREEN_MAIN_BALL_INITIAL_Y;
+import defines::SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X, defines::SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y;
 import defines::FIXED_POINT_MULTIPLIER;
 import defines::GRAVITY;
 
@@ -43,7 +43,7 @@ begin
 	if (!resetN) begin
 
 		Yspeed <= 0;
-		topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_Y * FIXED_POINT_MULTIPLIER;
+		topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y * FIXED_POINT_MULTIPLIER;
 		
 		counter <= 0;
 
@@ -53,7 +53,7 @@ begin
 		if (reset_level) begin
 
 			Yspeed <= 0;
-			topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_Y * FIXED_POINT_MULTIPLIER;
+			topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y * FIXED_POINT_MULTIPLIER;
 
 			counter <= 0;
 
@@ -108,7 +108,7 @@ begin
 	if (!resetN) begin
 
 		Xspeed <= 0;
-		topLeftX_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_X * FIXED_POINT_MULTIPLIER;
+		topLeftX_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X * FIXED_POINT_MULTIPLIER;
 
 	end
 	else begin
@@ -116,7 +116,7 @@ begin
 		if (reset_level) begin
 
 			Xspeed <= 0;
-			topLeftX_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_X * FIXED_POINT_MULTIPLIER;
+			topLeftX_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X * FIXED_POINT_MULTIPLIER;
 
 		end
 		else if (!pause) begin
