@@ -9,6 +9,7 @@ module game_controller(
 	input	logic			collisionBallObstacleBad,
 	input	logic			start,
 	input	logic			collisionBallBottom,
+	input	logic			collisionBallCredit,
 	output 	logic 			pause,
 	output 	logic 			reset_level,
 	output 	logic 			reset_level_pulse,
@@ -113,6 +114,11 @@ begin
 
 			end
 			else if (collisionBallObstacle && collisionBallObstacleGood) begin
+
+				score_next = score_current + 1;
+
+			end
+			else if (collisionBallCredit) begin
 
 				score_next = score_current + 1;
 

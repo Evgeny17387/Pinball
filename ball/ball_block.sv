@@ -17,6 +17,7 @@ module ball_block(
 	input	logic						collisionBallBumper,
 	input	logic						collisionBallFrame,
 	input	COLLISION_FACTOR			collisionFactor,
+	input	logic						collisionBallCredit,
 	output	logic				[7:0]	RGBBall,
 	output	logic						drawBall
 );
@@ -41,6 +42,7 @@ ball_controller ball_controller_inst(
 	.collisionBallBumper(collisionBallBumper),
 	.collisionBallFrame(collisionBallFrame),
 	.collisionFactor(collisionFactor),
+	.collisionBallCredit(collisionBallCredit),
 // output
 	.topLeftX(topLeftX),
 	.topLeftY(topLeftY)

@@ -18,6 +18,7 @@ module ball_controller(
 	input	logic					collisionBallBumper,
 	input	logic					collisionBallFrame,
 	input	COLLISION_FACTOR		collisionFactor,
+	input	logic					collisionBallCredit,
 	output	logic signed 	[10:0]	topLeftX,
 	output	logic signed	[10:0]	topLeftY
 );
@@ -92,6 +93,14 @@ begin
 					Yspeed <= (Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor) >>> 1;
 					counter <= 10;
 				end
+				else if (collisionBallCredit) begin
+					if (hitEdgeCode[2] && (Yspeed < 0)) begin
+						Yspeed <= -Yspeed;
+					end
+					else if (hitEdgeCode[0] && (Yspeed > 0)) begin
+						Yspeed <= -Yspeed;
+					end
+				end
 
 			end
 
@@ -142,6 +151,14 @@ begin
 				end
 				else if ((counter == 0) && collisionBallBumper) begin
 					Xspeed <= (Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor) >>> 1;
+				end
+				else if (collisionBallCredit) begin
+					if (hitEdgeCode[3] && (Xspeed < 0)) begin
+						Xspeed <= -Xspeed;
+					end
+					else if (hitEdgeCode[1] && (Xspeed > 0)) begin
+						Xspeed <= -Xspeed;
+					end
 				end
 
 			end

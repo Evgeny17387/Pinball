@@ -19,7 +19,8 @@ module CollisionDetector(
 	output	logic 			collisionBallObstacleBad,
 	output	logic			collisionBallSpringPulse,
 	output	logic			collisionBallBumper,
-	output	logic			collisionBallBottom
+	output	logic			collisionBallBottom,
+	output	logic			collisionBallCredit
 );
 
 edge_dectector edge_dectector_ball_credit_inst(
@@ -27,9 +28,9 @@ edge_dectector edge_dectector_ball_credit_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.startOfFrame(startOfFrame),
-	.signal(drawBall && drawBumper),
+	.signal(drawBall && drawCredit),
 // output
-	.edgeDetected(collisionBallBumper)
+	.edgeDetected(collisionBallCredit)
 );
 
 edge_dectector edge_dectector_ball_bumper_inst(
@@ -41,7 +42,6 @@ edge_dectector edge_dectector_ball_bumper_inst(
 // output
 	.edgeDetected(collisionBallBumper)
 );
-
 
 logic collisionFlipperFrame_c;
 assign collisionFlipperFrame_c = drawFlipper && drawFrame;

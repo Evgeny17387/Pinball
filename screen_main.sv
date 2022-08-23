@@ -48,6 +48,7 @@ ball_block ball_block_inst(
 	.collisionBallBumper(collisionBallBumper),
 	.collisionBallFrame(collisionBallFrame),
 	.collisionFactor(collisionFactor),
+	.collisionBallCredit(collisionBallCredit),
 // output
 	.RGBBall(RGBBall),
 	.drawBall(drawBall)
@@ -128,6 +129,7 @@ logic collisionBallObstacleBad;
 logic collisionBallSpringPulse;
 logic collisionBallBumper;
 logic collisionBallBottom;
+logic collisionBallCredit;
 
 CollisionDetector CollisionDetector_inst(
 // input
@@ -152,7 +154,8 @@ CollisionDetector CollisionDetector_inst(
 	.collisionBallObstacleBad(collisionBallObstacleBad),
 	.collisionBallSpringPulse(collisionBallSpringPulse),
 	.collisionBallBumper(collisionBallBumper),
-	.collisionBallBottom(collisionBallBottom)
+	.collisionBallBottom(collisionBallBottom),
+	.collisionBallCredit(collisionBallCredit)
 );
 
 logic reset_level_pulse;
@@ -169,6 +172,7 @@ game_controller game_controller_inst(
 	.collisionBallObstacleBad(collisionBallObstacleBad),
 	.start(start),
 	.collisionBallBottom(collisionBallBottom),
+	.collisionBallCredit(collisionBallCredit),
 // output
 	.pause(pause),
 	.reset_level(reset_level),
