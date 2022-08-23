@@ -13,19 +13,6 @@ module screen_main(
 	output	logic	[3:0] 	score
 );
 
-logic	[7:0]	RGB_flipper;
-logic	[7:0]	RGBObstacle;
-logic	[7:0]	RGBIndications;
-
-logic 			drawFlipper;
-logic 			drawObstacle;
-logic 			drawIndications;
-
-logic			pause;
-logic			reset_level;
-
-logic	[31:0]	flipperSpeedX;
-
 logic	[7:0]	RGBCredit;
 logic 			drawCredit;
 
@@ -66,6 +53,10 @@ ball_block ball_block_inst(
 	.drawBall(drawBall)
 );
 
+logic	[7:0]	RGB_flipper;
+logic 			drawFlipper;
+logic	[31:0]	flipperSpeedX;
+
 flipper_block flipper_block_inst(
 // input
 	.clk(clk),
@@ -85,6 +76,7 @@ flipper_block flipper_block_inst(
 );
 
 logic [3:0] scoreNumber;
+logic 		drawScoreNumber;
 
 random_number random_number_inst(
 // input
@@ -95,7 +87,8 @@ random_number random_number_inst(
 	.randomNumber(scoreNumber)
 );
 
-logic drawScoreNumber;
+logic	[7:0]	RGBObstacle;
+logic 			drawObstacle;
 
 Obstacle Obstacle_inst(
 // input
@@ -149,6 +142,7 @@ CollisionDetector CollisionDetector_inst(
 	.drawBumper(drawBumper),
 	.drawScoreNumber(drawScoreNumber),
 	.drawBottom(drawBottom),
+	.drawCredit(drawCredit),
 // output
 	.collisionBallFrame(collisionBallFrame),
 	.collisionBallFlipper(collisionBallFlipper),
@@ -162,6 +156,8 @@ CollisionDetector CollisionDetector_inst(
 );
 
 logic reset_level_pulse;
+logic pause;
+logic reset_level;
 
 game_controller game_controller_inst(
 // input
@@ -215,6 +211,9 @@ bumpers_block bumpers_block_inst(
 	.RGBBumper(RGBBumper),
 	.collisionFactor(collisionFactor)
 );
+
+logic	[7:0]	RGBIndications;
+logic 			drawIndications;
 
 indications_block indications_block_inst(
 // input
