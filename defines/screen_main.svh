@@ -3,10 +3,10 @@
 
 parameter logic [10:0] SCREEN_MAIN_CREDIT_RADIUS = 25;
 
-parameter logic [10:0] SCREEN_MAIN_CREDITS_TOP_LEFT_X [1:0] = '{200, 400};
-parameter logic [10:0] SCREEN_MAIN_CREDITS_TOP_LEFT_Y [1:0] = '{200, 200};
+parameter byte NUM_CREDITS = 3;
 
-parameter byte NUM_CREDITS = 2;
+parameter logic [10:0] SCREEN_MAIN_CREDITS_TOP_LEFT_X [NUM_CREDITS-1:0] = '{200, 400, 300};
+parameter logic [10:0] SCREEN_MAIN_CREDITS_TOP_LEFT_Y [NUM_CREDITS-1:0] = '{150, 150, 250};
 
 parameter logic [10:0] SCREEN_MAIN_CREDIT_NUMBER_OFFSET_X = 17;
 parameter logic [10:0] SCREEN_MAIN_CREDIT_NUMBER_OFFSET_Y = 9;
