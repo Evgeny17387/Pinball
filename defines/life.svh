@@ -1,2 +1,2 @@
 
-localparam LIFE_INIT = 2;
+localparam LIFE_INIT = 3;

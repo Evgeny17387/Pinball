@@ -55,24 +55,19 @@ localparam LIFE_SPACE = 40;
 parameter logic [10:0] SCREEN_MAIN_SCORE_WIDTH = 32;
 parameter logic [10:0] SCREEN_MAIN_SCORE_HEIGHT = 32;
 
-parameter logic [10:0] SCREEN_MAIN_SCORE_TOP_LEFT_X = 170;
+parameter logic [10:0] SCREEN_MAIN_SCORE_TOP_LEFT_X = 250;
 parameter logic [10:0] SCREEN_MAIN_SCORE_TOP_LEFT_Y = 5;
 
-parameter logic [10:0] SCREEN_MAIN_SCORE_NUMBER_TOP_LEFT_X = 220;
+parameter logic [10:0] SCREEN_MAIN_SCORE_NUMBER_TOP_LEFT_X = 300;
 parameter logic [10:0] SCREEN_MAIN_SCORE_NUMBER_TOP_LEFT_Y = 5;
-
-// Level
-
-parameter logic [10:0] LEVEL_NUMBER_TOP_LEFT_X = 300;
-parameter logic [10:0] LEVEL_NUMBER_TOP_LEFT_Y = 5;
 
 // Equation
 
 parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_WIDTH = 32;
 parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_HEIGHT = 32;
 
-parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_TOP_LEFT_X = 450;
+parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_TOP_LEFT_X = 525;
 parameter logic [10:0] SCREEN_MAIN_LUCK_SYMBOL_TOP_LEFT_Y = 5;
 
-parameter logic [10:0] SCREEN_MAIN_LUCK_NUMBER_TOP_LEFT_X = 500;
+parameter logic [10:0] SCREEN_MAIN_LUCK_NUMBER_TOP_LEFT_X = 575;
 parameter logic [10:0] SCREEN_MAIN_LUCK_NUMBER_TOP_LEFT_Y = 5;
