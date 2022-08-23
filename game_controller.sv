@@ -20,6 +20,7 @@ module game_controller(
 enum logic [2:0] {state_0, state_1, state_2, state_3} state_present, state_next;
 
 logic [15:0] score_current, score_next;
+
 logic [3:0] life_current, life_next;
 
 assign score = score_current;
@@ -86,8 +87,6 @@ begin
 		end
 
 		state_1: begin
-
-			score_next = 0;
 
 			reset_level = 1;
 

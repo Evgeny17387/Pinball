@@ -79,20 +79,20 @@ logic [3:0] digit;
 always_comb begin
     offsetX = offsetXSquare2[0];
     offsetY = offsetYSquare2[0];
-	digit = score[3:0];
+	digit = score[15:12];
 
     for (integer i = 1; i < SCORE_NUMBERS; i = i + 1) begin
         if (drawSquare2[i]) begin
             offsetX = offsetXSquare2[i];
             offsetY = offsetYSquare2[i];
 			if (i == 1) begin
-				digit = score[7:4];
-			end
-			else if (i == 2) begin
 				digit = score[11:8];
 			end
+			else if (i == 2) begin
+				digit = score[7:4];
+			end
 			else if (i == 3) begin
-				digit = score[15:12];
+				digit = score[3:0];
 			end
         end
     end
