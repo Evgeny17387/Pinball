@@ -43,7 +43,7 @@ ball_block ball_block_inst(
 	.flipperSpeedX(flipperSpeedX),
 	.reset_level(reset_level),
 	.collisionBallObstacle(collisionBallObstacle),
-	.collisionBallSpringPulse(collisionBallSpringPulse),
+	.collisionBallSpring(collisionBallSpring),
 	.springSpeedY(springSpeedY),
 	.collisionBallBumper(collisionBallBumper),
 	.collisionBallFrame(collisionBallFrame),
@@ -126,7 +126,7 @@ logic collisionFlipperFrame;
 logic collisionBallObstacle;
 logic collisionBallObstacleGood;
 logic collisionBallObstacleBad;
-logic collisionBallSpringPulse;
+logic collisionBallSpring;
 logic collisionBallBumper;
 logic collisionBallBottom;
 logic collisionBallCredit;
@@ -152,7 +152,7 @@ collision_detector collision_detector_inst(
 	.collisionBallObstacle(collisionBallObstacle),
 	.collisionBallObstacleGood(collisionBallObstacleGood),
 	.collisionBallObstacleBad(collisionBallObstacleBad),
-	.collisionBallSpringPulse(collisionBallSpringPulse),
+	.collisionBallSpring(collisionBallSpring),
 	.collisionBallBumper(collisionBallBumper),
 	.collisionBallBottom(collisionBallBottom),
 	.collisionBallCredit(collisionBallCredit)

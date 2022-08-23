@@ -46,7 +46,7 @@ parameter logic [10:0] SCREEN_MAIN_SPRING_HEIGHT = 65;
 parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_X = 600;
 parameter logic [10:0] SCREEN_MAIN_SPRING_TOP_LEFT_Y = 410;
 
-localparam SPRING_Y_MARGIN = 5;
+localparam SPRING_Y_MARGIN = 25;
 
 // Bumpers
 

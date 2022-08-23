@@ -13,7 +13,7 @@ module ball_controller(
 	input	logic					reset_level,
 	input	logic 					collisionBallObstacle,
 	input 	logic			[3:0]	hitEdgeCode,
-	input	logic					collisionBallSpringPulse,
+	input	logic					collisionBallSpring,
 	input	int						springSpeedY,
 	input	logic					collisionBallBumper,
 	input	logic					collisionBallFrame,
@@ -35,7 +35,8 @@ int topLeftY_FixedPoint;
 // Right 	- 1
 // Bottom 	- 0
 
-int counter;
+byte collisionsCounterBumper;
+byte collisionsCounterSpring;
 
 always_ff@(posedge clk or negedge resetN)
 begin
@@ -45,7 +46,8 @@ begin
 		Yspeed <= 0;
 		topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y * FIXED_POINT_MULTIPLIER;
 		
-		counter <= 0;
+		collisionsCounterBumper <= 0;
+		collisionsCounterSpring <= 0;
 
 	end 
 	else begin
@@ -55,7 +57,8 @@ begin
 			Yspeed <= 0;
 			topLeftY_FixedPoint <= SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y * FIXED_POINT_MULTIPLIER;
 
-			counter <= 0;
+			collisionsCounterBumper <= 0;
+			collisionsCounterSpring <= 0;
 
 		end
 		else if (!pause) begin
@@ -65,8 +68,11 @@ begin
 				Yspeed <= Yspeed + GRAVITY;
 				topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
 
-				if (counter > 0)
-					counter <= counter - 1;
+				if (collisionsCounterBumper > 0)
+					collisionsCounterBumper <= collisionsCounterBumper - 1;
+
+				if (collisionsCounterSpring > 0)
+					collisionsCounterSpring <= collisionsCounterSpring - 1;
 
 			end
 			else begin
@@ -77,21 +83,24 @@ begin
 					else if (hitEdgeCode[0] && (Yspeed > 0))
 						Yspeed <= -Yspeed;
 				end
-				else if (collisionBallSpringPulse) begin
+				else if ((collisionsCounterSpring == 0) && collisionBallSpring) begin
 					if (hitEdgeCode[0]) begin
-						if (springSpeedY < 0)
-							Yspeed <= Yspeed + springSpeedY;
-						else
+						if (springSpeedY < 0) begin
+							Yspeed <= -Yspeed + springSpeedY;
+						end
+						else begin
 							Yspeed <= -Yspeed;
+						end
+						collisionsCounterSpring <= 5;
 					end
 				end
 				else if (collisionBallFlipper) begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Yspeed <= -Yspeed;
 				end
-				else if ((counter == 0) && collisionBallBumper) begin
+				else if (collisionBallBumper && (collisionsCounterBumper == 0)) begin
 					Yspeed <= (Yspeed * collisionFactor.yyFactor + Xspeed * collisionFactor.xyFactor) >>> 1;
-					counter <= 10;
+					collisionsCounterBumper <= 40;
 				end
 				else if (collisionBallCredit) begin
 					if (hitEdgeCode[2] && (Yspeed < 0)) begin
@@ -149,7 +158,7 @@ begin
 					if (hitEdgeCode[0] && (Yspeed > 0))
 						Xspeed <= Xspeed + flipperSpeedX;
 				end
-				else if ((counter == 0) && collisionBallBumper) begin
+				else if (collisionBallBumper && (collisionsCounterBumper == 0)) begin
 					Xspeed <= (Xspeed * collisionFactor.xxFactor + Yspeed * collisionFactor.yxFactor) >>> 1;
 				end
 				else if (collisionBallCredit) begin
