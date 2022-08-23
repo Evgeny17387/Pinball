@@ -1,6 +1,7 @@
 import defines::SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X, defines::SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y;
 import defines::FIXED_POINT_MULTIPLIER;
 import defines::GRAVITY;
+import defines::FRAME_SIZE_X;
 
 module ball_controller(
 	input	logic					clk,
@@ -141,6 +142,8 @@ begin
 			if (startOfFrame == 1'b1) begin
 
 				if (topLeftX_FixedPoint + Xspeed < 0)
+					Xspeed <= Xspeed >>> 1;
+				else if (topLeftX_FixedPoint + Xspeed > (FRAME_SIZE_X * FIXED_POINT_MULTIPLIER))
 					Xspeed <= Xspeed >>> 1;
 				else
 					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
