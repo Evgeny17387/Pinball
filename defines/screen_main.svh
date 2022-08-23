@@ -1,4 +1,14 @@
 
+// Credits
+
+parameter logic [10:0] SCREEN_MAIN_CREDIT_RADIUS = 25;
+
+parameter logic [10:0] SCREEN_MAIN_CREDIT_1_TOP_LEFT_X = 200;
+parameter logic [10:0] SCREEN_MAIN_CREDIT_1_TOP_LEFT_Y = 200;
+
+parameter logic [10:0] SCREEN_MAIN_CREDIT_NUMBER_OFFSET_X = 17;
+parameter logic [10:0] SCREEN_MAIN_CREDIT_NUMBER_OFFSET_Y = 9;
+
 // Ball
 
 parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X = 600;

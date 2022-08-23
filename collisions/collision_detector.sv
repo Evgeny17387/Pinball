@@ -1,4 +1,4 @@
-module CollisionDetector(
+module collision_detector(
 	input	logic 			clk,
 	input	logic 			resetN,
 	input 	logic 			startOfFrame,

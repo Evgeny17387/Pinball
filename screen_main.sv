@@ -131,7 +131,7 @@ logic collisionBallBumper;
 logic collisionBallBottom;
 logic collisionBallCredit;
 
-CollisionDetector CollisionDetector_inst(
+collision_detector collision_detector_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

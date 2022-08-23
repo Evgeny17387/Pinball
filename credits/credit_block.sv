@@ -1,5 +1,8 @@
 import defines::NUMBER_WIDTH, defines::NUMBER_HEIGHT;
 import defines::COLOR_WHITE;
+import defines::SCREEN_MAIN_CREDIT_RADIUS;
+import defines::SCREEN_MAIN_CREDIT_1_TOP_LEFT_X, defines::SCREEN_MAIN_CREDIT_1_TOP_LEFT_Y;
+import defines::SCREEN_MAIN_CREDIT_NUMBER_OFFSET_X, defines::SCREEN_MAIN_CREDIT_NUMBER_OFFSET_Y;
 
 module credit_block(
 	input	logic					clk,
@@ -12,12 +15,12 @@ module credit_block(
 
 logic drawCicrcle;
 
-circle_dynamic #(.RADIUS(25)) circle_dynamic_inst(
+circle_dynamic #(.RADIUS(SCREEN_MAIN_CREDIT_RADIUS)) circle_dynamic_inst(
 // input
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.topLeftX(200),
-	.topLeftY(200),
+	.topLeftX(SCREEN_MAIN_CREDIT_1_TOP_LEFT_X),
+	.topLeftY(SCREEN_MAIN_CREDIT_1_TOP_LEFT_Y),
 // output
 	.draw(drawCicrcle),
 );
@@ -26,7 +29,7 @@ logic [10:0]	offsetX;
 logic [10:0] 	offsetY;
 logic 			drawSquare;
 
-square #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT), .TOP_LEFT_X(217), .TOP_LEFT_Y(209)) square_inst(
+square #(.OBJECT_WIDTH(NUMBER_WIDTH), .OBJECT_HEIGHT(NUMBER_HEIGHT), .TOP_LEFT_X(SCREEN_MAIN_CREDIT_1_TOP_LEFT_X + SCREEN_MAIN_CREDIT_NUMBER_OFFSET_X), .TOP_LEFT_Y(SCREEN_MAIN_CREDIT_1_TOP_LEFT_Y + SCREEN_MAIN_CREDIT_NUMBER_OFFSET_Y)) square_inst(
 // input
 	.pixelX(pixelX),
 	.pixelY(pixelY),
