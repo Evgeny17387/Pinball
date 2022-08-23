@@ -5,7 +5,6 @@ module indications_block(
 	input 	logic	[10:0]	pixelY,
 	input	logic	[3:0] 	life,
 	input	logic	[3:0] 	score,
-	input	logic	[3:0] 	level,
 	input	logic	[3:0] 	scoreNumber,
 	output	logic			drawIndications,
 	output	logic	[7:0]	RGBIndications
@@ -41,21 +40,6 @@ score_block score_block_inst(
 	.RGBScore(RGBScore)
 );
 
-logic 			drawLevel;
-logic	[7:0]	RGBLevel;
-
-level_block level_block_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.level(level),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-// output
-	.drawLevel(drawLevel),
-	.RGBLevel(RGBLevel)
-);
-
 logic 			drawEquation;
 logic	[7:0]	RGBEquation;
 
@@ -71,7 +55,7 @@ equation_block equation_block_inst(
 	.RGBEquation(RGBEquation)
 );
 
-assign drawIndications = drawLife || drawScore || drawLevel || drawEquation;
-assign RGBIndications = drawLife ? RGBLife : drawScore ? RGBScore : drawLevel ? RGBLevel : RGBEquation;
+assign drawIndications = drawLife || drawScore || drawEquation;
+assign RGBIndications = drawLife ? RGBLife : drawScore ? RGBScore : RGBEquation;
 
 endmodule

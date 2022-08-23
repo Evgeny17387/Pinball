@@ -501,7 +501,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE indications/equation_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE random_number.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/score_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/score_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/level_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/life_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE number/number_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE number/number_bitmap.sv

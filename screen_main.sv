@@ -26,8 +26,6 @@ logic			reset_level;
 
 logic	[31:0]	flipperSpeedX;
 
-logic	[3:0] 	level;
-
 logic	[7:0]	RGBCredit;
 logic 			drawCredit;
 
@@ -58,7 +56,6 @@ ball_block ball_block_inst(
 	.flipperSpeedX(flipperSpeedX),
 	.reset_level(reset_level),
 	.collisionBallObstacle(collisionBallObstacle),
-	.level(level),
 	.collisionBallSpringPulse(collisionBallSpringPulse),
 	.springSpeedY(springSpeedY),
 	.collisionBallBumper(collisionBallBumper),
@@ -181,7 +178,6 @@ game_controller game_controller_inst(
 	.reset_level(reset_level),
 	.reset_level_pulse(reset_level_pulse),
 	.score(score),
-	.level(level),
 	.life(life)
 );
 
@@ -228,7 +224,6 @@ indications_block indications_block_inst(
 	.pixelY(pixelY),
 	.life(life),
 	.score(score),
-	.level(level),
 	.scoreNumber(scoreNumber),
 // output
 	.drawIndications(drawIndications),

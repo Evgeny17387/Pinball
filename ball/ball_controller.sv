@@ -13,7 +13,6 @@ module ball_controller(
 	input	logic					reset_level,
 	input	logic 					collisionBallObstacle,
 	input 	logic			[3:0]	hitEdgeCode,
-	input	logic 			[3:0]	level,
 	input	logic					collisionBallSpringPulse,
 	input	int						springSpeedY,
 	input	logic					collisionBallBumper,
