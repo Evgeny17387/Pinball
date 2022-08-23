@@ -4,6 +4,8 @@ package defines;
 
     `include "defines/colors.svh"
 
+    `include "defines/number.svh"
+
     `include "defines/background.svh"
 
     `include "defines/letter.svh"
@@ -23,9 +25,6 @@ package defines;
     `include "defines/screen_welcome.svh"
     `include "defines/screen_main.svh"
     `include "defines/screen_end.svh"
-
-    parameter logic [10:0]  NUMBER_WIDTH            = 16;
-    parameter logic [10:0]  NUMBER_HEIGHT           = 32;
 
     // {Left, Top, Right, Bottom}
     // Left 	- 3

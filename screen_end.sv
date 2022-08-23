@@ -9,7 +9,7 @@ module screen_end(
 	input	logic			resetN,
 	input	logic	[10:0]	pixelX,
 	input	logic	[10:0]	pixelY,
-	input	logic	[3:0] 	score,
+	input	logic	[15:0] 	score,
 	output	logic	[7:0]	RGB_screen_end
 );
 

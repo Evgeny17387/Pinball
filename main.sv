@@ -74,7 +74,7 @@ screen_welcome screen_welcome_inst(
 
 logic 	[7:0] 	RGB_screen_main;
 logic 	[3:0] 	life;
-logic	[3:0]	score;
+logic	[15:0]	score;
 
 screen_main screen_main_inst(
 // input

@@ -10,7 +10,7 @@ module screen_main(
 	input	logic 			start,
 	output	logic	[7:0]	RGB_screen_main,
 	output	logic	[3:0]	life,
-	output	logic	[3:0] 	score
+	output	logic	[15:0] 	score
 );
 
 logic	[7:0]	RGBCredit;

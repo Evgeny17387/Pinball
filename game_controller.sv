@@ -13,13 +13,13 @@ module game_controller(
 	output 	logic 			pause,
 	output 	logic 			reset_level,
 	output 	logic 			reset_level_pulse,
-	output 	logic [3:0] 	score,
+	output 	logic [15:0] 	score,
 	output 	logic [3:0] 	life
 );
 
 enum logic [2:0] {state_0, state_1, state_2, state_3} state_present, state_next;
 
-logic [3:0] score_current, score_next;
+logic [15:0] score_current, score_next;
 logic [3:0] life_current, life_next;
 
 assign score = score_current;

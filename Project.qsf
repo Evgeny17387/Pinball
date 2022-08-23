@@ -511,9 +511,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE number/number_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/life_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE indications/indications_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE defines/defines.sv
-set_global_assignment -name SYSTEMVERILOG_FILE level/level_label_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE status_level_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE level/level_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE keyboard/lpf.sv
 set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard.sv
