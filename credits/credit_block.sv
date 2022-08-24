@@ -6,12 +6,13 @@ import defines::SCREEN_MAIN_CREDIT_NUMBER_OFFSET_X, defines::SCREEN_MAIN_CREDIT_
 import defines::NUM_CREDITS;
 
 module credit_block(
-	input	logic					clk,
-	input	logic					resetN,
-	input 	logic signed	[10:0] 	pixelX,
-	input 	logic signed	[10:0] 	pixelY,
-	output	logic			[7:0]	RGBCredit,
-	output 	logic 					drawCredit
+	input	logic			clk,
+	input	logic			resetN,
+	input 	logic	[10:0] 	pixelX,
+	input 	logic	[10:0]	pixelY,
+	input	logic			collisionBallCredit,
+	output	logic	[7:0]	RGBCredit,
+	output 	logic 			drawCredit
 );
 
 logic drawCicrcle[NUM_CREDITS];
@@ -63,18 +64,33 @@ endgenerate
 
 logic [10:0] offsetXNumber;
 logic [10:0] offsetYNumber;
+logic [3:0]	creditIndex;
 
 always_comb begin
     offsetXNumber = offsetXSquare[0];
     offsetYNumber = offsetYSquare[0];
+	creditIndex = 0;
 
     for (byte i = 1; i < NUM_CREDITS; i = i + 1) begin
         if (drawSquare[i]) begin
+			creditIndex = i;
             offsetXNumber = offsetXSquare[i];
             offsetYNumber = offsetYSquare[i];
         end
     end
 end
+
+logic [3:0] number;
+
+credit_control credit_control_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.creditIndex(creditIndex),
+	.collisionBallCredit(collisionBallCredit),
+// output
+	.number(number)
+);
 
 logic			drawNumber;
 logic	[10:0]	RGBNumber;
@@ -85,7 +101,7 @@ number_bitmap number_bitmap_inst(
 	.resetN(resetN),
 	.offsetX(offsetXNumber),
 	.offsetY(offsetYNumber),
-	.number(0),
+	.number(number),
 	.insideRectangle(drawSquares),
 // output
 	.drawNumber(drawNumber),

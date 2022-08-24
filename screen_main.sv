@@ -22,6 +22,7 @@ credit_block credit_block_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.collisionBallCredit(collisionBallCredit),
 // output
 	.RGBCredit(RGBCredit),
 	.drawCredit(drawCredit)
