@@ -72,7 +72,7 @@ always_comb begin
 	creditIndex = 0;
 
     for (byte i = 1; i < NUM_CREDITS; i = i + 1) begin
-        if (drawSquare[i]) begin
+        if (drawCicrcle[i]) begin
 			creditIndex = i;
             offsetXNumber = offsetXSquare[i];
             offsetYNumber = offsetYSquare[i];
