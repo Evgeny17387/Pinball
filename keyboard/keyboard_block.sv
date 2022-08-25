@@ -5,6 +5,7 @@ module keyboard_block(
 	input 	logic 		kbd_dat,
 	output 	logic 		key0IsPressed,
 	output 	logic 		key1IsPressed,
+	output 	logic 		key2IsPressed,
 	output 	logic 		key4IsPressed,
 	output 	logic 		key5IsPressed,
 	output 	logic 		key6IsPressed,
@@ -48,6 +49,17 @@ key_decoder #(.KEY_VALUE(9'h069)) key_decoder_1_inst(
 	.key_code(key_code),
 // output
 	.keyIsPressed(key1IsPressed)
+);
+
+key_decoder #(.KEY_VALUE(9'h072)) key_decoder_2_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.make(make),
+	.breakk(breakk),
+	.key_code(key_code),
+// output
+	.keyIsPressed(key2IsPressed)
 );
 
 key_decoder #(.KEY_VALUE(9'h06B)) key_decoder_4_inst(

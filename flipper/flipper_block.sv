@@ -2,68 +2,66 @@ import defines::FLIPPER_INITIAL_Y;
 import defines::FLIPPER_HEIGHT_Y, defines::FLIPPER_WIDTH_X;
 
 module flipper_block(
-	input	logic					clk,
-	input	logic					resetN,
-	input 	logic signed	[10:0] 	pixelX,
-	input 	logic signed	[10:0] 	pixelY,
-	input 	logic 					startOfFrame,
-	input	logic					key4IsPressed,
-	input	logic					key6IsPressed,
-	input	logic					pause,
-	input	logic					reset_level,
-	input 	logic 					collisionFlipperFrame,
-	output	logic			[7:0]	RGB_flipper,
-	output	logic					drawFlipper,
-	output	logic			[31:0]	speedX
+	input	logic			clk,
+	input	logic			resetN,
+	input 	logic	[10:0] 	pixelX,
+	input 	logic 	[10:0] 	pixelY,
+	input 	logic			startOfFrame,
+	input	logic			key2IsPressed,
+	input	logic			key4IsPressed,
+	input	logic			key6IsPressed,
+	input	logic			pause,
+	input	logic			reset_level,
+	input 	logic			collisionFlipperFrame,
+	output	logic	[7:0]	RGB_flipper,
+	output	logic			drawFlipper,
+	output	logic	[31:0]	speedX
 );
 
-logic signed [10:0] topLeftX;
+logic	[7:0]	RGB_flipper_single;
+logic			drawFlipper_single;
+logic	[31:0]	flipperSpeedX_single;
 
-flipper_controller flipper_controller_inst(
+flipper_single_block flipper_single_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
 	.key4IsPressed(key4IsPressed),
 	.key6IsPressed(key6IsPressed),
 	.pause(pause),
 	.reset_level(reset_level),
 	.collisionFlipperFrame(collisionFlipperFrame),
-	.hitEdgeCode(hitEdgeCode),
 // output
-	.topLeftX(topLeftX),
-	.speedX(speedX)
+	.RGB_flipper(RGB_flipper_single),
+	.drawFlipper(drawFlipper_single),
+	.speedX(flipperSpeedX_single)
 );
 
-logic 			insideBracket;
-logic [10:0] 	offsetX;
-logic [10:0] 	offsetY;
+logic	[7:0]	RGB_flipper_dual;
+logic			drawFlipper_dual;
+logic	[31:0]	flipperSpeedX_dual;
 
-square_dynamic #(.OBJECT_WIDTH(FLIPPER_WIDTH_X), .OBJECT_HEIGHT(FLIPPER_HEIGHT_Y)) square_dynamic_inst(
-// input
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-	.topLeftX(topLeftX),
-	.topLeftY(FLIPPER_INITIAL_Y),
-// output
-	.draw(insideBracket),
-	.offsetX(offsetX),
-	.offsetY(offsetY)
-);
-
-logic [3:0] hitEdgeCode;
-
-flipper_object flipper_object_inst(
+flipper_dual_block flipper_dual_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.offsetX(offsetX),
-	.offsetY(offsetY),
-	.insideBracket(insideBracket),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.startOfFrame(startOfFrame),
+	.key2IsPressed(key2IsPressed),
+	.pause(pause),
+	.reset_level(reset_level),
 // output
-	.draw(drawFlipper),
-	.RGB(RGB_flipper),
-	.hitEdgeCode(hitEdgeCode)
+	.RGB_flipper(RGB_flipper_dual),
+	.drawFlipper(drawFlipper_dual),
+	.speedX(flipperSpeedX_dual)
 );
+
+assign RGB_flipper = RGB_flipper_dual;
+assign drawFlipper = drawFlipper_dual;
+assign speedX = flipperSpeedX_dual;
 
 endmodule

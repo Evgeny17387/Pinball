@@ -1,7 +1,7 @@
-import defines::FLIPPER_INITIAL_X, defines::FLIPPER_INITIAL_Y;
+import defines::FLIPPER_INITIAL_X;
 import defines::FIXED_POINT_MULTIPLIER;
 
-module flipper_controller(
+module flipper_single_controller(
 	input	logic					clk,
 	input	logic					resetN,
 	input	logic					startOfFrame,

@@ -273,47 +273,6 @@ set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[6] -t
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[13] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[19] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[21] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
-set_global_assignment -name SYSTEMVERILOG_FILE credits/credit_control.sv
-set_global_assignment -name SYSTEMVERILOG_FILE collisions/edge_detector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE collisions/collision_detector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE text/word.sv
-set_global_assignment -name SYSTEMVERILOG_FILE text/letter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE credits/credit_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE shapes/circle_dynamic.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ball/ball_controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ball/ball_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ball/ball_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE shapes/triangle.sv
-set_global_assignment -name SYSTEMVERILOG_FILE shapes/square_dynamic.sv
-set_global_assignment -name SYSTEMVERILOG_FILE shapes/square.sv
-set_global_assignment -name SYSTEMVERILOG_FILE defines/structs.sv
-set_global_assignment -name SYSTEMVERILOG_FILE edge_detector.sv
-set_global_assignment -name SYSTEMVERILOG_FILE bumpers/bumpers_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/luck_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/equation_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE random_number.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/score_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/score_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/life_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE number/number_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE number/number_bitmap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/life_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE indications/indications_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE defines/defines.sv
-set_global_assignment -name SYSTEMVERILOG_FILE keyboard/lpf.sv
-set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard_block.sv
-set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard.sv
-set_global_assignment -name SYSTEMVERILOG_FILE keyboard/key_decoder.sv
-set_global_assignment -name SYSTEMVERILOG_FILE keyboard/byterec.sv
-set_global_assignment -name SYSTEMVERILOG_FILE keyboard/bitrec.sv
-set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_object.sv
-set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_block.sv
-set_global_assignment -name TCL_SCRIPT_FILE pin.tcl
-set_global_assignment -name SYSTEMVERILOG_FILE main.sv
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[1] -to "screen_main:screen_main_inst|credit_block:credit_block_inst|credit_control:credit_control_inst|collisionBallCredit" -section_id auto_signaltap_0
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[2] -to "screen_main:screen_main_inst|credit_block:credit_block_inst|credit_control:credit_control_inst|creditIndex[0]" -section_id auto_signaltap_0
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[3] -to "screen_main:screen_main_inst|credit_block:credit_block_inst|credit_control:credit_control_inst|creditIndex[1]" -section_id auto_signaltap_0
@@ -363,5 +322,49 @@ set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[8] -t
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_Project_auto_signaltap_0_1_e8ed," -section_id auto_signaltap_0
+set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_single_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_dual_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_single_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_dual_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE credits/credit_control.sv
+set_global_assignment -name SYSTEMVERILOG_FILE collisions/edge_detector.sv
+set_global_assignment -name SYSTEMVERILOG_FILE collisions/collision_detector.sv
+set_global_assignment -name SYSTEMVERILOG_FILE text/word.sv
+set_global_assignment -name SYSTEMVERILOG_FILE text/letter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE credits/credit_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE shapes/circle_dynamic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ball/ball_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ball/ball_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ball/ball_bitmap.sv
+set_global_assignment -name SYSTEMVERILOG_FILE shapes/triangle.sv
+set_global_assignment -name SYSTEMVERILOG_FILE shapes/square_dynamic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE shapes/square.sv
+set_global_assignment -name SYSTEMVERILOG_FILE defines/structs.sv
+set_global_assignment -name SYSTEMVERILOG_FILE edge_detector.sv
+set_global_assignment -name SYSTEMVERILOG_FILE bumpers/bumpers_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spring/spring_bitmap.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/luck_bitmap.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/equation_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE random_number.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/score_bitmap.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/score_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/life_bitmap.sv
+set_global_assignment -name SYSTEMVERILOG_FILE number/number_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE number/number_bitmap.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/life_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE indications/indications_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE defines/defines.sv
+set_global_assignment -name SYSTEMVERILOG_FILE keyboard/lpf.sv
+set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard.sv
+set_global_assignment -name SYSTEMVERILOG_FILE keyboard/key_decoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE keyboard/byterec.sv
+set_global_assignment -name SYSTEMVERILOG_FILE keyboard/bitrec.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flipper/flipper_object.sv
+set_global_assignment -name TCL_SCRIPT_FILE pin.tcl
+set_global_assignment -name SYSTEMVERILOG_FILE main.sv
 set_global_assignment -name SLD_FILE db/stp1_auto_stripped.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

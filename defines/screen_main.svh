@@ -9,6 +9,9 @@ const int FRAME_SIZE_Y = 475;
 const int FLIPPER_INITIAL_X = 280;
 const int FLIPPER_INITIAL_Y = 440;
 
+const int FLIPPER_DUAL_LEFT_INITIAL_X = 5;
+const int FLIPPER_DUAL_RIGHT_INITIAL_X = 460;
+
 localparam int FLIPPER_NUMBER_OF_Y_BITS = 5;
 localparam int FLIPPER_NUMBER_OF_X_BITS = 7;
 

@@ -40,6 +40,7 @@ VGA_Controller VGA_Controller_inst(
 
 logic  			key0IsPressed;
 logic  			key1IsPressed;
+logic  			key2IsPressed;
 logic 			key4IsPressed;
 logic 			key5IsPressed;
 logic  			key6IsPressed;
@@ -54,6 +55,7 @@ keyboard_block keyboard_block_inst(
 // output
 	.key0IsPressed(key0IsPressed),
 	.key1IsPressed(key1IsPressed),
+	.key2IsPressed(key2IsPressed),
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
 	.key6IsPressed(key6IsPressed),
@@ -82,6 +84,7 @@ screen_main screen_main_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.key2IsPressed(key2IsPressed),
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
 	.key6IsPressed(key6IsPressed),
