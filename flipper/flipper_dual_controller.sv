@@ -1,4 +1,5 @@
 import defines::FLIPPER_DUAL_LEFT_INITIAL_X, defines::FLIPPER_DUAL_RIGHT_INITIAL_X;
+import defines::FLIPPER_DUAL_LEFT_LIMIT_X, defines::FLIPPER_DUAL_RIGHT_LIMIT_X;
 import defines::FIXED_POINT_MULTIPLIER;
 
 module flipper_dual_controller(
@@ -40,8 +41,12 @@ begin
 			if (startOfFrame) begin
 
 				if (key2IsPressed) begin
-					topLeftXLeft_FixedPoint <= topLeftXLeft_FixedPoint + Xspeed;
-					topLeftXRight_FixedPoint <= topLeftXRight_FixedPoint - Xspeed;
+					if (topLeftXLeft < FLIPPER_DUAL_LEFT_LIMIT_X) begin
+						topLeftXLeft_FixedPoint <= topLeftXLeft_FixedPoint + Xspeed;
+					end
+					if (topLeftXRight > FLIPPER_DUAL_RIGHT_LIMIT_X) begin
+						topLeftXRight_FixedPoint <= topLeftXRight_FixedPoint - Xspeed;
+					end
 				end else begin
 					if (topLeftXLeft > FLIPPER_DUAL_LEFT_INITIAL_X) begin
 						topLeftXLeft_FixedPoint <= topLeftXLeft_FixedPoint - Xspeed;
