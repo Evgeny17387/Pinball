@@ -9,6 +9,7 @@ module screen_main(
 	input	logic 			key6IsPressed,
 	input	logic 			startOfFrame,
 	input	logic 			start,
+	input	logic			flipperType,
 	output	logic	[7:0]	RGB_screen_main,
 	output	logic	[3:0]	life,
 	output	logic	[15:0] 	score
@@ -73,6 +74,7 @@ flipper_block flipper_block_inst(
 	.pause(pause),
 	.reset_level(reset_level),
 	.collisionFlipperFrame(collisionFlipperFrame),
+	.flipperType(flipperType),
 // output
 	.RGB_flipper(RGB_flipper),
 	.drawFlipper(drawFlipper),

@@ -1,4 +1,4 @@
-module objects_mux(
+module screen_objects_mux(
 	input	logic		clk,
 	input	logic		resetN,
 	input	logic		start,

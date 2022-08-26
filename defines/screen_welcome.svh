@@ -7,3 +7,13 @@ localparam WORD_WELCOME_2_TOP_LEFT_X = 1;
 localparam WORD_WELCOME_2_TOP_LEFT_Y = 300;
 localparam WORD_WELCOME_2_SIZE = 16;
 localparam int WORD_WELCOME_2_LETTERS[WORD_WELCOME_2_SIZE-1:0] = '{19, 17, 0, 19, 18, 26, 14, 19, 26, 28, 26, 18, 18, 4, 17, 15};
+
+localparam WORD_WELCOME_3_TOP_LEFT_X = 100;
+localparam WORD_WELCOME_3_TOP_LEFT_Y = 400;
+localparam WORD_WELCOME_3_SIZE = 6;
+localparam int WORD_WELCOME_3_LETTERS[WORD_WELCOME_3_SIZE-1:0] = '{4, 11, 6, 13, 8, 18};
+
+localparam WORD_WELCOME_4_TOP_LEFT_X = 400;
+localparam WORD_WELCOME_4_TOP_LEFT_Y = 400;
+localparam WORD_WELCOME_4_SIZE = 4;
+localparam int WORD_WELCOME_4_LETTERS[WORD_WELCOME_4_SIZE-1:0] = '{11, 0, 20, 3};

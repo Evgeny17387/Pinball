@@ -1,4 +1,4 @@
-import defines::COLOR_WHITE;
+import defines::COLOR_WHITE, defines::COLOR_DEFAULT;
 import defines::WORD_END_TOP_LEFT_X, defines::WORD_END_TOP_LEFT_Y, defines::WORD_END_SIZE, defines::WORD_END_LETTERS;
 import defines::WORD_END_2_TOP_LEFT_X, defines::WORD_END_2_TOP_LEFT_Y, defines::WORD_END_2_SIZE, defines::WORD_END_2_LETTERS;
 import defines::SCORE_NUMBER_TOP_LEFT_X, defines::SCORE_NUMBER_TOP_LEFT_Y;
@@ -29,6 +29,7 @@ word #(.TOP_LEFT_X(WORD_END_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_TOP_LEFT_Y), .WORD
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.color(COLOR_DEFAULT),
 // output
 	.drawWord(drawWord_1),
 	.RGBWord(RGBWord_1)
@@ -40,6 +41,7 @@ word #(.TOP_LEFT_X(WORD_END_2_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_2_TOP_LEFT_Y), .
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.color(COLOR_DEFAULT),
 // output
 	.drawWord(drawWord_2),
 	.RGBWord(RGBWord_2)
@@ -63,6 +65,7 @@ word #(.TOP_LEFT_X(WORD_END_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_3_TOP_LEFT_Y), .
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.color(COLOR_DEFAULT),
 // output
 	.drawWord(drawWord_3),
 	.RGBWord(RGBWord_3)

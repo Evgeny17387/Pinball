@@ -13,6 +13,7 @@ module flipper_block(
 	input	logic			pause,
 	input	logic			reset_level,
 	input 	logic			collisionFlipperFrame,
+	input	logic			flipperType,
 	output	logic	[7:0]	RGB_flipper,
 	output	logic			drawFlipper,
 	output	logic	[31:0]	speedX
@@ -60,8 +61,8 @@ flipper_dual_block flipper_dual_block_inst(
 	.speedX(flipperSpeedX_dual)
 );
 
-assign RGB_flipper = RGB_flipper_dual;
-assign drawFlipper = drawFlipper_dual;
-assign speedX = flipperSpeedX_dual;
+assign RGB_flipper = flipperType == 0 ? RGB_flipper_single : RGB_flipper_dual;
+assign drawFlipper = flipperType == 0 ? drawFlipper_single : drawFlipper_dual;
+assign speedX = flipperType == 0 ? flipperSpeedX_single : flipperSpeedX_dual;
 
 endmodule

@@ -63,6 +63,7 @@ keyboard_block keyboard_block_inst(
 );
 
 logic [7:0] RGB_screen_welcome;
+logic		flipperType;
 
 screen_welcome screen_welcome_inst(
 // input
@@ -70,8 +71,12 @@ screen_welcome screen_welcome_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.key4IsPressed(key4IsPressed),
+	.key6IsPressed(key6IsPressed),
+	.screenWelcomeOperational(screenWelcomeOperational),
 // output
-	.RGB_screen_welcome(RGB_screen_welcome)
+	.RGB_screen_welcome(RGB_screen_welcome),
+	.flipperType(flipperType)
 );
 
 logic 	[7:0] 	RGB_screen_main;
@@ -90,6 +95,7 @@ screen_main screen_main_inst(
 	.key6IsPressed(key6IsPressed),
 	.startOfFrame(startOfFrame),
 	.start(start),
+	.flipperType(flipperType),
 // output
 	.RGB_screen_main(RGB_screen_main),
 	.life(life),
@@ -111,6 +117,7 @@ screen_end screen_end_inst(
 
 logic game_end;
 logic start;
+logic screenWelcomeOperational;
 
 screen_controller screen_controller_inst(
 // input
@@ -121,10 +128,11 @@ screen_controller screen_controller_inst(
 	.life(life),
 // output
 	.start(start),
-	.game_end(game_end)
+	.game_end(game_end),
+	.screenWelcomeOperational(screenWelcomeOperational)
 );
 
-objects_mux objects_mux_inst(
+screen_objects_mux screen_objects_mux_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

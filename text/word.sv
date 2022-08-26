@@ -9,6 +9,7 @@ module word
 	input 	logic 			resetN,
 	input 	logic	[10:0]	pixelX,
 	input 	logic	[10:0]	pixelY,
+	input 	logic 	[7:0]	color,
 	output	logic			drawWord,
 	output	logic	[7:0]	RGBWord
 );
@@ -67,6 +68,7 @@ letter letter_inst(
 	.offsetY(offsetYLetter),
 	.letter(letter),
 	.drawLetter(drawLetter),
+    .color(color),
 // output
 	.drawLetterBitMask(drawWord),
 	.RGBLetter(RGBWord)

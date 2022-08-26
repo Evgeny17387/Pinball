@@ -9,6 +9,7 @@ module letter
 	input 	logic	[10:0]	offsetY,
 	input	logic	[4:0] 	letter,
 	input 	logic 			drawLetter,
+	input 	logic 	[7:0]	color,
 	output	logic			drawLetterBitMask,
 	output	logic	[7:0]	RGBLetter
 );
@@ -27,6 +28,10 @@ module letter
 //15, 17, 4, 18, 18, 26, 29, 26 19, 14, 26, 18, 19, 0, 17, 19
 //your score is:
 //24, 14, 20, 17, 26, 18, 2, 14, 17, 4, 26, 8, 18, 27
+//single
+//18, 8, 13, 6, 11, 4
+//Dual
+//3, 20, 0, 11
 
 // A - 0
 // B - 1
@@ -1136,6 +1141,6 @@ begin
 
 end
 
-assign RGBLetter = COLOR_DEFAULT;
+assign RGBLetter = color;
 
 endmodule 
