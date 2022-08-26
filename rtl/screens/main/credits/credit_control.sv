@@ -5,6 +5,7 @@ module credit_control(
 	input	logic			resetN,
 	input	logic	[3:0]	creditIndex,
 	input	logic			collisionBallCredit,
+	input	logic			reset_level_pulse,
 	output	logic	[3:0]	number
 );
 
@@ -31,7 +32,11 @@ begin
 	end
 	else begin
 
-		if (collisionBallCredit) begin
+		if (reset_level_pulse) begin
+
+			numbers = '{0, 0, 0};
+
+		end else if (collisionBallCredit) begin
 
 			if (creditIndex == 0) begin
 				numbers[0] <= numbers[0] + 1;

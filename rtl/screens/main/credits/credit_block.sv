@@ -11,6 +11,7 @@ module credit_block(
 	input 	logic	[10:0] 	pixelX,
 	input 	logic	[10:0]	pixelY,
 	input	logic			collisionBallCredit,
+	input	logic			reset_level_pulse,
 	output	logic	[7:0]	RGBCredit,
 	output 	logic 			drawCredit
 );
@@ -88,6 +89,7 @@ credit_control credit_control_inst(
 	.resetN(resetN),
 	.creditIndex(creditIndex),
 	.collisionBallCredit(collisionBallCredit),
+	.reset_level_pulse(reset_level_pulse),
 // output
 	.number(number)
 );
