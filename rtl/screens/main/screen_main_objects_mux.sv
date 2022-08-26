@@ -1,4 +1,4 @@
-module objects_mux_screen_main(
+module screen_main_objects_mux(
 	input	logic		clk,
 	input	logic		resetN,
 	input	logic		drawBall,
@@ -15,6 +15,8 @@ module objects_mux_screen_main(
 	input	logic [7:0]	RGBBumper,
 	input	logic		drawCredit,
 	input	logic [7:0]	RGBCredit,
+	input	logic		drawTrap,
+	input	logic [7:0]	RGBTrap,
 	input	logic [7:0] RGB_backGround,
 	output	logic [7:0] RGB_screen_main
 );
@@ -39,6 +41,8 @@ begin
 			RGB_screen_main <= RGBBumper;
 		else if (drawCredit == 1'b1)
 			RGB_screen_main <= RGBCredit;
+		else if (drawTrap == 1'b1)
+			RGB_screen_main <= RGBTrap;
 		else
 			RGB_screen_main <= RGB_backGround;
 	end

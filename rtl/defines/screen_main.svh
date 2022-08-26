@@ -4,6 +4,14 @@
 const int FRAME_SIZE_X = 635;
 const int FRAME_SIZE_Y = 475;
 
+// Trap
+
+localparam logic [10:0] SCREEN_MAIN_TRAP_RADIUS_OUTER = 25;
+localparam logic [10:0] SCREEN_MAIN_TRAP_RADIUS_INNER = 20;
+
+localparam logic [10:0] SCREEN_MAIN_TRAP_INITIAL_CENTER_X = 100;
+localparam logic [10:0] SCREEN_MAIN_TRAP_INITIAL_CENTER_Y = 100;
+
 // Flipper
 
 const int FLIPPER_INITIAL_X = 280;

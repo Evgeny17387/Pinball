@@ -11,4 +11,6 @@ parameter logic [7:0] COLOR_YELLOW      = 8'b11111000;
 
 parameter logic [7:0] COLOR_BLUE_DARK   = 8'h11101101;
 
+parameter logic [7:0] COLOR_NEW         = 8'b10110011;
+
 parameter logic [7:0] COLOR_DEFAULT     = 8'b01011011;

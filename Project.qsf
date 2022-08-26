@@ -322,6 +322,9 @@ set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[8] -t
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_Project_auto_signaltap_0_1_e8ed," -section_id auto_signaltap_0
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/trap/trap_block.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/shapes/cylinder_dynamic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/screen_main_objects_mux.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/number/number_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/number/number_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/shapes/triangle.sv
@@ -359,7 +362,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/spring/spring_bl
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/spring/spring_bitmap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/screen_main.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/obstacle.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/objects_mux_screen_main.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/game_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/background.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/end/screen_end.sv

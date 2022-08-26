@@ -20,6 +20,8 @@ package defines;
 
     `include "rtl/defines/bumpers.svh"
 
+    `include "rtl/defines/trap.svh"
+
     `include "rtl/defines/screen_welcome.svh"
     `include "rtl/defines/screen_main.svh"
     `include "rtl/defines/screen_end.svh"

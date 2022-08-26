@@ -15,6 +15,20 @@ module screen_main(
 	output	logic	[15:0] 	score
 );
 
+logic	[7:0]	RGBTrap;
+logic 			drawTrap;
+
+trap_block trap_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+// output
+	.RGBTrap(RGBTrap),
+	.drawTrap(drawTrap)
+);
+
 logic	[7:0]	RGBCredit;
 logic 			drawCredit;
 
@@ -239,7 +253,7 @@ indications_block indications_block_inst(
 	.RGBIndications(RGBIndications)
 );
 
-objects_mux_screen_main objects_mux_screen_main_inst(
+screen_main_objects_mux screen_main_objects_mux_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
@@ -257,6 +271,8 @@ objects_mux_screen_main objects_mux_screen_main_inst(
 	.RGBBumper(RGBBumper),
 	.drawCredit(drawCredit),
 	.RGBCredit(RGBCredit),
+	.drawTrap(drawTrap),
+	.RGBTrap(RGBTrap),
 	.RGB_backGround(RGB_backGround),
 // output
 	.RGB_screen_main(RGB_screen_main)
