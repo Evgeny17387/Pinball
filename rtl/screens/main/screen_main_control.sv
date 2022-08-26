@@ -1,6 +1,6 @@
 import defines::LIFE_INIT;
 
-module game_controller(	
+module screen_main_control(
 	input	logic 			clk,
 	input	logic 			resetN,
 	input	logic 			key5IsPressed,

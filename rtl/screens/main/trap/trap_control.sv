@@ -4,6 +4,8 @@ module trap_control(
 	input	logic			clk,
 	input	logic			resetN,
 	input	logic 			startOfFrame,
+	input 	logic 			reset_level,
+	input 	logic 			pause,
 	output	logic	[10:0]	centerX,
 	output	logic	[10:0]	centerY
 );
@@ -55,7 +57,14 @@ always_comb begin
 
 	path_next = path_current;
 
-	if (startOfFrame) begin
+	if (reset_level) begin
+
+		centerXNext <= SCREEN_MAIN_TRAP_CENTER_X[0];
+		centerYNext <= SCREEN_MAIN_TRAP_CENTER_Y[0];
+
+		path_next <= path_0;
+
+	end else if (startOfFrame && !pause) begin
 
 		case (path_current)
 

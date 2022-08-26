@@ -25,6 +25,8 @@ trap_block trap_block_inst(
 	.pixelX(pixelX),
 	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
+	.reset_level(reset_level),
+	.pause(pause),
 // output
 	.RGBTrap(RGBTrap),
 	.drawTrap(drawTrap)
@@ -183,7 +185,7 @@ logic reset_level_pulse;
 logic pause;
 logic reset_level;
 
-game_controller game_controller_inst(
+screen_main_control screen_main_control_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

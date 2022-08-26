@@ -7,6 +7,8 @@ module trap_block(
 	input 	logic	[10:0] 	pixelX,
 	input 	logic	[10:0]	pixelY,
 	input	logic 			startOfFrame,
+	input 	logic 			reset_level,
+	input 	logic 			pause,
 	output	logic	[7:0]	RGBTrap,
 	output 	logic 			drawTrap
 );
@@ -19,6 +21,8 @@ trap_control trap_control_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.startOfFrame(startOfFrame),
+	.reset_level(reset_level),
+	.pause(pause),
 // output
 	.centerX(centerX),
 	.centerY(centerY)
