@@ -24,6 +24,7 @@ trap_block trap_block_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.startOfFrame(startOfFrame),
 // output
 	.RGBTrap(RGBTrap),
 	.drawTrap(drawTrap)
