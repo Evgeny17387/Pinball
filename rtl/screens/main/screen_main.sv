@@ -107,19 +107,21 @@ flipper_block flipper_block_inst(
 );
 
 logic [3:0] scoreNumber;
-logic 		drawScoreNumber;
+logic [3:0] countDownNumber;
 
-random_number random_number_inst(
+count_down count_down_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
-	.getRandomNumber(reset_level_pulse),
+	.reset_level_pulse(reset_level_pulse),
+	.collisionBallTrap(collisionBallTrap),
 // output
-	.randomNumber(scoreNumber)
+	.countDownNumber(countDownNumber)
 );
 
 logic	[7:0]	RGBObstacle;
 logic 			drawObstacle;
+logic 			drawScoreNumber;
 
 Obstacle Obstacle_inst(
 // input
@@ -260,7 +262,7 @@ indications_block indications_block_inst(
 	.pixelY(pixelY),
 	.life(life),
 	.score(score),
-	.scoreNumber(scoreNumber),
+	.scoreNumber(countDownNumber),
 // output
 	.drawIndications(drawIndications),
 	.RGBIndications(RGBIndications)
