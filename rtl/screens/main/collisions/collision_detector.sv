@@ -1,26 +1,28 @@
 module collision_detector(
-	input	logic 			clk,
-	input	logic 			resetN,
-	input 	logic 			startOfFrame,
-	input	logic 			drawBall,
-	input	logic 			drawFrame,
-	input	logic 			drawFlipper,
-	input	logic 			drawObstacle,
-	input	logic 			drawSpring,
-	input	logic 			drawBumper,
-	input	logic			drawScoreNumber,
-	input	logic			drawBottom,
-	input	logic			drawCredit,
-	output 	logic 			collisionBallFrame,
-	output 	logic 			collisionBallFlipper,
-	output 	logic 			collisionFlipperFrame,
-	output	logic 			collisionBallObstacle,
-	output	logic 			collisionBallObstacleGood,
-	output	logic 			collisionBallObstacleBad,
-	output	logic			collisionBallSpring,
-	output	logic			collisionBallBumper,
-	output	logic			collisionBallBottom,
-	output	logic			collisionBallCredit
+	input	logic	clk,
+	input	logic 	resetN,
+	input 	logic 	startOfFrame,
+	input	logic 	drawBall,
+	input	logic 	drawFrame,
+	input	logic 	drawFlipper,
+	input	logic 	drawObstacle,
+	input	logic 	drawSpring,
+	input	logic 	drawBumper,
+	input	logic	drawScoreNumber,
+	input	logic	drawBottom,
+	input	logic	drawCredit,
+	input	logic	drawTrap,
+	output 	logic 	collisionBallFrame,
+	output 	logic 	collisionBallFlipper,
+	output 	logic 	collisionFlipperFrame,
+	output	logic 	collisionBallObstacle,
+	output	logic 	collisionBallObstacleGood,
+	output	logic 	collisionBallObstacleBad,
+	output	logic	collisionBallSpring,
+	output	logic	collisionBallBumper,
+	output	logic	collisionBallBottom,
+	output	logic	collisionBallCredit,
+	output	logic	collisionBallTrap
 );
 
 edge_dectector edge_dectector_ball_credit_inst(
@@ -51,6 +53,16 @@ edge_dectector edge_dectector_ball_spring_inst(
 	.signal(drawBall && drawSpring),
 // output
 	.edgeDetected(collisionBallSpring)
+);
+
+edge_dectector edge_dectector_ball_trap_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.startOfFrame(startOfFrame),
+	.signal(drawBall && drawTrap),
+// output
+	.edgeDetected(collisionBallTrap)
 );
 
 logic collisionFlipperFrame_c;

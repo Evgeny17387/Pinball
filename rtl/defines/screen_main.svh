@@ -13,6 +13,19 @@ localparam byte TRAP_TRAJECTORY_POINTS = 4;
 localparam logic [10:0] SCREEN_MAIN_TRAP_CENTER_X[TRAP_TRAJECTORY_POINTS-1:0] = '{100, 500, 500, 100};
 localparam logic [10:0] SCREEN_MAIN_TRAP_CENTER_Y[TRAP_TRAJECTORY_POINTS-1:0] = '{400, 400, 100, 100};
 
+// Ball
+
+parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X = 600;
+parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y = 340;
+
+localparam logic [10:0] BALL_HEIGHT_NUMBER_OF_Y_BITS = 5;
+localparam logic [10:0] BALL_WIDTH_NUMBER_OF_X_BITS = 5;
+
+localparam logic [10:0] BALL_RADIUS = 1 <<  (BALL_HEIGHT_NUMBER_OF_Y_BITS - 1);
+
+localparam logic [10:0] BALL_WIDTH_Y_DIVIDER = BALL_HEIGHT_NUMBER_OF_Y_BITS - 2;
+localparam logic [10:0] BALL_WIDTH_X_DIVIDER =  BALL_WIDTH_NUMBER_OF_X_BITS - 2;
+
 // Flipper
 
 const int FLIPPER_INITIAL_X = 280;
@@ -62,11 +75,6 @@ parameter logic [10:0] SCREEN_MAIN_CREDITS_TOP_LEFT_Y [NUM_CREDITS-1:0] = '{150,
 
 parameter logic [10:0] SCREEN_MAIN_CREDIT_NUMBER_OFFSET_X = 17;
 parameter logic [10:0] SCREEN_MAIN_CREDIT_NUMBER_OFFSET_Y = 9;
-
-// Ball
-
-parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X = 600;
-parameter int SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_Y = 340;
 
 // Background
 

@@ -2,26 +2,31 @@ import defines::SCREEN_MAIN_BALL_INITIAL_TOP_LEFT_X, defines::SCREEN_MAIN_BALL_I
 import defines::FIXED_POINT_MULTIPLIER;
 import defines::GRAVITY;
 import defines::FRAME_SIZE_X;
+import defines::BALL_RADIUS;
 
 module ball_controller(
-	input	logic					clk,
-	input	logic					resetN,
-	input	logic					startOfFrame,
-	input 	logic					collisionBallFlipper,
-	input	logic					key5IsPressed,
-	input	logic					pause,
-	input	logic			[31:0]	flipperSpeedX,
-	input	logic					reset_level,
-	input	logic 					collisionBallObstacle,
-	input 	logic			[3:0]	hitEdgeCode,
-	input	logic					collisionBallSpring,
-	input	int						springSpeedY,
-	input	logic					collisionBallBumper,
-	input	logic					collisionBallFrame,
-	input	COLLISION_FACTOR		collisionFactor,
-	input	logic					collisionBallCredit,
-	output	logic signed 	[10:0]	topLeftX,
-	output	logic signed	[10:0]	topLeftY
+	input	logic						clk,
+	input	logic						resetN,
+	input	logic						startOfFrame,
+	input 	logic						collisionBallFlipper,
+	input	logic						key5IsPressed,
+	input	logic						pause,
+	input	logic				[31:0]	flipperSpeedX,
+	input	logic						reset_level,
+	input	logic 						collisionBallObstacle,
+	input 	logic				[3:0]	hitEdgeCode,
+	input	logic						collisionBallSpring,
+	input	int							springSpeedY,
+	input	logic						collisionBallBumper,
+	input	logic						collisionBallFrame,
+	input	COLLISION_FACTOR			collisionFactor,
+	input	logic						collisionBallCredit,
+	input	logic						collisionBallTrap,
+	input	logic						controlledByTrapStop,
+	input	logic signed 		[10:0]	trapCenterX,
+	input	logic signed		[10:0]	trapCenterY,
+	output	logic signed 		[10:0]	topLeftX,
+	output	logic signed		[10:0]	topLeftY
 );
 
 int Xspeed;
@@ -38,6 +43,35 @@ int topLeftY_FixedPoint;
 
 byte collisionsCounterBumper;
 byte collisionsCounterSpring;
+
+logic controlledByTrap;
+
+always_ff@(posedge clk or negedge resetN)
+begin
+
+	if (!resetN) begin
+
+		controlledByTrap <= 1'b0;
+
+	end else begin
+
+		if (reset_level) begin
+
+			controlledByTrap <= 1'b0;
+
+		end else if (collisionBallTrap) begin
+
+			controlledByTrap <= 1'b1;
+
+		end else if (controlledByTrapStop) begin
+
+			controlledByTrap <= 1'b0;
+
+		end
+
+	end
+
+end
 
 always_ff@(posedge clk or negedge resetN)
 begin
@@ -64,7 +98,11 @@ begin
 		end
 		else if (!pause) begin
 
-			if (startOfFrame) begin
+			if (controlledByTrap) begin
+
+				topLeftY_FixedPoint <= (trapCenterY - BALL_RADIUS) * FIXED_POINT_MULTIPLIER;
+
+			end else if (startOfFrame) begin
 
 				Yspeed <= Yspeed + GRAVITY;
 				topLeftY_FixedPoint <= topLeftY_FixedPoint + Yspeed;
@@ -75,8 +113,7 @@ begin
 				if (collisionsCounterSpring > 0)
 					collisionsCounterSpring <= collisionsCounterSpring - 1;
 
-			end
-			else begin
+			end else begin
 
 				if (collisionBallFrame || collisionBallObstacle) begin
 					if (hitEdgeCode[2] && (Yspeed < 0))
@@ -139,7 +176,11 @@ begin
 		end
 		else if (!pause) begin
 
-			if (startOfFrame == 1'b1) begin
+			if (controlledByTrap) begin
+
+				topLeftX_FixedPoint <= (trapCenterX - BALL_RADIUS) * FIXED_POINT_MULTIPLIER;
+
+			end else if (startOfFrame) begin
 
 				if (topLeftX_FixedPoint + Xspeed < 0)
 					Xspeed <= Xspeed >>> 1;
@@ -148,8 +189,7 @@ begin
 				else
 					topLeftX_FixedPoint <= topLeftX_FixedPoint + Xspeed;
 
-			end
-			else begin
+			end else begin
 
 				if (collisionBallFrame || collisionBallObstacle) begin
 					if (hitEdgeCode[3] && (Xspeed < 0))

@@ -10,11 +10,10 @@ module trap_block(
 	input 	logic 			reset_level,
 	input 	logic 			pause,
 	output	logic	[7:0]	RGBTrap,
-	output 	logic 			drawTrap
+	output 	logic 			drawTrap,
+	output	logic	[10:0]	centerX,
+	output	logic	[10:0]	centerY
 );
-
-logic [10:0] centerX;
-logic [10:0] centerY;
 
 trap_control trap_control_inst(
 // input

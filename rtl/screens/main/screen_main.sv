@@ -17,6 +17,8 @@ module screen_main(
 
 logic	[7:0]	RGBTrap;
 logic 			drawTrap;
+logic	[10:0]	trapCenterX;
+logic	[10:0]	trapCenterY;
 
 trap_block trap_block_inst(
 // input
@@ -29,7 +31,9 @@ trap_block trap_block_inst(
 	.pause(pause),
 // output
 	.RGBTrap(RGBTrap),
-	.drawTrap(drawTrap)
+	.drawTrap(drawTrap),
+	.centerX(trapCenterX),
+	.centerY(trapCenterY)
 );
 
 logic	[7:0]	RGBCredit;
@@ -70,6 +74,9 @@ ball_block ball_block_inst(
 	.collisionBallFrame(collisionBallFrame),
 	.collisionFactor(collisionFactor),
 	.collisionBallCredit(collisionBallCredit),
+	.collisionBallTrap(collisionBallTrap),
+	.trapCenterX(trapCenterX),
+	.trapCenterY(trapCenterY),
 // output
 	.RGBBall(RGBBall),
 	.drawBall(drawBall)
@@ -153,6 +160,7 @@ logic collisionBallSpring;
 logic collisionBallBumper;
 logic collisionBallBottom;
 logic collisionBallCredit;
+logic collisionBallTrap;
 
 collision_detector collision_detector_inst(
 // input
@@ -168,6 +176,7 @@ collision_detector collision_detector_inst(
 	.drawScoreNumber(drawScoreNumber),
 	.drawBottom(drawBottom),
 	.drawCredit(drawCredit),
+	.drawTrap(drawTrap),
 // output
 	.collisionBallFrame(collisionBallFrame),
 	.collisionBallFlipper(collisionBallFlipper),
@@ -178,7 +187,8 @@ collision_detector collision_detector_inst(
 	.collisionBallSpring(collisionBallSpring),
 	.collisionBallBumper(collisionBallBumper),
 	.collisionBallBottom(collisionBallBottom),
-	.collisionBallCredit(collisionBallCredit)
+	.collisionBallCredit(collisionBallCredit),
+	.collisionBallTrap(collisionBallTrap)
 );
 
 logic reset_level_pulse;
