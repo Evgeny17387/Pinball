@@ -3,7 +3,7 @@ import defines::FLIPPER_HEIGHT_Y_DIVIDER, defines::FLIPPER_WIDTH_X_DIVIDER;
 import defines::FLIPPER_COLOR;
 import defines::HIT_COLORS;
 
-module flipper_object(
+module flipper_single_object(
 	input	logic					clk,
 	input	logic					resetN,
 	input 	logic signed	[10:0] 	offsetX,

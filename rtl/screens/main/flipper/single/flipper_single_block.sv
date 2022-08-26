@@ -53,7 +53,7 @@ square_dynamic #(.OBJECT_WIDTH(FLIPPER_WIDTH_X), .OBJECT_HEIGHT(FLIPPER_HEIGHT_Y
 
 logic [3:0] hitEdgeCode;
 
-flipper_object flipper_object_inst(
+flipper_single_object flipper_single_object_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
