@@ -46,6 +46,8 @@ byte collisionsCounterSpring;
 
 logic controlledByTrap;
 
+byte controlledByTrapStopCounter;
+
 always_ff@(posedge clk or negedge resetN)
 begin
 
@@ -61,11 +63,21 @@ begin
 
 		end else if (collisionBallTrap) begin
 
-			controlledByTrap <= 1'b1;
+			if (controlledByTrapStopCounter > 0) begin
+
+				controlledByTrapStopCounter <= controlledByTrapStopCounter - 1;
+
+			end else begin
+
+				controlledByTrap <= 1'b1;
+
+			end
 
 		end else if (controlledByTrapStop) begin
 
 			controlledByTrap <= 1'b0;
+
+			controlledByTrapStopCounter <= 10;
 
 		end
 

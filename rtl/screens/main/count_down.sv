@@ -3,18 +3,19 @@ module count_down(
     input	logic			resetN,
 	input	logic			reset_level_pulse,
 	input	logic			collisionBallTrap,
-	output	logic	[3:0]	countDownNumber
+	output	logic	[3:0]	countDownNumber,
+	output	logic			controlledByTrapStop
 );
 
 logic countDownEnabe;
-
-logic skipOneClockCycle;
 
 always_ff@(posedge clk or negedge resetN) begin
 
 	if (!resetN) begin
 
 		countDownEnabe <= 1'b0;
+
+		controlledByTrapStop <= 1'b0;
 
 	end else begin
 
@@ -26,6 +27,8 @@ always_ff@(posedge clk or negedge resetN) begin
 
 			countDownEnabe <= 1'b1;
 
+			controlledByTrapStop <= 1'b0;
+
 		end else if (countDownEnabe) begin
 
 			if (oneSecPulse) begin
@@ -33,6 +36,8 @@ always_ff@(posedge clk or negedge resetN) begin
 				if (countDownNumber == 4'h0) begin
 
 					countDownEnabe <= 1'b0;
+
+					controlledByTrapStop <= 1'b1;
 
 				end else begin
 

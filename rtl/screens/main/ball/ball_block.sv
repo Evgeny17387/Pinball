@@ -19,6 +19,7 @@ module ball_block(
 	input	COLLISION_FACTOR			collisionFactor,
 	input	logic						collisionBallCredit,
 	input	logic						collisionBallTrap,
+	input	logic						controlledByTrapStop,
 	input	logic				[10:0]	trapCenterX,
 	input	logic				[10:0]	trapCenterY,
 	output	logic				[7:0]	RGBBall,
@@ -47,6 +48,7 @@ ball_controller ball_controller_inst(
 	.collisionFactor(collisionFactor),
 	.collisionBallCredit(collisionBallCredit),
 	.collisionBallTrap(collisionBallTrap),
+	.controlledByTrapStop(controlledByTrapStop),
 	.trapCenterX(trapCenterX),
 	.trapCenterY(trapCenterY),
 // output

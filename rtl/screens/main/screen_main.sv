@@ -75,6 +75,7 @@ ball_block ball_block_inst(
 	.collisionFactor(collisionFactor),
 	.collisionBallCredit(collisionBallCredit),
 	.collisionBallTrap(collisionBallTrap),
+	.controlledByTrapStop(controlledByTrapStop),
 	.trapCenterX(trapCenterX),
 	.trapCenterY(trapCenterY),
 // output
@@ -116,7 +117,8 @@ count_down count_down_inst(
 	.reset_level_pulse(reset_level_pulse),
 	.collisionBallTrap(collisionBallTrap),
 // output
-	.countDownNumber(countDownNumber)
+	.countDownNumber(countDownNumber),
+	.controlledByTrapStop(controlledByTrapStop),
 );
 
 logic	[7:0]	RGBObstacle;
