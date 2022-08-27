@@ -8,14 +8,30 @@ module trap_block(
 	input 	logic	[10:0]	pixelY,
 	input	logic 			startOfFrame,
 	input 	logic 			reset_level,
+	input 	logic 			reset_level_pulse,
 	input 	logic 			pause,
+	input	logic			collisionBallTrap,
 	output	logic	[7:0]	RGBTrap,
 	output 	logic 			drawTrap,
 	output	logic	[10:0]	centerX,
-	output	logic	[10:0]	centerY
+	output	logic	[10:0]	centerY,
+	output	logic			controlledByTrap,
+	output	logic	[3:0]	countDownNumber
 );
 
-trap_control trap_control_inst(
+trap_control_capture trap_control_capture_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.reset_level_pulse(reset_level_pulse),
+	.collisionBallTrap(collisionBallTrap),
+	.startOfFrame(startOfFrame),
+// output
+	.countDownNumber(countDownNumber),
+	.controlledByTrap(controlledByTrap)
+);
+
+trap_control_movement trap_control_movement_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),

@@ -19,6 +19,8 @@ logic	[7:0]	RGBTrap;
 logic 			drawTrap;
 logic	[10:0]	trapCenterX;
 logic	[10:0]	trapCenterY;
+logic 			controlledByTrap;
+logic	[3:0]	countDownNumber;
 
 trap_block trap_block_inst(
 // input
@@ -28,28 +30,16 @@ trap_block trap_block_inst(
 	.pixelY(pixelY),
 	.startOfFrame(startOfFrame),
 	.reset_level(reset_level),
+	.reset_level_pulse(reset_level_pulse),
 	.pause(pause),
+	.collisionBallTrap(collisionBallTrap),
 // output
 	.RGBTrap(RGBTrap),
 	.drawTrap(drawTrap),
 	.centerX(trapCenterX),
-	.centerY(trapCenterY)
-);
-
-logic	[7:0]	RGBCredit;
-logic 			drawCredit;
-
-credit_block credit_block_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.pixelX(pixelX),
-	.pixelY(pixelY),
-	.collisionBallCredit(collisionBallCredit),
-	.reset_level_pulse(reset_level_pulse),
-// output
-	.RGBCredit(RGBCredit),
-	.drawCredit(drawCredit)
+	.centerY(trapCenterY),
+	.controlledByTrap(controlledByTrap),
+	.countDownNumber(countDownNumber)
 );
 
 logic	[7:0]	RGBBall;
@@ -74,13 +64,28 @@ ball_block ball_block_inst(
 	.collisionBallFrame(collisionBallFrame),
 	.collisionFactor(collisionFactor),
 	.collisionBallCredit(collisionBallCredit),
-	.collisionBallTrap(collisionBallTrap),
-	.controlledByTrapStop(controlledByTrapStop),
+	.controlledByTrap(controlledByTrap),
 	.trapCenterX(trapCenterX),
 	.trapCenterY(trapCenterY),
 // output
 	.RGBBall(RGBBall),
 	.drawBall(drawBall)
+);
+
+logic	[7:0]	RGBCredit;
+logic 			drawCredit;
+
+credit_block credit_block_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.collisionBallCredit(collisionBallCredit),
+	.reset_level_pulse(reset_level_pulse),
+// output
+	.RGBCredit(RGBCredit),
+	.drawCredit(drawCredit)
 );
 
 logic	[7:0]	RGB_flipper;
@@ -107,20 +112,6 @@ flipper_block flipper_block_inst(
 	.speedX(flipperSpeedX)
 );
 
-logic [3:0] scoreNumber;
-logic [3:0] countDownNumber;
-
-count_down count_down_inst(
-// input
-	.clk(clk),
-	.resetN(resetN),
-	.reset_level_pulse(reset_level_pulse),
-	.collisionBallTrap(collisionBallTrap),
-// output
-	.countDownNumber(countDownNumber),
-	.controlledByTrapStop(controlledByTrapStop),
-);
-
 logic	[7:0]	RGBObstacle;
 logic 			drawObstacle;
 logic 			drawScoreNumber;
@@ -131,7 +122,7 @@ Obstacle Obstacle_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.scoreNumber(scoreNumber),
+	.scoreNumber(0),
 // output
 	.drawObstacle(drawObstacle),
 	.RGBObstacle(RGBObstacle),

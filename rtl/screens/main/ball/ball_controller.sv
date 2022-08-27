@@ -21,8 +21,7 @@ module ball_controller(
 	input	logic						collisionBallFrame,
 	input	COLLISION_FACTOR			collisionFactor,
 	input	logic						collisionBallCredit,
-	input	logic						collisionBallTrap,
-	input	logic						controlledByTrapStop,
+	input	logic						controlledByTrap,
 	input	logic signed 		[10:0]	trapCenterX,
 	input	logic signed		[10:0]	trapCenterY,
 	output	logic signed 		[10:0]	topLeftX,
@@ -43,47 +42,6 @@ int topLeftY_FixedPoint;
 
 byte collisionsCounterBumper;
 byte collisionsCounterSpring;
-
-logic controlledByTrap;
-
-byte controlledByTrapStopCounter;
-
-always_ff@(posedge clk or negedge resetN)
-begin
-
-	if (!resetN) begin
-
-		controlledByTrap <= 1'b0;
-
-	end else begin
-
-		if (reset_level) begin
-
-			controlledByTrap <= 1'b0;
-
-		end else if (collisionBallTrap) begin
-
-			if (controlledByTrapStopCounter > 0) begin
-
-				controlledByTrapStopCounter <= controlledByTrapStopCounter - 1;
-
-			end else begin
-
-				controlledByTrap <= 1'b1;
-
-			end
-
-		end else if (controlledByTrapStop) begin
-
-			controlledByTrap <= 1'b0;
-
-			controlledByTrapStopCounter <= 10;
-
-		end
-
-	end
-
-end
 
 always_ff@(posedge clk or negedge resetN)
 begin

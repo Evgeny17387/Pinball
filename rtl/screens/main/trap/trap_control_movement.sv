@@ -1,6 +1,6 @@
 import defines::SCREEN_MAIN_TRAP_CENTER_X, defines::SCREEN_MAIN_TRAP_CENTER_Y;
 
-module trap_control(
+module trap_control_movement(
 	input	logic			clk,
 	input	logic			resetN,
 	input	logic 			startOfFrame,

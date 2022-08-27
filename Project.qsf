@@ -322,11 +322,12 @@ set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[8] -t
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[20] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[28] -to auto_signaltap_0|vcc -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_Project_auto_signaltap_0_1_e8ed," -section_id auto_signaltap_0
-set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/counter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/count_down.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/one_sec_counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/trap/count_down.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/counters/one_sec_counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/counters/counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/trap/trap_control_movement.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/trap/trap_control_capture.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/screen_main_control.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/trap/trap_control.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/trap/trap_block.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/common/shapes/cylinder_dynamic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/screens/main/screen_main_objects_mux.sv
