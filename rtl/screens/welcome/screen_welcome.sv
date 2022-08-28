@@ -4,6 +4,7 @@ import defines::WORD_WELCOME_2_TOP_LEFT_X, defines::WORD_WELCOME_2_TOP_LEFT_Y, d
 import defines::WORD_WELCOME_3_TOP_LEFT_X, defines::WORD_WELCOME_3_TOP_LEFT_Y, defines::WORD_WELCOME_3_SIZE, defines::WORD_WELCOME_3_LETTERS;
 import defines::WORD_WELCOME_4_TOP_LEFT_X, defines::WORD_WELCOME_4_TOP_LEFT_Y, defines::WORD_WELCOME_4_SIZE, defines::WORD_WELCOME_4_LETTERS;
 import defines::WORD_WELCOME_5_TOP_LEFT_X, defines::WORD_WELCOME_5_TOP_LEFT_Y, defines::WORD_WELCOME_5_SIZE, defines::WORD_WELCOME_5_LETTERS;
+import defines::WORD_WELCOME_6_TOP_LEFT_X, defines::WORD_WELCOME_6_TOP_LEFT_Y, defines::WORD_WELCOME_6_SIZE, defines::WORD_WELCOME_6_LETTERS;
 import defines::SCREEN_WELCOME_PLAYER_ID_TOP_LEFT_X, defines::SCREEN_WELCOME_PLAYER_ID_TOP_LEFT_Y;
 
 module screen_welcome(
@@ -132,6 +133,21 @@ number_block #(.TOP_LEFT_X(SCREEN_WELCOME_PLAYER_ID_TOP_LEFT_X), .TOP_LEFT_Y(SCR
 	.RGBNumber(RGBPlayerId)
 );
 
-assign RGB_screen_welcome = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawWord_3 ? RGBWord_3 : drawWord_4 ? RGBWord_4 : drawWord_5 ? RGBWord_5 : drawPlayerId ? RGBPlayerId : COLOR_WHITE;
+logic 			drawWord_6;
+logic	[7:0]	RGBWord_6;
+
+word #(.TOP_LEFT_X(WORD_WELCOME_6_TOP_LEFT_X), .TOP_LEFT_Y(WORD_WELCOME_6_TOP_LEFT_Y), .WORD_SIZE(WORD_WELCOME_6_SIZE), .LETTERS(WORD_WELCOME_6_LETTERS)) word_6_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.color(COLOR_DEFAULT),
+// output
+	.drawWord(drawWord_6),
+	.RGBWord(RGBWord_6)
+);
+
+assign RGB_screen_welcome = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawWord_3 ? RGBWord_3 : drawWord_4 ? RGBWord_4 : drawWord_5 ? RGBWord_5 : drawWord_6 ? RGBWord_6 : drawPlayerId ? RGBPlayerId : COLOR_WHITE;
 
 endmodule

@@ -2,6 +2,8 @@ import defines::COLOR_WHITE, defines::COLOR_DEFAULT;
 import screen_end::WORD_END_TOP_LEFT_X, screen_end::WORD_END_TOP_LEFT_Y, screen_end::WORD_END_SIZE, screen_end::WORD_END_LETTERS;
 import screen_end::WORD_END_2_TOP_LEFT_X, screen_end::WORD_END_2_TOP_LEFT_Y, screen_end::WORD_END_2_SIZE, screen_end::WORD_END_2_LETTERS;
 import screen_end::WORD_END_3_TOP_LEFT_X, screen_end::WORD_END_3_TOP_LEFT_Y, screen_end::WORD_END_3_SIZE, screen_end::WORD_END_3_LETTERS;
+import screen_end::WORD_END_4_TOP_LEFT_X, screen_end::WORD_END_4_TOP_LEFT_Y, screen_end::WORD_END_4_SIZE, screen_end::WORD_END_4_LETTERS;
+import screen_end::WORD_END_5_TOP_LEFT_X, screen_end::WORD_END_5_TOP_LEFT_Y, screen_end::WORD_END_5_SIZE, screen_end::WORD_END_5_LETTERS;
 import screen_end::SCORE_VALUE_TOP_LEFT_X, screen_end::SCORE_VALUE_TOP_LEFT_Y;
 import screen_end::SCORE_INDEX_TOP_LEFT_X, screen_end::SCORE_INDEX_TOP_LEFT_Y;
 import screen_end::SCORE_ROW_SPACE_Y;
@@ -44,6 +46,36 @@ word #(.TOP_LEFT_X(WORD_END_2_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_2_TOP_LEFT_Y), .
 // output
 	.drawWord(drawWord_2),
 	.RGBWord(RGBWord_2)
+);
+
+logic 			drawWord_3;
+logic	[7:0]	RGBWord_3;
+
+word #(.TOP_LEFT_X(WORD_END_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_3_TOP_LEFT_Y), .WORD_SIZE(WORD_END_3_SIZE), .LETTERS(WORD_END_3_LETTERS)) word_3_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.color(COLOR_DEFAULT),
+// output
+	.drawWord(drawWord_3),
+	.RGBWord(RGBWord_3)
+);
+
+logic 			drawWord_4;
+logic	[7:0]	RGBWord_4;
+
+word #(.TOP_LEFT_X(WORD_END_4_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_4_TOP_LEFT_Y), .WORD_SIZE(WORD_END_4_SIZE), .LETTERS(WORD_END_4_LETTERS)) word_4_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.color(COLOR_DEFAULT),
+// output
+	.drawWord(drawWord_4),
+	.RGBWord(RGBWord_4)
 );
 
 logic 			drawIndices[TOP_SCORES_NUM];
@@ -113,10 +145,10 @@ always_comb begin
 	end
 end
 
-logic 			drawWord_3;
-logic	[7:0]	RGBWord_3;
+logic 			drawWord_5;
+logic	[7:0]	RGBWord_5;
 
-word #(.TOP_LEFT_X(WORD_END_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_3_TOP_LEFT_Y), .WORD_SIZE(WORD_END_3_SIZE), .LETTERS(WORD_END_3_LETTERS)) word_3_inst(
+word #(.TOP_LEFT_X(WORD_END_5_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_5_TOP_LEFT_Y), .WORD_SIZE(WORD_END_5_SIZE), .LETTERS(WORD_END_5_LETTERS)) word_5_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
@@ -124,10 +156,10 @@ word #(.TOP_LEFT_X(WORD_END_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_3_TOP_LEFT_Y), .
 	.pixelY(pixelY),
 	.color(COLOR_DEFAULT),
 // output
-	.drawWord(drawWord_3),
-	.RGBWord(RGBWord_3)
+	.drawWord(drawWord_5),
+	.RGBWord(RGBWord_5)
 );
 
-assign RGB_screen_end = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawWord_3 ? RGBWord_3 : drawIndex ? RGBIndex : drawScore ? RGBScore : COLOR_WHITE;
+assign RGB_screen_end = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawWord_3 ? RGBWord_3 :  drawWord_4 ? RGBWord_4 : drawIndex ? RGBIndex : drawScore ? RGBScore :  drawWord_5 ? RGBWord_5 : COLOR_WHITE;
 
 endmodule
