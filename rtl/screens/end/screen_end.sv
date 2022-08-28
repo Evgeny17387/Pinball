@@ -1,27 +1,23 @@
 import defines::COLOR_WHITE, defines::COLOR_DEFAULT;
-import defines::WORD_END_TOP_LEFT_X, defines::WORD_END_TOP_LEFT_Y, defines::WORD_END_SIZE, defines::WORD_END_LETTERS;
-import defines::WORD_END_2_TOP_LEFT_X, defines::WORD_END_2_TOP_LEFT_Y, defines::WORD_END_2_SIZE, defines::WORD_END_2_LETTERS;
-import defines::SCORE_NUMBER_TOP_LEFT_X, defines::SCORE_NUMBER_TOP_LEFT_Y;
-import defines::WORD_END_3_TOP_LEFT_X, defines::WORD_END_3_TOP_LEFT_Y, defines::WORD_END_3_SIZE, defines::WORD_END_3_LETTERS;
+
+import screen_end::WORD_END_TOP_LEFT_X, screen_end::WORD_END_TOP_LEFT_Y, screen_end::WORD_END_SIZE, screen_end::WORD_END_LETTERS;
+import screen_end::WORD_END_2_TOP_LEFT_X, screen_end::WORD_END_2_TOP_LEFT_Y, screen_end::WORD_END_2_SIZE, screen_end::WORD_END_2_LETTERS;
+import screen_end::WORD_END_3_TOP_LEFT_X, screen_end::WORD_END_3_TOP_LEFT_Y, screen_end::WORD_END_3_SIZE, screen_end::WORD_END_3_LETTERS;
+
+import screen_end::SCORE_VALUE_TOP_LEFT_X, screen_end::SCORE_VALUE_TOP_LEFT_Y;
+import screen_end::SCORE_INDEX_TOP_LEFT_X, screen_end::SCORE_INDEX_TOP_LEFT_Y;
 
 module screen_end(
-	input	logic			clk,
-	input	logic			resetN,
-	input	logic	[10:0]	pixelX,
-	input	logic	[10:0]	pixelY,
-	input	logic	[15:0] 	score,
-	output	logic	[7:0]	RGB_screen_end
+	input	logic				clk,
+	input	logic				resetN,
+	input	logic		[10:0]	pixelX,
+	input	logic		[10:0]	pixelY,
+	input	TOP_SCORES			topScores,
+	output	logic		[7:0]	RGB_screen_end
 );
 
 logic 			drawWord_1;
-logic 			drawWord_2;
-logic 			drawScore;
-logic 			drawWord_3;
-
 logic	[7:0]	RGBWord_1;
-logic	[7:0]	RGBWord_2;
-logic	[7:0]	RGBScore;
-logic	[7:0]	RGBWord_3;
 
 word #(.TOP_LEFT_X(WORD_END_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_TOP_LEFT_Y), .WORD_SIZE(WORD_END_SIZE), .LETTERS(WORD_END_LETTERS)) word_inst(
 // input
@@ -35,6 +31,9 @@ word #(.TOP_LEFT_X(WORD_END_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_TOP_LEFT_Y), .WORD
 	.RGBWord(RGBWord_1)
 );
 
+logic 			drawWord_2;
+logic	[7:0]	RGBWord_2;
+
 word #(.TOP_LEFT_X(WORD_END_2_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_2_TOP_LEFT_Y), .WORD_SIZE(WORD_END_2_SIZE), .LETTERS(WORD_END_2_LETTERS)) word_2_inst(
 // input
 	.clk(clk),
@@ -47,17 +46,53 @@ word #(.TOP_LEFT_X(WORD_END_2_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_2_TOP_LEFT_Y), .
 	.RGBWord(RGBWord_2)
 );
 
-number_block #(.TOP_LEFT_X(SCORE_NUMBER_TOP_LEFT_X), .TOP_LEFT_Y(SCORE_NUMBER_TOP_LEFT_Y)) number_block_inst(
+
+
+
+
+
+
+
+logic 			drawIndex;
+logic	[7:0]	RGBIndex;
+
+number_block #(.TOP_LEFT_X(SCORE_INDEX_TOP_LEFT_X), .TOP_LEFT_Y(SCORE_INDEX_TOP_LEFT_Y)) number_block_inst(
 // input
 	.clk(clk),
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.number(score),
+	.number(topScores.place1Score),
+// output
+	.drawNumber(drawIndex),
+	.RGBNumber(RGBIndex)
+);
+
+logic 			drawScore;
+logic	[7:0]	RGBScore;
+
+score_value #(.TOP_LEFT_X(SCORE_VALUE_TOP_LEFT_X), .TOP_LEFT_Y(SCORE_VALUE_TOP_LEFT_Y)) score_value_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.pixelX(pixelX),
+	.pixelY(pixelY),
+	.score(topScores.place1Score),
 // output
 	.drawNumber(drawScore),
 	.RGBNumber(RGBScore)
 );
+
+
+
+
+
+
+
+
+
+logic 			drawWord_3;
+logic	[7:0]	RGBWord_3;
 
 word #(.TOP_LEFT_X(WORD_END_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_3_TOP_LEFT_Y), .WORD_SIZE(WORD_END_3_SIZE), .LETTERS(WORD_END_3_LETTERS)) word_3_inst(
 // input
@@ -71,6 +106,6 @@ word #(.TOP_LEFT_X(WORD_END_3_TOP_LEFT_X), .TOP_LEFT_Y(WORD_END_3_TOP_LEFT_Y), .
 	.RGBWord(RGBWord_3)
 );
 
-assign RGB_screen_end = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawScore ? RGBScore : drawWord_3 ? RGBWord_3 : COLOR_WHITE;
+assign RGB_screen_end = drawWord_1 ? RGBWord_1 : drawWord_2 ? RGBWord_2 : drawWord_3 ? RGBWord_3 : drawIndex ? RGBIndex : drawScore ? RGBScore : COLOR_WHITE;
 
 endmodule

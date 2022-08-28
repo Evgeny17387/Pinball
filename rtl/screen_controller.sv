@@ -5,15 +5,14 @@ module screen_controller(
 	input	logic 			key1IsPressed,
 	input	logic	[3:0]	life,
 	output 	logic 			start,
-	output 	logic 			game_end,
+	output 	logic 			gameEnd,
 	output	logic			screenWelcomeOperational
 );
 
 enum logic [2:0] {state_0, state_1, state_2} state_present, state_next;
 
-logic screenWelcomeOperationalCurrent, screenWelcomeOperationalNext;
-
 assign screenWelcomeOperational = screenWelcomeOperationalCurrent;
+logic screenWelcomeOperationalCurrent, screenWelcomeOperationalNext;
 
 always_ff @(posedge clk or negedge resetN)
 begin
@@ -42,7 +41,7 @@ begin
 
 	start = 0;
 
-	game_end = 0;
+	gameEnd = 0;
 
 	screenWelcomeOperationalNext = screenWelcomeOperationalCurrent;
 
@@ -74,7 +73,7 @@ begin
 
 			start = 1;
 
-			game_end = 1;
+			gameEnd = 1;
 
 			if (key1IsPressed) begin
 				state_next = state_0;

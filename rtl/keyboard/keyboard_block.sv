@@ -9,6 +9,7 @@ module keyboard_block(
 	output 	logic 		key4IsPressed,
 	output 	logic 		key5IsPressed,
 	output 	logic 		key6IsPressed,
+	output 	logic 		key8IsPressed,
 	output 	logic 		key9IsPressed
 );
 
@@ -93,6 +94,17 @@ key_decoder #(.KEY_VALUE(9'h074)) key_decoder_6_inst(
 	.key_code(key_code),
 // output
 	.keyIsPressed(key6IsPressed)
+);
+
+key_decoder #(.KEY_VALUE(9'h075)) key_decoder_8_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.make(make),
+	.breakk(breakk),
+	.key_code(key_code),
+// output
+	.keyIsPressed(key8IsPressed)
 );
 
 key_decoder #(.KEY_VALUE(9'h07D)) key_decoder_9_inst(

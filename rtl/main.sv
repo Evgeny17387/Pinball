@@ -6,10 +6,10 @@ module main(
 	output	logic	[28:0] 	OVGA
 );
 
-logic			clk;
 logic			reset;
-
 assign reset = !resetN;
+
+logic			clk;
 
 clock_divider clock_divider_inst(
 // input
@@ -19,11 +19,32 @@ clock_divider clock_divider_inst(
 	.outclk_0(clk)
 );
 
-logic	[7:0]	RGB;
+TOP_SCORES topScores;
 
+scores scores_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+	.playerId(playerId),
+	.score(score),
+	.gameEnd(gameEnd),
+// output
+	.topScores(topScores)
+);
+
+logic oneSecPulse;
+
+one_sec_counter one_sec_counter_inst(
+// input
+	.clk(clk),
+	.resetN(resetN),
+// output
+	.oneSecPulse(oneSecPulse)
+);
+
+logic	[7:0]	RGB;
 logic	[10:0]	pixelX;
 logic	[10:0]	pixelY;
-
 logic 			startOfFrame;
 
 VGA_Controller VGA_Controller_inst(
@@ -44,6 +65,7 @@ logic  			key2IsPressed;
 logic 			key4IsPressed;
 logic 			key5IsPressed;
 logic  			key6IsPressed;
+logic  			key8IsPressed;
 logic  			key9IsPressed;
 
 keyboard_block keyboard_block_inst(
@@ -59,11 +81,13 @@ keyboard_block keyboard_block_inst(
 	.key4IsPressed(key4IsPressed),
 	.key5IsPressed(key5IsPressed),
 	.key6IsPressed(key6IsPressed),
+	.key8IsPressed(key8IsPressed),
 	.key9IsPressed(key9IsPressed)
 );
 
-logic [7:0] RGB_screen_welcome;
-logic		flipperType;
+logic 	[7:0] 	RGB_screen_welcome;
+logic			flipperType;
+logic	[3:0]	playerId;
 
 screen_welcome screen_welcome_inst(
 // input
@@ -71,12 +95,16 @@ screen_welcome screen_welcome_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
+	.key2IsPressed(key2IsPressed),
 	.key4IsPressed(key4IsPressed),
 	.key6IsPressed(key6IsPressed),
+	.key8IsPressed(key8IsPressed),
 	.screenWelcomeOperational(screenWelcomeOperational),
+	.oneSecPulse(oneSecPulse),
 // output
 	.RGB_screen_welcome(RGB_screen_welcome),
-	.flipperType(flipperType)
+	.flipperType(flipperType),
+	.playerId(playerId)
 );
 
 logic 	[7:0] 	RGB_screen_main;
@@ -110,12 +138,12 @@ screen_end screen_end_inst(
 	.resetN(resetN),
 	.pixelX(pixelX),
 	.pixelY(pixelY),
-	.score(score),
+	.topScores(topScores),
 // output
 	.RGB_screen_end(RGB_screen_end)
 );
 
-logic game_end;
+logic gameEnd;
 logic start;
 logic screenWelcomeOperational;
 
@@ -128,7 +156,7 @@ screen_controller screen_controller_inst(
 	.life(life),
 // output
 	.start(start),
-	.game_end(game_end),
+	.gameEnd(gameEnd),
 	.screenWelcomeOperational(screenWelcomeOperational)
 );
 
@@ -137,7 +165,7 @@ screen_objects_mux screen_objects_mux_inst(
 	.clk(clk),
 	.resetN(resetN),
 	.start(start),
-	.game_end(game_end),
+	.gameEnd(gameEnd),
 	.RGB_screen_welcome(RGB_screen_welcome),
 	.RGB_screen_main(RGB_screen_main),
 	.RGB_screen_end(RGB_screen_end),

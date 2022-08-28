@@ -2,7 +2,7 @@ module screen_objects_mux(
 	input	logic		clk,
 	input	logic		resetN,
 	input	logic		start,
-	input	logic		game_end,
+	input	logic		gameEnd,
 	input	logic [7:0] RGB_screen_welcome,
 	input	logic [7:0] RGB_screen_main,
 	input	logic [7:0] RGB_screen_end,
@@ -17,7 +17,7 @@ begin
 	else begin
 		if (!start)
 			RGB <= RGB_screen_welcome;
-		else if (!game_end)
+		else if (!gameEnd)
 			RGB <= RGB_screen_main;
 		else
 			RGB <= RGB_screen_end;
