@@ -22,8 +22,6 @@ logic	[10:0]	trapCenterY;
 logic 			controlledByTrap;
 logic	[3:0]	countDownNumber;
 
-assign drawTrap = 0;
-
 trap_block trap_block_inst(
 // input
 	.clk(clk),
@@ -37,7 +35,7 @@ trap_block trap_block_inst(
 	.collisionBallTrap(collisionBallTrap),
 // output
 	.RGBTrap(RGBTrap),
-	// .drawTrap(drawTrap),
+	.drawTrap(drawTrap),
 	.centerX(trapCenterX),
 	.centerY(trapCenterY),
 	.controlledByTrap(controlledByTrap),
