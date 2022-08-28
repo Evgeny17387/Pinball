@@ -34,6 +34,7 @@ begin
 		colorSingleCurrent <= COLOR_DEFAULT;
 		colorDualCurrent <= COLOR_DEFAULT;
 		flipperTypeCurrent <= 1'b0;
+		playerIdCurrent <= 1;
 		counterKeyboardCurrent <= 0;
 
 	end
@@ -66,11 +67,15 @@ begin
 			end
 
 		end else if (key8IsPressed) begin
-			playerIdNext = playerIdCurrent + 1;
-			counterKeyboardNext = 1;
+			if (playerIdCurrent < 9) begin
+				playerIdNext = playerIdCurrent + 1;
+				counterKeyboardNext = 1;
+			end
 		end else if (key2IsPressed) begin
-			playerIdNext = playerIdCurrent - 1;
-			counterKeyboardNext = 1;
+			if (playerIdCurrent > 1) begin
+				playerIdNext = playerIdCurrent - 1;
+				counterKeyboardNext = 1;
+			end
 		end
 
 	end

@@ -9,19 +9,19 @@ module scores(
 
 logic [15:0] scoreCurrent, scoreNext;
 
-assign topScores.place1Score = place1ScoreCurrent;
+assign topScores.placeScore[0] = place1ScoreCurrent;
 logic [15:0] place1ScoreCurrent, place1ScoreNext;
-assign topScores.place1Index = place1IndexCurrent;
+assign topScores.placeIndex[0] = place1IndexCurrent;
 logic [3:0] place1IndexCurrent, place1IndexNext;
 
-assign topScores.place2Score = place2ScoreCurrent;
+assign topScores.placeScore[1] = place2ScoreCurrent;
 logic [15:0] place2ScoreCurrent, place2ScoreNext;
-assign topScores.place2Index = place2IndexCurrent;
+assign topScores.placeIndex[1] = place2IndexCurrent;
 logic [3:0] place2IndexCurrent, place2IndexNext;
 
-assign topScores.place3Score = place3ScoreCurrent;
+assign topScores.placeScore[2] = place3ScoreCurrent;
 logic [15:0] place3ScoreCurrent, place3ScoreNext;
-assign topScores.place3Index = place3IndexCurrent;
+assign topScores.placeIndex[2] = place3IndexCurrent;
 logic [3:0] place3IndexCurrent, place3IndexNext;
 
 always_ff @(posedge clk or negedge resetN) begin

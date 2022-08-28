@@ -16,6 +16,8 @@ parameter logic [10:0] SCORE_INDEX_TOP_LEFT_Y = 250;
 parameter logic [10:0] SCORE_VALUE_TOP_LEFT_X = 100;
 parameter logic [10:0] SCORE_VALUE_TOP_LEFT_Y = 250;
 
+parameter logic [10:0] SCORE_ROW_SPACE_Y = 50;
+
 localparam WORD_END_3_TOP_LEFT_X = 1;
 localparam WORD_END_3_TOP_LEFT_Y = 400;
 localparam WORD_END_3_SIZE = 16;

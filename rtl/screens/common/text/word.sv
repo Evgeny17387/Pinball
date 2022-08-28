@@ -1,6 +1,7 @@
 import defines::COLOR_TRANSPARENT;
 import defines::LETTER_HEIGHT, defines::LETTER_WIDTH;
 import defines::LETTER_SPACE;
+import score::TOP_SCORES_NUM;
 
 module word
 #(parameter TOP_LEFT_X, TOP_LEFT_Y, WORD_SIZE, int LETTERS[WORD_SIZE-1:0])
