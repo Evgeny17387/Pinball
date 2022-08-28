@@ -72,30 +72,65 @@ always_comb begin
 
 		if (scoreCurrent > place1ScoreNext) begin
 
-			place3ScoreNext = place2ScoreCurrent;
-			place3IndexNext = place2IndexCurrent;
+			if (playerId == place1IndexNext) begin
 
-			place2ScoreNext = place1ScoreCurrent;
-			place2IndexNext = place1IndexCurrent;
+				place1ScoreNext = scoreCurrent;
+				place1IndexNext = playerId;
 
-			place1ScoreNext = scoreCurrent;
-			place1IndexNext = playerId;
+			end else if (playerId == place2IndexNext) begin
+
+				place2ScoreNext = place1ScoreCurrent;
+				place2IndexNext = place1IndexCurrent;
+
+				place1ScoreNext = scoreCurrent;
+				place1IndexNext = playerId;
+
+			end else begin
+
+				place3ScoreNext = place2ScoreCurrent;
+				place3IndexNext = place2IndexCurrent;
+
+				place2ScoreNext = place1ScoreCurrent;
+				place2IndexNext = place1IndexCurrent;
+
+				place1ScoreNext = scoreCurrent;
+				place1IndexNext = playerId;
+
+			end
 
 		end else if (scoreCurrent > place2ScoreNext) begin
 
-			place3ScoreNext = place2ScoreCurrent;
-			place3IndexNext = place2IndexCurrent;
+			if (playerId == place1IndexNext) begin
+				
+			end else if (playerId == place2IndexNext) begin
 
-			place2ScoreNext = scoreCurrent;
-			place2IndexNext = playerId;
+				place2ScoreNext = scoreCurrent;
+				place2IndexNext = playerId;
+
+			end else begin
+
+				place3ScoreNext = place2ScoreCurrent;
+				place3IndexNext = place2IndexCurrent;
+
+				place2ScoreNext = scoreCurrent;
+				place2IndexNext = playerId;
+
+			end
 
 		end else if (scoreCurrent > place3ScoreNext) begin
 
-			place3ScoreNext = scoreCurrent;
-			place3IndexNext = playerId;
+			if (playerId == place1IndexNext) begin
+
+			end else if (playerId == place2IndexNext) begin
+
+			end else begin
+
+				place3ScoreNext = scoreCurrent;
+				place3IndexNext = playerId;
+
+			end
 
 		end
-
 
 	end
 

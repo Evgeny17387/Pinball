@@ -7,6 +7,6 @@ typedef struct packed {
 } COLLISION_FACTOR;
 
 typedef struct packed {
-	logic	[15:0]	[TOP_SCORES_NUM-1:0]	placeScore;
-	logic	[3:0]	[TOP_SCORES_NUM-1:0]	placeIndex;
+	logic	[TOP_SCORES_NUM-1:0]	[15:0]	placeScore;
+	logic	[TOP_SCORES_NUM-1:0]	[3:0]	placeIndex;
 } TOP_SCORES;

@@ -10,10 +10,10 @@ localparam WORD_END_2_TOP_LEFT_Y = 150;
 localparam WORD_END_2_SIZE = 10;
 localparam int WORD_END_2_LETTERS[WORD_END_2_SIZE-1:0] = '{18, 4, 17, 14, 2, 18, 26, 15, 14, 19};
 
-parameter logic [10:0] SCORE_INDEX_TOP_LEFT_X = 200;
+parameter logic [10:0] SCORE_INDEX_TOP_LEFT_X = 250;
 parameter logic [10:0] SCORE_INDEX_TOP_LEFT_Y = 200;
 
-parameter logic [10:0] SCORE_VALUE_TOP_LEFT_X = 300;
+parameter logic [10:0] SCORE_VALUE_TOP_LEFT_X = 350;
 parameter logic [10:0] SCORE_VALUE_TOP_LEFT_Y = 200;
 
 parameter logic [10:0] SCORE_ROW_SPACE_Y = 50;
